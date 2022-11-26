@@ -1,5 +1,5 @@
 import math,random
-
+import pygame
 """
 This was adapted from a GeeksforGeeks article "Program for Sudoku Generator" by Aarti_Rathi and Ankur Trisal
 https://www.geeksforgeeks.org/program-sudoku-generator/
@@ -23,6 +23,8 @@ class SudokuGenerator:
 	None
     '''
     def __init__(self, row_length, removed_cells):
+        self.row_length = row_length
+        self.removed_cells = removed_cells
         pass
 
     '''
