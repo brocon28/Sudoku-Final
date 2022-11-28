@@ -24,8 +24,10 @@ class SudokuGenerator:
     def __init__(self, row_length, removed_cells):
         self.row_length = 9
         self.removed_cells = removed_cells
-        self.board = [[0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0]]
-        self.box_length = int(row_length)**0.5
+        self.board = []
+        for i in range(0, self.row_length):
+            self.board.append([0,0,0,0,0,0,0,0,0])
+        self.box_length = int(int(row_length)**0.5)
         #here i am trying a comment
         pass
     #hello Jaedon
@@ -126,14 +128,12 @@ class SudokuGenerator:
 	Return: None
     '''
     def fill_box(self, row_start, col_start):
-        new_box = [[0,0,0],[0,0,0],[0,0,0]]
         for i in range(0,3):
             for j in range(0,3):
                 num = random.randint(1, 9)
-                new_box[row_start + i][col_start + j] = num
+                self.board[row_start + i][col_start + j] = num
 
-        return new_box
-
+        return self.board
     
     '''
     Fills the three boxes along the main diagonal of the board
@@ -145,9 +145,9 @@ class SudokuGenerator:
     def fill_diagonal(self):
         num = 0
         while num < self.row_length:
-            self.fill_box(num, num)
-            num += 1
-
+            self.fill_box(int(num), int(num))
+            num += self.box_length
+        return self.board
 
     '''
     DO NOT CHANGE
