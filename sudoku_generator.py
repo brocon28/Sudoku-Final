@@ -28,10 +28,8 @@ class SudokuGenerator:
         for i in range(0, self.row_length):
             self.board.append([0,0,0,0,0,0,0,0,0])
         self.box_length = int(int(row_length)**0.5)
-        #here i am trying a comment
         pass
-    #hello Jaedon
-    # hi
+
 
     '''
 	Returns a 2D python list of numbers which represents the board
@@ -96,9 +94,9 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_box(self, row_start, col_start, num):
-        for row_count in range(0,3):
-            for col_count in range(0,3):
-                if num == self.board[row_start + row_count, col_start + col_count]:
+        for row_count in range(0,self.box_length):
+            for col_count in range(0,self.box_length):
+                if num == self.board[row_start + row_count] [col_start + col_count]:
                     return False
         return True
     
@@ -131,6 +129,8 @@ class SudokuGenerator:
         for i in range(0,3):
             for j in range(0,3):
                 num = random.randint(1, 9)
+                while self.valid_in_box(row_start, col_start, num) == False :
+                    num = random.randint(1, 9)
                 self.board[row_start + i][col_start + j] = num
 
         return self.board
