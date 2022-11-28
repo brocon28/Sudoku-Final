@@ -48,6 +48,10 @@ class SudokuGenerator:
 	Return: None
     '''
     def print_board(self):
+        for i in range(0,self.row_length):
+            for j in range(0,self.row_length):
+                print(self.board[i][j], end= "")
+            print()
         pass
 
     '''
@@ -61,8 +65,9 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_row(self, row, num):
-        if num in self.board[row]:
-            return False
+        for col in range(0, self.row_length):
+            if self.board[row][col] == num:
+                return False
         return True
 
     '''
@@ -76,7 +81,7 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_col(self, col, num):
-        for row in range(0,9):
+        for row in range(0,self.row_length):
             if self.board[row][col] == num:
                 return False
         return True
@@ -96,7 +101,7 @@ class SudokuGenerator:
     def valid_in_box(self, row_start, col_start, num):
         for row_count in range(0,self.box_length):
             for col_count in range(0,self.box_length):
-                if num == self.board[row_start + row_count] [col_start + col_count]:
+                if num == self.board[row_start + row_count][col_start + col_count]:
                     return False
         return True
     
@@ -111,9 +116,7 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def is_valid(self, row, col, num):
-        if self.board[row][col] == 0:
-            return True
-        return False
+        return self.valid_in_row(row, num) and self.valid_in_col(col, num) and self.valid_in_box(row - (row % self.box_length), col - (col %self.box_length), num)
 
     '''
     Fills the specified 3x3 box with values
@@ -147,7 +150,6 @@ class SudokuGenerator:
         while num < self.row_length:
             self.fill_box(int(num), int(num))
             num += self.box_length
-        return self.board
 
     '''
     DO NOT CHANGE
@@ -239,4 +241,5 @@ def generate_sudoku(size, removed):
     return board
 
 board = SudokuGenerator(9, 10)
-print(board.fill_diagonal())
+board.fill_values()
+board.print_board()
