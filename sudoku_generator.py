@@ -1,5 +1,4 @@
 import math,random
-import pygame
 """
 This was adapted from a GeeksforGeeks article "Program for Sudoku Generator" by Aarti_Rathi and Ankur Trisal
 https://www.geeksforgeeks.org/program-sudoku-generator/
@@ -7,6 +6,7 @@ https://www.geeksforgeeks.org/program-sudoku-generator/
 """
 
 class SudokuGenerator:
+    #ok here i am testing this thing out 
     '''
 	create a sudoku board - initialize class variables and set up the 2D board
 	This should initialize:
