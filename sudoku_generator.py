@@ -24,7 +24,7 @@ class SudokuGenerator:
     def __init__(self, row_length, removed_cells):
         self.row_length = row_length
         self.removed_cells = removed_cells
-        self.board = []
+        self.board = [[0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0]]
         self.box_length = int(row_length)**0.5
         #here i am trying a comment
         pass
@@ -115,6 +115,24 @@ class SudokuGenerator:
 	Return: None
     '''
     def fill_box(self, row_start, col_start):
+        self.row_start = row_start
+        self.col_start = col_start
+        used_randoms = []
+        generate_random = True
+        make_box = True
+        n = col_start
+        while n <= col_start+2:
+            while generate_random:
+                new_digit = random.randint(1,9)
+                if new_digit in used_randoms:
+                    continue
+                else:
+                    used_randoms.append(new_digit)
+                    generate_random = False
+            self.board[row_start]
+
+
+
         pass
     
     '''
