@@ -6,8 +6,6 @@ https://www.geeksforgeeks.org/program-sudoku-generator/
 """
 
 class SudokuGenerator:
-    #ok here i am testing this thing out
-    #ok testing agaon
     '''
 	create a sudoku board - initialize class variables and set up the 2D board
 	This should initialize:
@@ -26,8 +24,8 @@ class SudokuGenerator:
     def __init__(self, row_length, removed_cells):
         self.row_length = row_length
         self.removed_cells = removed_cells
-        # tua is mid
-        # im kidding tua is awesome!
+        self.board = []
+        self.box_length = int(row_length)**0.5
         pass
 
     '''
