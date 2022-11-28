@@ -26,6 +26,7 @@ class SudokuGenerator:
         self.removed_cells = removed_cells
         self.board = []
         self.box_length = int(row_length)**0.5
+        #here i am trying a comment
         pass
 
     '''
