@@ -124,29 +124,16 @@ class SudokuGenerator:
 	Return: None
     '''
     def fill_box(self, row_start, col_start):
-        self.row_start = row_start
-        self.col_start = col_start
-        used_randoms = []
-        new_box = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-        generate_random = True
-        n = col_start
-        while n <= 2:
-            for i in range(0,3):
-                while generate_random:
-                    new_digit = random.randint(1,9)
-                    if new_digit in used_randoms:
-                        continue
-                    else:
-                        used_randoms.append(new_digit)
-                        generate_random = False
-                new_box[i][n] = new_digit
-                n+=1
+        new_box = [[0,0,0],[0,0,0],[0,0,0]]
+        for i in range(0,3):
+            for j in range(0,3):
+                num = random.randint(1, 9)
+                new_box[row_start + i][col_start + j] = num
+
         return new_box
-board = SudokuGenerator(3, 2)
-print(board.fill_box(5, 3))
 
     
-'''
+    '''
     Fills the three boxes along the main diagonal of the board
     These are the boxes which start at (0,0), (3,3), and (6,6)
 
@@ -157,7 +144,7 @@ print(board.fill_box(5, 3))
         num = 0
         while num < self.row_length:
             self.fill_box(num, num)
-            num += self.box_length
+            num += 1
 
 
     '''
@@ -248,3 +235,6 @@ def generate_sudoku(size, removed):
     sudoku.remove_cells()
     board = sudoku.get_board()
     return board
+
+board = SudokuGenerator(9, 10)
+print(board.fill_diagonal())
