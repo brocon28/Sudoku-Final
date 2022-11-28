@@ -27,6 +27,7 @@ class SudokuGenerator:
         self.row_length = row_length
         self.removed_cells = removed_cells
         # tua is mid
+        # im kidding tua is awesome!
         pass
 
     '''
