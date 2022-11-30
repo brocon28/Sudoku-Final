@@ -3,6 +3,7 @@ from sudoku_generator import *
 
 class Board:
     def _init(self, width, height, screen, difficulty):
+        # constructor
         pass
 
     def draw(self):
