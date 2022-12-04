@@ -23,14 +23,18 @@ class SudokuGenerator:
 	Return: None
     '''
 
+    # initialized the class variables - jehan
+    # helped jehan initialize the class variable of self.board - syed
     def __init__(self, row_length, removed_cells):
-        self.row_length = row_length  # will always be 9
-        self.removed_cells = removed_cells
+        # an array that is 9 x 9 and holds the entire board's values
         self.board = [[0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                      [0, 0, 0, 0, 0, 0, 0, 0, 0]]  # 9x9 array that will contain the boards values
-        self.box_length = 3  # length of one box (3)
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        self.row_length = row_length
+        self.removed_cells = removed_cells
+        # length of one box (3)
+        self.box_length = 3
 
     '''
 	Returns a 2D python list of numbers which represents the board
@@ -39,6 +43,7 @@ class SudokuGenerator:
 	Return: list[list]
     '''
 
+    # getter function that just returns the attribute of the self object - jehan
     def get_board(self):
         return self.board
 
@@ -85,9 +90,10 @@ class SudokuGenerator:
     '''
 
     def valid_in_col(self, col, num):
-        for i in range(0, 9):
-            if self.board[i][col] == num:
+        for item in range(0, 9):
+            if self.board[item][col] == num:
                 return False
+        # no else is needed, as it would throw a logic error and break out of the loop immediately
         return True
 
     '''
@@ -177,25 +183,25 @@ class SudokuGenerator:
     '''
 
     def fill_remaining(self, row, col):
-        if (col >= self.row_length and row < self.row_length - 1):
+        if (col >= self.__row_length and row < self.__row_length - 1):
             row += 1
             col = 0
-        if row >= self.row_length and col >= self.row_length:
+        if row >= self.__row_length and col >= self.__row_length:
             return True
         if row < self.box_length:
             if col < self.box_length:
                 col = self.box_length
-        elif row < self.row_length - self.box_length:
+        elif row < self.__row_length - self.box_length:
             if col == int(row // self.box_length * self.box_length):
                 col += self.box_length
         else:
-            if col == self.row_length - self.box_length:
+            if col == self.__row_length - self.box_length:
                 row += 1
                 col = 0
-                if row >= self.row_length:
+                if row >= self.__row_length:
                     return True
 
-        for num in range(1, self.row_length + 1):
+        for num in range(1, self.__row_length + 1):
             if self.is_valid(row, col, num):
                 self.board[row][col] = num
                 if self.fill_remaining(row, col + 1):
@@ -212,6 +218,7 @@ class SudokuGenerator:
 	Return: None
     '''
 
+    # fills values in their respective boxes
     def fill_values(self):
         self.fill_diagonal()
         self.fill_remaining(0, self.box_length)
