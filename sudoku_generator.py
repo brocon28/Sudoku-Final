@@ -110,9 +110,9 @@ class SudokuGenerator:
     '''
 
     def valid_in_box(self, row_start, col_start, num):
-        for i in range(0, 3):  # the 3 rows
-            for j in range(0, 3):  # the 3 cols
-                if self.board[row_start + i][col_start + j] == num:
+        for row in range(0, 3):  # the 3 rows
+            for col in range(0, 3):  # the 3 cols
+                if self.board[row_start + row][col_start + col] == num:
                     return False
         return True
 
@@ -163,11 +163,11 @@ class SudokuGenerator:
 	Parameters: None
 	Return: None
     '''
-
-    def fill_diagonal(self):  # call fill_box 3x to fill in the diagonal
-        self.fill_box(0, 0)
-        self.fill_box(3, 3)
+    def fill_diagonal(self):
+        # fills the three boxes within the main diagonal of the board
         self.fill_box(6, 6)
+        self.fill_box(3, 3)
+        self.fill_box(0, 0)
 
     '''
     DO NOT CHANGE
