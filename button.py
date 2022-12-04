@@ -9,6 +9,7 @@ class Button():
 
     def draw(self, screen):
         action = False
+
         # Gets tuple of mouse position
         mouse_pos = pygame.mouse.get_pos()
 
