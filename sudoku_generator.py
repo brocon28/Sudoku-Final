@@ -59,7 +59,8 @@ class SudokuGenerator:
         for row in self.board:
             for col in row:
                 print(col, end=" ")
-            print()
+            #print()
+        print()
 
     '''
 	Determines if num is contained in the specified row (horizontal) of the board
@@ -147,14 +148,20 @@ class SudokuGenerator:
     '''
 
     def fill_box(self, row_start, col_start):
-        onetonine = [1, 2, 3, 4, 5, 6, 7, 8, 9]  # list of values
-        for i in range(0, 3):  # the 3 rows
-            for j in range(0, 3):  # the 3 cols
-                index = random.randint(0, (
-                            len(onetonine) - 1))  # randomly decide what value to input from list through index
-                value = onetonine[index]  # get value using index
-                onetonine.pop(index)  # remove value so it isn't used again
-                self.board[row_start + i][col_start + j] = value  # assign value to specific cell
+        # list of values that one grid has
+        one_to_nine = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        # the 3 rows in one grid
+        for row in range(3):
+            # the 3 cols in one grid
+            for col in range(3):
+                # randomly decide what value to input from list through index
+                index = random.randint(0, (len(one_to_nine) - 1))
+                # get value using index
+                value = one_to_nine[index]
+                # remove value so it isn't used again
+                one_to_nine.pop(index)
+                # assign value to specific cell
+                self.board[row_start + row][col_start + col] = value
 
     '''
     Fills the three boxes along the main diagonal of the board
@@ -183,25 +190,25 @@ class SudokuGenerator:
     '''
 
     def fill_remaining(self, row, col):
-        if (col >= self.__row_length and row < self.__row_length - 1):
+        if (col >= self.row_length and row < self.row_length - 1):
             row += 1
             col = 0
-        if row >= self.__row_length and col >= self.__row_length:
+        if row >= self.row_length and col >= self.row_length:
             return True
         if row < self.box_length:
             if col < self.box_length:
                 col = self.box_length
-        elif row < self.__row_length - self.box_length:
+        elif row < self.row_length - self.box_length:
             if col == int(row // self.box_length * self.box_length):
                 col += self.box_length
         else:
-            if col == self.__row_length - self.box_length:
+            if col == self.row_length - self.box_length:
                 row += 1
                 col = 0
-                if row >= self.__row_length:
+                if row >= self.row_length:
                     return True
 
-        for num in range(1, self.__row_length + 1):
+        for num in range(1, self.row_length + 1):
             if self.is_valid(row, col, num):
                 self.board[row][col] = num
                 if self.fill_remaining(row, col + 1):
@@ -218,7 +225,6 @@ class SudokuGenerator:
 	Return: None
     '''
 
-    # fills values in their respective boxes
     def fill_values(self):
         self.fill_diagonal()
         self.fill_remaining(0, self.box_length)
@@ -238,14 +244,14 @@ class SudokuGenerator:
 
     def remove_cells(self):
         i = 0  # index var
-        while i < self.removed_cells:  # while current removed is less then num removed needed
-            rand_row = random.randint(0, 8)  # random ints for row
-            rand_col = random.randint(0, 8)  # random ints for col
-            if self.board[rand_row][rand_col] != 0:  # if value isn't already 0, set it to zero
+        while i < self.removed_cells:  # while current removed is less than num removed needed - syed
+            rand_row = random.randint(0, 8)  # random ints for row - syed
+            rand_col = random.randint(0, 8)  # random ints for col - syed
+            if self.board[rand_row][rand_col] != 0:  # if value isn't already 0, set it to zero - syed
                 self.board[rand_row][rand_col] = 0
-                i += 1  # increase index to show how many cells removed
+                i += 1  # increase index to show how many cells removed - syed
                 continue
-            else:  # when random cell is already 0, loop again to try a diff cell
+            else:  # when random cell is already 0, loop again to try a diff cell - syed
                 continue
 
 
