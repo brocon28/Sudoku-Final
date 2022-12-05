@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="702adaa9-4652-4ccc-a655-d576b261f002" name="Changes" comment="" />
+    <list default="true" id="702adaa9-4652-4ccc-a655-d576b261f002" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cell.py" beforeDir="false" afterPath="$PROJECT_DIR$/cell.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,7 +36,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.sudoku_generator">
+  <component name="RunManager" selected="Python.game">
     <configuration name="game" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Sudoku-Project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -76,8 +81,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.sudoku_generator" />
         <item itemvalue="Python.game" />
+        <item itemvalue="Python.sudoku_generator" />
       </list>
     </recent_temporary>
   </component>

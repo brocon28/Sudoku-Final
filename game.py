@@ -1,5 +1,6 @@
 import pygame
 import os
+from cell import Cell
 import button
 from constants import *
 
@@ -42,14 +43,37 @@ def main_menu():
     pygame.display.update()
 
 def game_screen():
-  game_screen = pygame.display.set_mode((700, 725))
+  game_screen = pygame.display.set_mode((540, 600))
+  game_screen.fill((255, 144, 109))
+
+  # Initializes button class with position
+  reset_button = button.Button(110, 550, RESET_BUTTON)
+  restart_button = button.Button(215, 550, RESTART_BUTTON)
+  exit_button = button.Button(348, 550, EXIT_BUTTON)
+
+  # Puts/draws the buttons on the main_menu
+  reset_button.draw(game_screen)
+  restart_button.draw(game_screen)
+  exit_button.draw(game_screen)
 
   while True:
-    game_screen.fill("white")
+    # event loop for each click or action done in the game
+    testcell = Cell(3, 1, 1, 200, 100)
+    testcell.draw(game_screen)
 
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         pygame.quit()
+
+      # Checks if a cell is clicked
+      if event.type == pygame.MOUSEBUTTONDOWN:
+
+        if reset_button.draw(game_screen):
+          pass
+        if restart_button.draw(game_screen):
+          pass
+        if exit_button.draw(game_screen):
+          pygame.quit()
 
     pygame.display.update()
 

@@ -1,6 +1,8 @@
 import pygame
 import os
 
+pygame.font.init()
+
 LINE_WIDTH = 15
 WIN_LINE_WIDTH = 15
 BOARD_ROWS = 3
@@ -26,3 +28,11 @@ TITLE = pygame.transform.scale(TITLE, (475, 90))
 EASY_BUTTON = pygame.image.load(os.path.join('images', 'easy.png'))
 MEDIUM_BUTTON = pygame.image.load(os.path.join('images', 'medium.png'))
 HARD_BUTTON = pygame.image.load(os.path.join('images', 'hard.png'))
+
+# Game screen
+
+FONT = pygame.font.SysFont("Verdana", 40)
+
+RESET_BUTTON = pygame.image.load(os.path.join('images', 'reset.png'))
+EXIT_BUTTON = pygame.image.load(os.path.join('images', 'exit.png'))
+RESTART_BUTTON = pygame.image.load(os.path.join('images', 'Restart.png'))
