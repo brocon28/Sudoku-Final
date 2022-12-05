@@ -26,14 +26,14 @@ class SudokuGenerator:
     # initialized the class variables - jehan
     # helped jehan initialize the class variable of self.board - syed
     def __init__(self, row_length, removed_cells):
-        # an array that is 9 x 9 and holds the entire board's values
+        # an array that is 9 x 9 and holds the entire board's values - jehan
         self.board = [[0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0, 0, 0]]
         self.row_length = row_length
         self.removed_cells = removed_cells
-        # length of one box (3)
+        # length of one box (3) - jehan
         self.box_length = 3
 
     '''
@@ -43,7 +43,7 @@ class SudokuGenerator:
 	Return: list[list]
     '''
 
-    # getter function that just returns the attribute of the self object - jehan
+    # getter function that just returns the attribute of the self object - taran
     def get_board(self):
         return self.board
 
@@ -55,6 +55,7 @@ class SudokuGenerator:
 	Return: None
     '''
 
+    # printing function in which receives info from the self.board attribute and the get_board function - taran
     def print_board(self):
         for row in self.board:
             for col in row:
@@ -110,8 +111,8 @@ class SudokuGenerator:
     '''
 
     def valid_in_box(self, row_start, col_start, num):
-        for row in range(0, 3):  # the 3 rows
-            for col in range(0, 3):  # the 3 cols
+        for row in range(0, 3):  # the 3 rows - syed
+            for col in range(0, 3):  # the 3 cols - syed
                 if self.board[row_start + row][col_start + col] == num:
                     return False
         return True
@@ -128,8 +129,8 @@ class SudokuGenerator:
     '''
 
     def is_valid(self, row, col, num):
-        box_row = row // 3 * 3  # gets the box row index of what box num is in
-        box_col = col // 3 * 3  # gets the box col index of what box num is in
+        box_row = row // 3 * 3  # gets the box row index of what box num is in - syed
+        box_col = col // 3 * 3  # gets the box col index of what box num is in - syed
         if self.valid_in_row(row, num) and self.valid_in_col(col, num) and self.valid_in_box(box_row, box_col, num):
             return True
         else:
@@ -159,7 +160,7 @@ class SudokuGenerator:
                 value = one_to_nine[index]
                 # remove value so it isn't used again - syed
                 one_to_nine.pop(index)
-                # assign value to specific cell - jehan
+                # assign value to specific cell - syed
                 self.board[row_start + row][col_start + col] = value
 
     '''
