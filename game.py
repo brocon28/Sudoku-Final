@@ -1,6 +1,7 @@
 import pygame
 import os
 from cell import Cell
+from board import Board
 import button
 from constants import *
 
@@ -58,8 +59,8 @@ def game_screen():
 
   while True:
     # event loop for each click or action done in the game
-    testcell = Cell(3, 1, 1, 200, 100)
-    testcell.draw(game_screen)
+    testBoard = Board(540, 540, game_screen, "easy")
+    testBoard.draw()
 
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
@@ -67,7 +68,6 @@ def game_screen():
 
       # Checks if a cell is clicked
       if event.type == pygame.MOUSEBUTTONDOWN:
-
         if reset_button.draw(game_screen):
           pass
         if restart_button.draw(game_screen):
