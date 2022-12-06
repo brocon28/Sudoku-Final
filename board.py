@@ -75,7 +75,10 @@ class Board:
                 if self.cells[i][j].clicked == True:
                     if (i, j) in self.empty_cells:  # to check if value existed before
                         value = self.cells[i][j].sketched_value
-                        self.cells[i][j].set_cell_value(value)
+                        if value == None:
+                            self.cells[i][j].set_cell_value(0)
+                        else:
+                            self.cells[i][j].set_cell_value(value)
 
     def find_empty(self):  # Finds an empty cell and returns its row and col as a tuple(x, y).
         for i in range(9):
