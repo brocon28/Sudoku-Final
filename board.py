@@ -49,6 +49,7 @@ class Board:
             for j in range(9):
                 self.cells[i][j].clicked = False
         self.cells[row][col].clicked = True  # sets the selected cells value to true
+        self.click(row,col)
 
     def click(self, x, y):  # if (x, y) within the  board, returns tuple of clicked cell. Otherwise, returns None.
         clicked_row = x // SQUARE_SIZE
@@ -58,6 +59,12 @@ class Board:
             return coordinates
         else:
             return None
+
+    def coordinates(self,x,y):
+        coords = []
+        coords.append(x)
+        coords.append(y)
+        return coords
 
     def clear(self):  # Clears the value cell. Note that the user can only remove values/sketch filled by themselves.
         pass

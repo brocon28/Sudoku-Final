@@ -1,7 +1,7 @@
 from sudoku_generator import *
 from constants import *
 import os
-from board import Board
+from board import *
 
 import pygame, sys
 from pygame.locals import QUIT
@@ -133,7 +133,6 @@ if __name__ == '__main__':
     inner_loop = True
     game_over = False
     win = False
-
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT+100))
     pygame.display.set_caption("Sudoku")
@@ -182,12 +181,19 @@ if __name__ == '__main__':
         screen.blit(reset_surface, reset_rectangle)
         screen.blit(restart_surface, restart_rectangle)
         screen.blit(exit_surface, exit_rectangle)
-
+        coords = board.coordinates(0,0)
+        board.select(0,0)
         while inner_loop:
+            if coords[0] > 7:
+                coords[0]=-1
+
+            if coords[1] > 7:
+                coords[1] = 0
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:  # if user hits 'x' to close
                     sys.exit()
-
+                
+                
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if reset_rectangle.collidepoint(event.pos):  # if user clicks reset button
                         print('reset')
@@ -314,6 +320,32 @@ if __name__ == '__main__':
                         screen.blit(reset_surface, reset_rectangle)
                         screen.blit(restart_surface, restart_rectangle)
                         screen.blit(exit_surface, exit_rectangle)
+
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:  # set user value then print everything again so stuff is hidden
+                        board.select(coords[0]-1,coords[1])
+                        coords[0] = (coords[0]-1)
+                        board.draw()
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_DOWN:  # set user value then print everything again so stuff is hidden
+                        board.select(coords[0]+1,coords[1])
+                        coords[0] = (coords[0]+1)
+                        board.draw()
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT:  # set user value then print everything again so stuff is hidden
+                        board.select(coords[0],coords[1]-1)
+                        coords[1] = (coords[1]-1)
+                        board.draw()
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RIGHT:  # set user value then print everything again so stuff is hidden
+                        board.select(coords[0],coords[1]+1)
+                        coords[1] = (coords[1]+1)
+                        board.draw()
+
 
                         if board.is_full():  # check if board if full
                             game_over_font = pygame.font.Font(None, 80)
