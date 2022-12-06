@@ -26,14 +26,14 @@ class SudokuGenerator:
     # initialized the class variables - jehan
     # helped jehan initialize the class variable of self.board - syed
     def __init__(self, row_length, removed_cells):
-        # an array that is 9 x 9 and holds the entire board's values
+        # an array that is 9 x 9 and holds the entire board's values - jehan
         self.board = [[0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0, 0, 0]]
         self.row_length = row_length
         self.removed_cells = removed_cells
-        # length of one box (3)
+        # length of one box (3) - jehan
         self.box_length = 3
 
     '''
@@ -43,7 +43,7 @@ class SudokuGenerator:
 	Return: list[list]
     '''
 
-    # getter function that just returns the attribute of the self object - jehan
+    # getter function that just returns the attribute of the self object - taran
     def get_board(self):
         return self.board
 
@@ -55,11 +55,11 @@ class SudokuGenerator:
 	Return: None
     '''
 
+    # printing function in which receives info from the self.board attribute and the get_board function - taran
     def print_board(self):
         for row in self.board:
             for col in row:
                 print(col, end=" ")
-            #print()
         print()
 
     '''
@@ -73,11 +73,11 @@ class SudokuGenerator:
 	Return: boolean
     '''
 
-    def valid_in_row(self, row, num):
+    def valid_in_row(self, row, num):  # checks if number in the row can be placed - syed
         if num in self.board[row]:
-            return False
+            return False  # returns when the number is already in that row - syed
         else:
-            return True
+            return True  # returns when the number is not in that row - syed
 
     '''
 	Determines if num is contained in the specified column (vertical) of the board
@@ -91,10 +91,10 @@ class SudokuGenerator:
     '''
 
     def valid_in_col(self, col, num):
-        for item in range(0, 9):
+        for item in range(9):
             if self.board[item][col] == num:
                 return False
-        # no else is needed, as it would throw a logic error and break out of the loop immediately
+        # no else is needed, as it would throw a logic error and break out of the loop immediately - syed
         return True
 
     '''
@@ -111,8 +111,8 @@ class SudokuGenerator:
     '''
 
     def valid_in_box(self, row_start, col_start, num):
-        for row in range(0, 3):  # the 3 rows
-            for col in range(0, 3):  # the 3 cols
+        for row in range(0, 3):  # the 3 rows - syed
+            for col in range(0, 3):  # the 3 cols - syed
                 if self.board[row_start + row][col_start + col] == num:
                     return False
         return True
@@ -129,8 +129,8 @@ class SudokuGenerator:
     '''
 
     def is_valid(self, row, col, num):
-        box_row = row // 3 * 3  # gets the box row index of what box num is in
-        box_col = col // 3 * 3  # gets the box col index of what box num is in
+        box_row = row // 3 * 3  # gets the box row index of what box num is in - syed
+        box_col = col // 3 * 3  # gets the box col index of what box num is in - syed
         if self.valid_in_row(row, num) and self.valid_in_col(col, num) and self.valid_in_box(box_row, box_col, num):
             return True
         else:
@@ -148,19 +148,19 @@ class SudokuGenerator:
     '''
 
     def fill_box(self, row_start, col_start):
-        # list of values that one grid has
+        # list of values that one grid has - jehan
         one_to_nine = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        # the 3 rows in one grid
+        # the 3 rows in one grid - jehan
         for row in range(3):
-            # the 3 cols in one grid
+            # the 3 cols in one grid - jehan
             for col in range(3):
-                # randomly decide what value to input from list through index
+                # randomly decide what value to input from list through index - syed
                 index = random.randint(0, (len(one_to_nine) - 1))
-                # get value using index
+                # get value using index - syed
                 value = one_to_nine[index]
-                # remove value so it isn't used again
+                # remove value so it isn't used again - syed
                 one_to_nine.pop(index)
-                # assign value to specific cell
+                # assign value to specific cell - syed
                 self.board[row_start + row][col_start + col] = value
 
     '''
@@ -171,7 +171,7 @@ class SudokuGenerator:
 	Return: None
     '''
     def fill_diagonal(self):
-        # fills the three boxes within the main diagonal of the board
+        # fills the three boxes within the main diagonal of the board - jehan
         self.fill_box(6, 6)
         self.fill_box(3, 3)
         self.fill_box(0, 0)
