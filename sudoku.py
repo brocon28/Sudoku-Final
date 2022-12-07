@@ -14,37 +14,37 @@ def draw_game_start(screen):
     start_subheading_font = pygame.font.Font(None, 60)
     button_font = pygame.font.Font(None, 50)
 
-    # Color background
+    # Color background - syed
     screen.fill(BG_COLOR)
 
-    # Initialize and draw title
+    # Initialize and draw title - syed
     title_surface = start_title_font.render("Welcome to Sudoku", 0, LINE_COLOR)
     title_rectangle = title_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 150))
     screen.blit(title_surface, title_rectangle)
 
-    # Initialize and draw subheading
+    # Initialize and draw subheading - syed
     subheading_surface = start_subheading_font.render("Select Game Mode:", 0, LINE_COLOR)
     subheading_rect = subheading_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 220))
     screen.blit(subheading_surface, subheading_rect)
 
-    # Initialize buttons
-    # Initialize text first
+    # Initialize buttons - syed
+    # Initialize text first - syed
     easy_text = button_font.render("Easy", 0, (255, 255, 255))
     med_text = button_font.render("Medium", 0, (255, 255, 255))
     hard_text = button_font.render("Hard", 0, (255, 255, 255))
     quit_text = button_font.render("Quit", 0, (255, 255, 255))
 
-    # Initialize Easy button background color and text
+    # Initialize Easy button background color and text - syed
     easy_surface = pygame.Surface((easy_text.get_size()[0] + 20, easy_text.get_size()[1] + 20))
     easy_surface.fill(LINE_COLOR)
     easy_surface.blit(easy_text, (10, 10))
 
-    # Initialize Medium button background color and text
+    # Initialize Medium button background color and text - syed
     med_surface = pygame.Surface((med_text.get_size()[0] + 20, med_text.get_size()[1] + 20))
     med_surface.fill(LINE_COLOR)
     med_surface.blit(med_text, (10, 10))
 
-    # Initialize Hard button background color and text
+    # Initialize Hard button background color and text - syed
     hard_surface = pygame.Surface((hard_text.get_size()[0] + 20, hard_text.get_size()[1] + 20))
     hard_surface.fill(LINE_COLOR)
     hard_surface.blit(hard_text, (10, 10))
@@ -54,13 +54,13 @@ def draw_game_start(screen):
     quit_surface.fill(LINE_COLOR)
     quit_surface.blit(quit_text, (10, 10))
 
-    # Initialize button rectangle
+    # Initialize button rectangle - syed
     easy_rectangle = easy_surface.get_rect(center=(WIDTH // 4, HEIGHT // 2 + 300))
     med_rectangle = med_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 300))
     hard_rectangle = hard_surface.get_rect(center=(WIDTH - (WIDTH // 4), HEIGHT // 2 + 300))
     quit_rectangle = quit_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 300))
 
-    # Draw buttons
+    # Draw buttons - dany
     screen.blit(easy_surface, easy_rectangle)
     screen.blit(med_surface, med_rectangle)
     screen.blit(hard_surface, hard_rectangle)
@@ -150,34 +150,34 @@ if __name__ == '__main__':
         board.print_board()  # print board to console
         print()
 
-        # Initialize game buttons
+        # Initialize game buttons - syed
         button_font = pygame.font.Font(None, 50)
-        # Initialize text first
+        # Initialize text first - jehan
         reset_text = button_font.render("Reset", 0, (255, 255, 255))
         restart_text = button_font.render("Restart", 0, (255, 255, 255))
         exit_text = button_font.render("Exit", 0, (255, 255, 255))
 
-        # Initialize Reset button background color and text
+        # Initialize Reset button background color and text - syed
         reset_surface = pygame.Surface((reset_text.get_size()[0] + 20, reset_text.get_size()[1] + 20))
         reset_surface.fill(LINE_COLOR)
         reset_surface.blit(reset_text, (10, 10))
 
-        # Initialize Restart button background color and text
+        # Initialize Restart button background color and text - syed
         restart_surface = pygame.Surface((restart_text.get_size()[0] + 20, restart_text.get_size()[1] + 20))
         restart_surface.fill(LINE_COLOR)
         restart_surface.blit(restart_text, (10, 10))
 
-        # Initialize Exit button background color and text
+        # Initialize Exit button background color and text - syed
         exit_surface = pygame.Surface((exit_text.get_size()[0] + 20, exit_text.get_size()[1] + 20))
         exit_surface.fill(LINE_COLOR)
         exit_surface.blit(exit_text, (10, 10))
 
-        # Initialize game button rectangle
+        # Initialize game button rectangle - syed
         reset_rectangle = reset_surface.get_rect(center=(SQUARE_SIZE * 1.5, HEIGHT // 2 + 365))
         restart_rectangle = restart_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 365))
         exit_rectangle = exit_surface.get_rect(center=(WIDTH - (SQUARE_SIZE * 1.5), HEIGHT // 2 + 365))
 
-        # Draw game buttons
+        # Draw game buttons - syed
         screen.blit(reset_surface, reset_rectangle)
         screen.blit(restart_surface, restart_rectangle)
         screen.blit(exit_surface, exit_rectangle)
@@ -190,12 +190,12 @@ if __name__ == '__main__':
             if coords[1] > 7:
                 coords[1] = 0
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:  # if user hits 'x' to close
+                if event.type == pygame.QUIT:  # if user hits 'x' to close - syed
                     sys.exit()
                 
                 
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if reset_rectangle.collidepoint(event.pos):  # if user clicks reset button
+                    if reset_rectangle.collidepoint(event.pos):  # if user clicks reset button - syed
                         print('reset')
                         board.reset_to_original()  # reset board and display everything
                         screen.fill(BG_COLOR)
@@ -383,7 +383,7 @@ if __name__ == '__main__':
             pygame.display.update()
 
 
-            # game is over
+            # Game is over - jehan
             if game_over:
                 # draw_game_over(screen, win)
                 while True:
