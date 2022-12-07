@@ -9,7 +9,7 @@ from pygame.locals import QUIT
 
 
 def draw_game_start(screen):
-    # Initialize title font
+    # Initialize title font - syed
     start_title_font = pygame.font.Font(None, 80)
     start_subheading_font = pygame.font.Font(None, 60)
     button_font = pygame.font.Font(None, 50)

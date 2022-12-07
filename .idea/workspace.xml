@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="702adaa9-4652-4ccc-a655-d576b261f002" name="Changes" comment="">
+    <list default="true" id="702adaa9-4652-4ccc-a655-d576b261f002" name="Changes" comment="finished and renamed the &quot;main&quot; file to &quot;sudoku&quot; file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sudoku.py" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +37,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.game">
+  <component name="RunManager">
     <configuration name="game" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Sudoku-Project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -99,6 +99,14 @@
       <updated>1670019889504</updated>
       <workItem from="1670348640891" duration="1531000" />
     </task>
+    <task id="LOCAL-00001" summary="finished and renamed the &quot;main&quot; file to &quot;sudoku&quot; file">
+      <created>1670371403704</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1670371403704</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,5 +133,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="finished and renamed the &quot;main&quot; file to &quot;sudoku&quot; file" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished and renamed the &quot;main&quot; file to &quot;sudoku&quot; file" />
   </component>
 </project>
