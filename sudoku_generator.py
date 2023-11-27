@@ -31,7 +31,6 @@ class SudokuGenerator:
             for j in range(self.row_length):
                 temp.append(0)
             self.board.append(temp)
-        print(type(self.board))
         self.box_length = int(math.sqrt(self.row_length))
         self.fill_values()
 
@@ -103,10 +102,12 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_box(self, row_start, col_start, num):
-        print(self.board)
+        row = row_start//self.box_length
+        col = col_start//self.box_length
+
         for i in range(3):
             for j in range(3):
-                if self.board[row_start+i][col_start+j] == num:
+                if self.board[row*3+i][col*3+j] == num:
                     return False
         return True
     
@@ -121,6 +122,7 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def is_valid(self, row, col, num):
+        print(f"check{col} and {row}")
         return self.valid_in_row(row, num) and self.valid_in_col(col, num) and self.valid_in_box(row, col, num)
 
     '''
