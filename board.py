@@ -1,7 +1,15 @@
+import pygame
+from cell import Cell
+
 class Board:
     def __init__(self, width, height, screen, difficulty):
-        pass
+        self.width = width
+        self.height = height
+        self.screen = screen 
+        self.difficulty = difficulty
+        self.board 
 
+    #Draws outline of sudoku grid
     def draw(self):
         pass
 
