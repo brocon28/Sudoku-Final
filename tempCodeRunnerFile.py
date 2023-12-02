@@ -1,1 +1,1 @@
-SudokuGenerator
+pygame.display.update()
