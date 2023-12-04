@@ -1,1 +1,1 @@
-SudokuGenerator
+{PATH}

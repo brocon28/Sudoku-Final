@@ -1,9 +1,27 @@
+import pygame
+from cell import Cell
+import sudoku_generator
+
 class Board:
     def __init__(self, width, height, screen, difficulty):
-        pass
+        self.width = width
+        self.height = height
+        self.screen = screen 
+        self.difficulty = difficulty
+        self.board = sudoku_generator.generate_sudoku(width, difficulty)
+        self.cell = [[Cell(self.board[i][j], i, j, self.screen) 
+                      for j in range(self.width)] for i in range(self.width)]
 
+    #Draws outline of sudoku grid
     def draw(self):
-        pass
+        for i in range(0, 10):
+            if i % 3 == 0:
+                pygame.draw.line(self.screen, (0, 0, 0), (50 + 50 * i, 50), (50 + 50 * i, 500), 4)
+                pygame.draw.line(self.screen, (0, 0, 0), (50, 50 + 50 * i), (500, 50 + 50 * i), 4)
+
+            pygame.draw.line(self.screen, (0, 0, 0), (50 + 50 * i, 50), (50 + 50 * i, 500), 2)
+            pygame.draw.line(self.screen, (0, 0, 0), (50, 50 + 50 * i), (500, 50 + 50 * i), 2)
+        pygame.display.update()
 
     def select(self, row, col):
         pass
