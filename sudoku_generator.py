@@ -188,7 +188,18 @@ class SudokuGenerator:
 	Return: None
     '''
     def remove_cells(self):
-        pass
+        random_row=random.randint(0,8)
+        random_col=random.randint(0,8)
+        count=0
+        while count < self.removed_cells:
+            if self.board[random_row][random_col] !=0:
+                self.board[random_row][random_col]=0
+                random_row=random.randint(0,8)
+                random_col=random.randint(0,8)
+                count += 1
+            else:
+                random_row = random.randint(0, 8)
+                random_col = random.randint(0, 8)
 
 '''
 DO NOT CHANGE
@@ -205,6 +216,8 @@ removed is the number of cells to clear (set to 0)
 
 Return: list[list] (a 2D Python list to represent the board)
 '''
+
+
 def generate_sudoku(size, removed):
     sudoku = SudokuGenerator(size, removed)
     sudoku.fill_values()
