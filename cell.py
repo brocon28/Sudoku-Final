@@ -7,3 +7,11 @@ class Cell:
 
     def set_cell_value(self, value):
         self.value = value
+
+    def set_sketched_value(self,value):
+        return
+
+    def draw(self):
+        return
+
+
