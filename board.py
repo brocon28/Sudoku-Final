@@ -26,7 +26,7 @@ class Board:
         total = 0
         for i in range (0, 9, 1):
             for j in range (0, 9, 1):
-                if board[i][j] > 0:
+                if SG.print_board()[i][j] > 0:
                     total += 1
         if total == 81:
             return True
@@ -39,7 +39,7 @@ class Board:
     def find_empty(self):
         for i in range(0, 9, 1):
             for j in range(0, 9, 1):
-                if board[i][j] == 0:
+                if SG.print_board()[i][j] == 0:
                     print(str(i)+", "+str(j))
 
 
