@@ -119,7 +119,7 @@ class SudokuGenerator:
 	Return: None
     '''
     def fill_box(self, row_start, col_start):
-        board = get_board()
+        board = self.get_board()
         numberlist = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         for i in range(row_start, row_start + 2):
             for j in range(col_start, col_start + 2):
@@ -138,7 +138,7 @@ class SudokuGenerator:
         for i in range(0, 6, 3):
             row_start = 0 + i
             col_start = 0 + i
-            fill_box(row_start, col_start)
+            self.fill_box(row_start, col_start)
 
     '''
     DO NOT CHANGE
