@@ -24,8 +24,15 @@ class SudokuGenerator:
     def __init__(self, row_length, removed_cells):
         self.row_length = row_length
         self.removed_cells = removed_cells
-        self.board = [[0, 0, 0][0, 0, 0][0, 0, 0]] #this is one of the squares of the board. Idk how you want to do it, add nine of these or write it as a 9x9
+        board = []
+        for i in range (0, self.row_length):
+            row = []
+            for i in range (0, self.row_length):
+                row.append(0)
+            board.append(row)
+        # self.board = [[0, 0, 0][0, 0, 0][0, 0, 0]] #this is one of the squares of the board. Idk how you want to do it, add nine of these or write it as a 9x9
         self.box_length = math.sqrt(row_length)
+        self.board = board
 
     '''
 	Returns a 2D python list of numbers which represents the board
@@ -44,7 +51,7 @@ class SudokuGenerator:
 	Return: None
     '''
     def print_board(self):
-        for i in self.board:
+        for i in range(0, len(self.board)):
             print(self.board[i])
 
     '''
@@ -225,3 +232,4 @@ def generate_sudoku(size, removed):
     sudoku.remove_cells()
     board = sudoku.get_board()
     return board
+
