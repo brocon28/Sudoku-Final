@@ -1,4 +1,5 @@
-
+class Board:
+    def __init__(self, width,height,screen,difficulty):
     def draw(self):
         pass
 
