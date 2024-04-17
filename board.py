@@ -1,8 +1,18 @@
 from sudoku_generator import SudokuGenerator as SG
 class Board:
     def __init__(self, width,height,screen,difficulty):
+        self.width = width
+        self.height=height
+        self.screen=screen
+        self.difficulty=difficulty
+
+
     def draw(self):
-        pass
+        for i in range (1,BOARD_ROWS):
+            pygame.draw.line(self.screen,LINE_COLOR,(0,1*SQUARE_SIZE),(WIDTH,i*SQUARE_SIZE),LINE_WIDTH)
+        for i in range (1,BOARD_COLS):
+            pygame.draw.line(screen,LINE_COLOR,(i*SQUARE_SIZE,0),(i*SQUARE_SIZE,HEIGHT),LINE_WIDTH)
+
 
     def select(self, row, col):
         pass
