@@ -9,9 +9,11 @@ class Cell:
         self.value = value
 
     def set_sketched_value(self,value):
-        return
+        self.value = value
 
     def draw(self):
-        return
+        
+
+
 
 
