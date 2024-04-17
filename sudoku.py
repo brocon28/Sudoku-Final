@@ -1,6 +1,7 @@
 import pygame
 import sys
 from constants import *
+
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("SUDOKU")
@@ -26,3 +27,7 @@ def print_hi(name):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('PyCharm')
+
+
+
+
