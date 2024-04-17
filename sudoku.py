@@ -6,6 +6,10 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("SUDOKU")
 
 screen.fill(BG_COLOR)
+
+game_over_font = pygame.font.Font(None, GAME_OVER_FONT)
+game_over = False
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
