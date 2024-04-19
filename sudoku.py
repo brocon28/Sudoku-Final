@@ -2,13 +2,17 @@ import pygame
 import sys
 from constants import *
 from board import Board
-from cell import Cell
+import cell
+import constants
 from sudoku_generator import SudokuGenerator
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("SUDOKU")
+window = pygame.display.set_mode((constants.WIDTH, constants.HEIGHT))
+window.fill(BG_COLOR)
 
-screen.fill(BG_COLOR)
+cell1 = cell.Cell(4, WIDTH//2, HEIGHT//2, window)
+cell1.draw()
 
 game_over_font = pygame.font.Font(None, GAME_OVER_FONT)
 game_over = False
@@ -17,6 +21,7 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
+
 
     pygame.display.update()
 
