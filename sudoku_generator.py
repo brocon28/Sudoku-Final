@@ -35,7 +35,7 @@ class SudokuGenerator:
 	Return: list[list]
     '''
     def get_board(self):
-        return list[self.board]
+        pass
 
     '''
 	Displays the board to the console
@@ -45,7 +45,7 @@ class SudokuGenerator:
 	Return: None
     '''
     def print_board(self):
-        print(self.board)
+        pass
 
     '''
 	Determines if num is contained in the specified row (horizontal) of the board
@@ -113,7 +113,7 @@ class SudokuGenerator:
     '''
     def fill_box(self, row_start, col_start):
         pass
-    
+
     '''
     Fills the three boxes along the main diagonal of the board
     These are the boxes which start at (0,0), (3,3), and (6,6)
@@ -154,7 +154,7 @@ class SudokuGenerator:
                 col = 0
                 if row >= self.row_length:
                     return True
-        
+
         for num in range(1, self.row_length + 1):
             if self.is_valid(row, col, num):
                 self.board[row][col] = num
@@ -291,4 +291,4 @@ def generate_sudoku(size, removed):
     board = sudoku.get_board()
     return board
 
-generate_sudoku(size=9,removed=0)
+print(generate_sudoku(9,0))
