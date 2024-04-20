@@ -25,22 +25,35 @@ class Board:
 
 
     def select(self, row, col):
-        pass
+        for i in self.cells:
+            for j in i:
+                if j.row==row and j.col==col:
+                    j.touch==True
+                    return j
 
     def click(self, x, y):
-        pass
+        row = x//SQUARE_SIZE
+        col = y//SQUARE_SIZE
+        return row, col
 
     def clear(self):
         pass
+    #we might not need this (logically)
 
     def sketch(self, value):
         pass
+    #do later
 
     def place_number(self, value):
         pass
+    #do later
 
     def reset_to_original(self):
-        pass
+        for i in range(9):
+            for j in range(9):
+                self.board[i][j]=self.original[i][j](self.cells[i][j]).value = self.board[i][j]
+                self.update.board()
+                self.draw()
 
     def is_full(self):
         total = 0
@@ -54,8 +67,9 @@ class Board:
             return False
 
     def update_board(self):
-        pass
-
+        for i in self.cells:
+            for j in i:
+                self.board[j.row][j.col] = j.value
     def find_empty(self):
         for i in range(0, 9, 1):
             for j in range(0, 9, 1):
