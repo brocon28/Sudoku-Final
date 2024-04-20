@@ -12,7 +12,7 @@ window = pygame.display.set_mode((constants.WIDTH, constants.HEIGHT))
 window.fill(BG_COLOR)
 
 cell1 = cell.Cell(4, WIDTH//2, HEIGHT//2, window)
-cell1.draw()
+cell1.draw(window)
 
 game_over_font = pygame.font.Font(None, GAME_OVER_FONT)
 game_over = False

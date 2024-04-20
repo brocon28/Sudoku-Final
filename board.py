@@ -1,17 +1,27 @@
 from sudoku_generator import SudokuGenerator as SG
+from constants import *
+import pygame
+import cell
 class Board:
     def __init__(self, width,height,screen,difficulty):
         self.width = width
         self.height=height
         self.screen=screen
         self.difficulty=difficulty
+        self.cells=[]
 
 
     def draw(self):
         for i in range (1,BOARD_ROWS):
             pygame.draw.line(self.screen,LINE_COLOR,(0,1*SQUARE_SIZE),(WIDTH,i*SQUARE_SIZE),LINE_WIDTH)
         for i in range (1,BOARD_COLS):
-            pygame.draw.line(screen,LINE_COLOR,(i*SQUARE_SIZE,0),(i*SQUARE_SIZE,HEIGHT),LINE_WIDTH)
+            pygame.draw.line(self.screen,LINE_COLOR,(i*SQUARE_SIZE,0),(i*SQUARE_SIZE,HEIGHT),LINE_WIDTH)
+
+        for i in self.cells:
+            for j in range (1,BOARD_ROWS):
+                pygame.draw
+                pygame.draw.rect(self.screen)
+
 
 
     def select(self, row, col):
