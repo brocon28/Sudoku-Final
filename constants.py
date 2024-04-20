@@ -1,5 +1,5 @@
 WIDTH = 600 #width of the board
-HEIGHT = 700 #height of the board
+HEIGHT = 600 #height of the board
 LINE_WIDTH = 15
 WIN_LINE_WIDTH = 15
 BOARD_ROWS = 3
@@ -10,6 +10,8 @@ CIRCLE_WIDTH = 15
 CROSS_WIDTH = 25
 SPACE = 55
 RED = (255, 0, 0)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 BG_COLOR = (255, 255, 245)
 LINE_COLOR = (245, 152, 66)
 CIRCLE_COLOR = (155, 155, 155)

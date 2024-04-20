@@ -5,32 +5,51 @@ from board import Board
 import cell
 import constants
 from sudoku_generator import SudokuGenerator
-pygame.init()
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("SUDOKU")
-window = pygame.display.set_mode((constants.WIDTH, constants.HEIGHT))
-window.fill(BG_COLOR)
 
-cell1 = cell.Cell(4, WIDTH//2, HEIGHT//2, window)
-cell1.draw(window)
+def game_start_screen():
+    # Sets the background to white
+    screen.fill(WHITE)
 
-game_over_font = pygame.font.Font(None, GAME_OVER_FONT)
-game_over = False
+    # Title
+    title_font = pygame.font.Font(None, 64)
+    title_text = title_font.render("Welcome to Sudoku", True, BLACK)
+    title_rect = title_text.get_rect(center=(WIDTH // 2, HEIGHT // 4))
+    screen.blit(title_text, title_rect)
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            sys.exit()
+    # Displays "Select Game Mode:"
+    mode_font = pygame.font.Font(None, 32)
+    mode_text = mode_font.render("Select Game Mode:", True, BLACK)
+    mode_rect = mode_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+    screen.blit(mode_text, mode_rect)
+
+    # Creates easy, medium, and hard buttons
+    button_font = pygame.font.Font(None, 32)
+    easy_button = button_font.render("Easy", True, BLACK)
+    easy_rect = easy_button.get_rect(center=(WIDTH // 4, HEIGHT * 3 // 4))
+    screen.blit(easy_button, easy_rect)
+
+    medium_button = button_font.render("Medium", True, BLACK)
+    medium_rect = medium_button.get_rect(center=(WIDTH // 2, HEIGHT * 3 // 4))
+    screen.blit(medium_button, medium_rect)
+
+    hard_button = button_font.render("Hard", True, BLACK)
+    hard_rect = hard_button.get_rect(center=(WIDTH * 3 // 4, HEIGHT * 3 // 4))
+    screen.blit(hard_button, hard_rect)
 
 
-    pygame.display.update()
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    pygame.init()
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption("SUDOKU")
+
+    game_over = False
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                # pygame.quit()
+                sys.exit()
+        # Clear the screen
+        screen.fill((0, 0, 0))
+        game_start_screen()
+        pygame.display.update()
