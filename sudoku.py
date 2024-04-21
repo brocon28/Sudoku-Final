@@ -1,97 +1,69 @@
 import pygame
 import sys
-
-from pygame import Surface, SurfaceType
-
-import board
-from constants import *
 from board import Board
-from cell import Cell
+from cell import *
+from constants import *
 from sudoku_generator import SudokuGenerator
-pygame.init()
-#screen: Surface | SurfaceType = pygame.display.set_mode((WIDTH, HEIGHT))
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("SUDOKU")
-
-"""board = Board.draw(Board)
-board[1][2]="1"
-board[2][2]="2"
-player = 1
-chip = "1"
-game_over=False
-winner=0"""
-window = pygame.display.set_mode((WIDTH, HEIGHT))
-window.fill(BG_COLOR)
-
-#cell1 = Cell(4, WIDTH//2, HEIGHT//2, window)
-#cell1.draw(window)
-
-game_over_font = pygame.font.Font(None, GAME_OVER_FONT)
-game_over = False
 
 
+def game_start_screen(screen):
+    # Sets the background to white
+    screen.fill(WHITE)
 
-"""
+    # Title
+    title_font = pygame.font.Font(None, 64)
+    title_text = title_font.render("Welcome to Sudoku", True, BLACK)
+    title_rect = title_text.get_rect(center=(WIDTH // 2, HEIGHT // 4))
+    screen.blit(title_text, title_rect)
 
-def draw_grid():
-    pygame.draw.line(screen, LINE_COLOR, (0, 575), (500 * SQUARE_SIZE, HEIGHT), LINE_WIDTH // 2)
-    pygame.draw.line(screen, LINE_COLOR, (0, 0), (800 * SQUARE_SIZE, HEIGHT), LINE_WIDTH // 2)
+    # Displays "Select Game Mode:"
+    mode_font = pygame.font.Font(None, 32)
+    mode_text = mode_font.render("Select Game Mode:", True, BLACK)
+    mode_rect = mode_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+    screen.blit(mode_text, mode_rect)
 
-    #Draw horizontal ine
-    for i in range(1, BOARD_ROWS):
-        pygame.draw.line(screen, LINE_COLOR, (0,i*SQUARE_SIZE), (WIDTH, i*SQUARE_SIZE), LINE_WIDTH//2)
+    # Creates easy, medium, and hard buttons
+    button_font = pygame.font.Font(None, 32)
+    easy_button = button_font.render("Easy", True, BLACK)
+    easy_rect = easy_button.get_rect(center=(WIDTH // 4, HEIGHT * 3 // 4))
+    screen.blit(easy_button, easy_rect)
 
-    #draw vertical line:
-    for i in range(1, BOARD_COLS):
-        pygame.draw.line(screen, LINE_COLOR, (i*SQUARE_SIZE, 0), (i*SQUARE_SIZE, HEIGHT-125), LINE_WIDTH//2)
+    medium_button = button_font.render("Medium", True, BLACK)
+    medium_rect = medium_button.get_rect(center=(WIDTH // 2, HEIGHT * 3 // 4))
+    screen.blit(medium_button, medium_rect)
 
-
-"""
-
-screen.fill(BG_COLOR)
-c = Cell(1, 1, 1, screen)
-c.draw()
-b = Board(2, 2, screen, 1)
-b.draw()
-
-
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-
-        if event.type == pygame.KEYDOWN:
-            x,y=event.pops
-            row = y//SQUARE_SIZE
-            col = (x//SQUARE_SIZE)
-
-    pygame.display.update()
+    hard_button = button_font.render("Hard", True, BLACK)
+    hard_rect = hard_button.get_rect(center=(WIDTH * 3 // 4, HEIGHT * 3 // 4))
+    screen.blit(hard_button, hard_rect)
 
 
+def main():
+    pygame.init()
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption("SUDOKU")
+    game_over_font = pygame.font.Font(None, GAME_OVER_FONT)
+    game_over = False
 
-"""            if available_square(board, row, col):
-                mark_square(board, rowl, col, chip)
-                if check_if_winner(board, num):
-                    game_over = True
-                    winner = player
+    screen.fill(BG_COLOR)
+    c = Cell(1, 1, 1, screen)
+    c.draw()
+    b = Board(2, 2, screen, 1)
+    b.draw()
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                # pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                x, y = event.pops
+                row = y // SQUARE_SIZE
+                col = (x // SQUARE_SIZE)
+        # Clear the screen
+        screen.fill((0, 0, 0))
+        game_start_screen(screen)
 
-                else:
-                    if board_is_full(board):
-                        game_over = True
-                        winner =0 #indicates a tie
-
-            player = 2 if player==1 else 1"""
-
-
-
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
+        pygame.display.update()
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    main()
