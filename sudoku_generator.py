@@ -80,9 +80,11 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_col(self, col, num):
-        for row in range(0, len(self.board)):
-            if self.board[row][col] == num:
-                return False
+        for i in range(0,9):
+            for j in range(0,9):
+                if self.board[j][i]==num:
+                    return False
+
         return True
 
     '''
@@ -200,7 +202,8 @@ class SudokuGenerator:
     '''
     def fill_values(self):
         self.fill_diagonal()
-        self.fill_remaining(0, self.box_length)
+        self.fill_remaining(9,9)
+
 
     '''
     Removes the appropriate number of cells from the board
@@ -248,11 +251,12 @@ Return: list[list] (a 2D Python list to represent the board)
 def generate_sudoku(size, removed):
     sudoku = SudokuGenerator(size, removed)
     sudoku.fill_values()
-    sudoku.remove_cells()
+
     board = sudoku.get_board()
     return board
 
 
-s = generate_sudoku(9, 0)
+
+s = generate_sudoku(9, 1)
 for i in range(0, len(s)):
     print(s[i])
