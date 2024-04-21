@@ -114,6 +114,87 @@ def generate_sudoku(size, removed):
     sudoku.remove_cells()
     board = sudoku.get_board()
     return board
-# This file will contain code to create the different screens of the project
-# (game start, game over, and game in progress), and will form a cohesive project together
-# with the rest of the code.
+
+def draw_menu(screen):
+    start_title_font = pygame.font.Font(None, 70)
+    select_title_font = pygame.font.Font(None, 55)
+    button_font = pygame.font.Font(None, 40)
+
+    screen.fill(BG_COLOR)
+
+    title_surf = start_title_font.render("Welcome to Sudoku", 1, LINE_COLOR)
+    title_rect = title_surf.get_rect(center=(WIDTH//2, HEIGHT//2-150))
+    screen.blit(title_surf, title_rect)
+
+    select_title_surf = select_title_font.render("Select Game Mode:", 1, LINE_COLOR)
+    select_title_rect = select_title_surf.get_rect(center=(WIDTH//2, HEIGHT//2))
+    screen.blit(select_title_surf, select_title_rect)
+
+
+    easy=button_font.render("Easy",0,(255,255,255))
+    med=button_font.render("Medium",0,(255,255,255))
+    hard=button_font.render("Hard",0,(255,255,255))
+
+    easy_surf=pygame.Surface((easy.get_size()[0]+20,easy.get_size()[1]+20))
+    easy_surf.fill(LINE_COLOR)
+    easy_surf.blit(easy,(10,10))
+    med_surf = pygame.Surface((med.get_size()[0] + 20, med.get_size()[1] + 20))
+    med_surf.fill(LINE_COLOR)
+    med_surf.blit(med, (10, 10))
+    hard_surf = pygame.Surface((hard.get_size()[0] + 20, hard.get_size()[1] + 20))
+    hard_surf.fill(LINE_COLOR)
+    hard_surf.blit(hard, (10, 10))
+
+
+    easy_rect=easy.get_rect(center=(WIDTH//2-120,HEIGHT//2+100))
+    med_rect=med.get_rect(center=(WIDTH//2,HEIGHT//2+100))
+    hard_rect=hard.get_rect(center=(WIDTH//2+120,HEIGHT//2+100))
+
+    screen.blit(easy_surf,easy_rect)
+    screen.blit(med_surf, med_rect)
+    screen.blit(hard_surf, hard_rect)
+
+
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if easy_rect.collidepoint(event.pos):
+                    return 'easy'
+                elif med_rect.collidepoint(event.pos):
+                    return 'medium'
+                elif hard_rect.collidepoint(event.pos):
+                    return 'hard'
+        pygame.display.update()
+
+def draw_game_over(screen):
+    game_over_font = pygame.font.Font(None, 100)
+    button_font = pygame.font.Font(None, 40)
+    screen.fill(BG_COLOR)
+    if win:
+        text="Game Won!"
+    else:
+        text = "Game Over :("
+    game_over_surf = game_over_font.render(text, 0, LINE_COLOR)
+    game_over_rect = game_over_surf.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 100))
+    screen.blit(game_over_surf, game_over_rect)
+
+    if win:
+        exit_text=button_font.render("EXIT",0,(255,255,255))
+        exit_surf=pygame.Surface((exit_text.get_size()[0]+20,exit_text.get_size()[1]+20))
+        exit_surf.fill(LINE_COLOR)
+        exit_surf.blit(exit_text,(10,10))
+        exit_rect=exit_surf.get_rect(center=(WIDTH//2+135,570))
+        screen.blit(exit_surf,exit_rect)
+
+    else:
+        restart_text = button_font.render("RESTART", 0, (255, 255, 255))
+        restart_surf = pygame.Surface((restart_text.get_size()[0] + 20, restart_text.get_size()[1] + 20))
+        restart_surf.fill(LINE_COLOR)
+        restart_surf.blit(restart_text, (10, 10))
+        restart_rect = restart_surf.get_rect(center=(WIDTH//2, 570))
+        screen.blit(restart_surf, restart_rect)
+
