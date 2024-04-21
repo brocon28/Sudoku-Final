@@ -1,5 +1,5 @@
 WIDTH = 600 #width of the board
-HEIGHT = 600 #height of the board
+HEIGHT = 700 #height of the board
 LINE_WIDTH = 15
 WIN_LINE_WIDTH = 15
 BOARD_ROWS = 3
