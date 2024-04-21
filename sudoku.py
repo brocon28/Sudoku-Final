@@ -37,6 +37,7 @@ def game_start_screen():
     screen.blit(hard_button, hard_rect)
 
 
+
 if __name__ == '__main__':
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -52,4 +53,7 @@ if __name__ == '__main__':
         # Clear the screen
         screen.fill((0, 0, 0))
         game_start_screen()
+
+
+
         pygame.display.update()

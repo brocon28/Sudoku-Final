@@ -31,7 +31,7 @@ class SudokuGenerator:
                 row.append(0)
             board.append(row)
         self.board = board
-        self.box_length = math.sqrt(row_length)
+        self.box_length = int(math.sqrt(row_length))
 
     '''
 	Returns a 2D python list of numbers which represents the board
@@ -81,9 +81,8 @@ class SudokuGenerator:
     '''
     def valid_in_col(self, col, num):
         for i in range(0,9):
-            for j in range(0,9):
-                if self.board[j][i]==num:
-                    return False
+            if self.board[i][col]==num:
+                return False
 
         return True
 
@@ -117,7 +116,8 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def is_valid(self, row, col, num):
-        if self.valid_in_row(row, num) == True and self.valid_in_col(col, num) == True and self.valid_in_box(row, col, num) == True:
+        row,col = int(row), int(col)
+        if self.valid_in_row(row, num) == True and self.valid_in_col(col, num) == True and self.valid_in_box(row//3*3, col//3*3, num) == True:
             return True
         else:
             return False
@@ -202,7 +202,7 @@ class SudokuGenerator:
     '''
     def fill_values(self):
         self.fill_diagonal()
-        self.fill_remaining(9,9)
+        self.fill_remaining(0,3)
 
 
     '''
@@ -251,12 +251,13 @@ Return: list[list] (a 2D Python list to represent the board)
 def generate_sudoku(size, removed):
     sudoku = SudokuGenerator(size, removed)
     sudoku.fill_values()
+    sudoku.remove_cells()
 
     board = sudoku.get_board()
     return board
 
 
 
-s = generate_sudoku(9, 1)
+s = generate_sudoku(9, 2)
 for i in range(0, len(s)):
     print(s[i])
