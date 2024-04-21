@@ -2,9 +2,9 @@ import pygame
 import sys
 from constants import *
 from board import Board
-import cell
+from cell import Cel
 import constants
-from sudoku_generator import SudokuGenerator
+from sudoku_generator import SodokuGenerator
 
 def game_start_screen():
     # Sets the background to white
@@ -53,6 +53,11 @@ if __name__ == '__main__':
         # Clear the screen
         screen.fill((0, 0, 0))
         game_start_screen()
+
+
+
+
+
 
 
 
