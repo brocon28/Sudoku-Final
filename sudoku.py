@@ -1,12 +1,12 @@
 import pygame
 import sys
-from constants import *
 from board import Board
-import cell
-import constants
-from sudoku_generator import SudokuGenerator
+from cell import *
+from constants import *
+from sudoku_generator import *
 
-def game_start_screen():
+
+def game_start_screen(screen):
     # Sets the background to white
     screen.fill(WHITE)
 
@@ -37,23 +37,41 @@ def game_start_screen():
     screen.blit(hard_button, hard_rect)
 
 
-
-if __name__ == '__main__':
+def main():
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("SUDOKU")
-
+    game_over_font = pygame.font.Font(None, GAME_OVER_FONT)
     game_over = False
 
+    # screen.fill(BG_COLOR)
+    # b = Board(2, 2, screen, 1)
+    # b.draw()
+    # c = Cell(1, 8, 0, screen)
+    # c.draw()
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 # pygame.quit()
                 sys.exit()
+            if event.type == pygame.KEYDOWN:
+                x, y = event.pops
+                row = y // SQUARE_SIZE
+                col = (x // SQUARE_SIZE)
         # Clear the screen
         screen.fill((0, 0, 0))
-        game_start_screen()
+        game_start_screen(screen)
 
-
-
+        z = generate_sudoku(9, 12)
+        for i in range(len(z)):
+            print(z[i])
+        screen.fill(BG_COLOR)
+        c = Cell(9, 7, 8, screen)
+        c.draw()
+        b = Board(2, 2, screen, 1)
+        b.draw()
         pygame.display.update()
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    main()
