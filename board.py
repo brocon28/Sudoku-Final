@@ -12,15 +12,17 @@ class Board:
 
 
     def draw(self):
-        for i in range (1,BOARD_ROWS):
-            pygame.draw.line(self.screen,LINE_COLOR,(0,1*SQUARE_SIZE),(WIDTH,i*SQUARE_SIZE),LINE_WIDTH)
-        for i in range (1,BOARD_COLS):
-            pygame.draw.line(self.screen,LINE_COLOR,(i*SQUARE_SIZE,0),(i*SQUARE_SIZE,HEIGHT),LINE_WIDTH)
+        for i in range (1,BOARD_ROWS):#big horizontal lines
+            pygame.draw.line(self.screen,BLACK,(0,i*SQUARE_SIZE),(WIDTH,i*SQUARE_SIZE),10)
+        for i in range(1,9):#little horizontal lines
+            pygame.draw.line(self.screen,BLACK,(0,i*200/3),(WIDTH,i*200/3),5)
+        for i in range(1,9):#little vertical lines
+            pygame.draw.line(self.screen,BLACK,(i*200/3,0),(i*200/3,HEIGHT),5)
+        for i in range (1,BOARD_COLS):#big vertical lines
+            pygame.draw.line(self.screen,BLACK,(i*SQUARE_SIZE,0),(i*SQUARE_SIZE,HEIGHT),10)
 
-        for i in self.cells:
-            for j in range (1,BOARD_ROWS):
-                pygame.draw
-                pygame.draw.rect(self.screen)
+
+
 
 
 
