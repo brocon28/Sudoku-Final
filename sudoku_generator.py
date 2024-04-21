@@ -258,6 +258,4 @@ def generate_sudoku(size, removed):
 
 
 
-s = generate_sudoku(9, 2)
-for i in range(0, len(s)):
-    print(s[i])
+
