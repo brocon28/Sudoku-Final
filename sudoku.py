@@ -35,6 +35,14 @@ def game_start_screen(screen):
     hard_button = button_font.render("Hard", True, BLACK)
     hard_rect = hard_button.get_rect(center=(WIDTH * 3 // 4, HEIGHT * 3 // 4))
     screen.blit(hard_button, hard_rect)
+def fill_sudoku():
+    z = generate_sudoku(9, 0)
+    for j in range(9):
+        for i in range(9):
+            value = z[i][j]
+
+            c = Cell(value, i, j, pygame.display.set_mode((WIDTH, HEIGHT)))
+            c.draw()
 
 
 def main():
@@ -49,6 +57,7 @@ def main():
     # b.draw()
     # c = Cell(1, 8, 0, screen)
     # c.draw()
+    o=1
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -59,18 +68,30 @@ def main():
                 row = y // SQUARE_SIZE
                 col = (x // SQUARE_SIZE)
         # Clear the screen
-        screen.fill((0, 0, 0))
-        game_start_screen(screen)
+        #screen.fill((0, 0, 0))
+        #game_start_screen(screen)
 
-        z = generate_sudoku(9, 12)
-        for i in range(len(z)):
-            print(z[i])
+
         screen.fill(BG_COLOR)
-        c = Cell(9, 7, 8, screen)
-        c.draw()
+
         b = Board(2, 2, screen, 1)
         b.draw()
-        pygame.display.update()
+        if o==1:
+            o=0
+            z = generate_sudoku(9, 0)
+            for j in range(9):
+                for i in range(9):
+                    value = z[i][j]
+
+                    c = Cell(value, i, j, screen)
+                    c.draw()
+
+            pygame.display.update()
+
+
+
+
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
