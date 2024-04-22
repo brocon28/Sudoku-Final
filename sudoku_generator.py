@@ -256,12 +256,7 @@ def generate_sudoku(size, removed):
     board = sudoku.get_board()
     return board
 
-z = generate_sudoku(9, 0)
-print(z) 
-for j in range(9):
-    for i in range(9):
-        print(z[j][i],end=" ")
-    print()
+
 
 
 

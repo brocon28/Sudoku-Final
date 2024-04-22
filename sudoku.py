@@ -6,8 +6,13 @@ from constants import *
 from sudoku_generator import *
 
 
-
-def game_start_screen(screen):
+screen=pygame.display.set_mode((WIDTH,HEIGHT))
+def game_start_screen():
+    pygame.init()
+    #screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption("SUDOKU")
+    game_over_font = pygame.font.Font(None, GAME_OVER_FONT)
+    game_over = False
     # Sets the background to white
     screen.fill(WHITE)
 
@@ -45,59 +50,60 @@ def game_start_screen(screen):
     hard_surface.blit(hard_button,(10,10))
     hard_rect = hard_button.get_rect(center=(WIDTH * 3 // 4, HEIGHT * 3 // 4))
     screen.blit(hard_surface, hard_rect)
-def fill_sudoku():
-    z = generate_sudoku(9, 0)
-    for j in range(9):
-        for i in range(9):
-            value = z[i][j]
-
-            c = Cell(value, i, j, pygame.display.set_mode((WIDTH, HEIGHT)))
-            c.draw()
 
 
-def main():
-    pygame.init()
-    screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("SUDOKU")
-    game_over_font = pygame.font.Font(None, GAME_OVER_FONT)
-    game_over = False
+
+
+#def main_menu():#main menu screen
+    #pygame.init()
+    #screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    #.display.set_caption("SUDOKU")
+    #game_over_font = pygame.font.Font(None, GAME_OVER_FONT)
+    #game_over = False
 
     # screen.fill(BG_COLOR)
     # b = Board(2, 2, screen, 1)
     # b.draw()
     # c = Cell(1, 8, 0, screen)
     # c.draw()
-    o=1
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 # pygame.quit()
                 sys.exit()
+            if event.type==pygame.MOUSEBUTTONDOWN and not game_over:
+                if easy_rect.collidepoint(event.pos):
+                    easy_screen()
+
             if event.type == pygame.KEYDOWN:
                 x, y = event.pops
                 row = y // SQUARE_SIZE
                 col = (x // SQUARE_SIZE)
         # Clear the screen
-        screen.fill((0, 0, 0))
-        game_start_screen(screen)
+        #screen.fill((0, 0, 0))
+
         pygame.display.update()
 
+def easy_screen():
+    o=1
+    while True:
 
-        #screen.fill(BG_COLOR)
+        screen.fill(BG_COLOR)
 
-        #b = Board(2, 2, screen, 1)
-        #b.draw()
-        #if o==1:
-            #o=0
-            #z = generate_sudoku(9, 30)
-            #for j in range(9):
-                #for i in range(9):
-                    #value = z[i][j]
+        b = Board(2, 2, screen, 1)
+        b.draw()
+        if o==1:
+            o=0
+            z = generate_sudoku(9, 30)
+            for j in range(9):
+                for i in range(9):
+                    value = z[i][j]
 
-                    #c = Cell(value, i, j, screen)
-                    #c.draw()
+                    c = Cell(value, i, j, screen)
+                    c.draw()
 
-            #pygame.display.update()
+            pygame.display.update()
 
 
 
@@ -106,4 +112,4 @@ def main():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    main()
+    game_start_screen()
