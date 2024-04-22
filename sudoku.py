@@ -163,7 +163,8 @@ def easy_screen():
                 pygame.draw.line(screen, BLUE, (0, HEIGHT - 100), (WIDTH, HEIGHT - 100), LINE_WIDTH // 3)
                 x, y = event.pos
                 row = y // SQUARE_SIZE
-                col = (x // SQUARE_SIZE)
+                col = x // SQUARE_SIZE
+
 
                 if restart_rect.collidepoint(event.pos):
                     game_start_screen()
