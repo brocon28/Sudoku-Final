@@ -92,6 +92,10 @@ def game_start_screen():
 def easy_screen():
     o=1
     while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+
 
         screen.fill(BG_COLOR)
 
@@ -111,6 +115,9 @@ def easy_screen():
 def medium_screen():
     o=1
     while True:
+        for event in pygame.event.get():
+            if event.type== pygame.QUIT:
+                sys.exit()
         screen.fill(BG_COLOR)
 
         b = Board(2, 2,screen,2)
@@ -127,6 +134,9 @@ def medium_screen():
 def hard_screen():
     o=1
     while True:
+        for event in pygame.event.get():
+            if event.type== pygame.QUIT:
+                sys.exit()
         screen.fill(BG_COLOR)
 
         b = Board(2, 2,screen,2)
