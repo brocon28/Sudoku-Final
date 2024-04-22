@@ -160,7 +160,6 @@ def easy_screen():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                c.touch = True
                 x, y = event.pos
                 row = int(y //67.5)
                 col = int(x // 67.5)
@@ -237,10 +236,33 @@ def medium_screen():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                row = int(y // 67.5)
+                col = int(x // 67.5)
+                print(event)
+                screen.fill(BG_COLOR)
+                b = Board(2, 2, screen, 1)
+                b.draw()
+                screen.blit(reset_surface, reset_rect)
+                screen.blit(restart_surface, restart_rect)
+                screen.blit(exit_surface, exit_rect)
+                print(row, col)
+
+                for j in range(9):
+                    for i in range(9):
+                        value = z[i][j]
+
+                        c = Cell(value, i, j, screen)
+                        c.draw()
+                if row < 9 and col < 9:
+                    pygame.draw.rect(screen, BLUE,
+                                     pygame.Rect(col * 67, row * 67,
+                                                 SQUARE_SIZE // 3, SQUARE_SIZE // 3), 5)
                 if restart_rect.collidepoint(event.pos):
                     game_start_screen()
                 if exit_rect.collidepoint(event.pos):
                     sys.exit()
+                pygame.display.update()
 
 def hard_screen():
 
@@ -282,10 +304,33 @@ def hard_screen():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                row = int(y // 67.5)
+                col = int(x // 67.5)
+                print(event)
+                screen.fill(BG_COLOR)
+                b = Board(2, 2, screen, 1)
+                b.draw()
+                screen.blit(reset_surface, reset_rect)
+                screen.blit(restart_surface, restart_rect)
+                screen.blit(exit_surface, exit_rect)
+                print(row, col)
+
+                for j in range(9):
+                    for i in range(9):
+                        value = z[i][j]
+
+                        c = Cell(value, i, j, screen)
+                        c.draw()
+                if row < 9 and col < 9:
+                    pygame.draw.rect(screen, BLUE,
+                                     pygame.Rect(col * 67, row * 67,
+                                                 SQUARE_SIZE // 3, SQUARE_SIZE // 3), 5)
                 if restart_rect.collidepoint(event.pos):
                     game_start_screen()
                 if exit_rect.collidepoint(event.pos):
                     sys.exit()
+                pygame.display.update()
 
 
 
