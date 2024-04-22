@@ -24,10 +24,10 @@ class Board:
 #This is the thinner lines dividing the cells in the 9x9 bigger cells
 
         for i in range(1,10):
-            pygame.draw.line(self.screen, LINE_COLOR, (0, i * SQUARE_SIZE//3), (WIDTH, i * SQUARE_SIZE//3), LINE_WIDTH // 5)
+            pygame.draw.line(self.screen, LINE_COLOR, (0, i * SQUARE_SIZE//3), (WIDTH, i * SQUARE_SIZE//3), LINE_WIDTH // 6)
         for i in range(1, 10):
             pygame.draw.line(self.screen, LINE_COLOR, (i * SQUARE_SIZE//3, 0), (i * SQUARE_SIZE//3, HEIGHT - 100),
-                         LINE_WIDTH // 5)
+                         LINE_WIDTH // 6)
 
         # for i in self.cells:
         #     for j in range (1,BOARD_ROWS):
