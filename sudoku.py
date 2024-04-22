@@ -6,6 +6,7 @@ from constants import *
 from sudoku_generator import *
 
 
+
 def game_start_screen(screen):
     # Sets the background to white
     screen.fill(WHITE)
@@ -25,16 +26,25 @@ def game_start_screen(screen):
     # Creates easy, medium, and hard buttons
     button_font = pygame.font.Font(None, 32)
     easy_button = button_font.render("Easy", True, BLACK)
+    easy_surface=pygame.Surface((easy_button.get_size()[0]+20, easy_button.get_size()[1]+20))
+    easy_surface.fill((255,100,180))
+    easy_surface.blit(easy_button,(10,10))
     easy_rect = easy_button.get_rect(center=(WIDTH // 4, HEIGHT * 3 // 4))
-    screen.blit(easy_button, easy_rect)
+    screen.blit(easy_surface, easy_rect)
 
     medium_button = button_font.render("Medium", True, BLACK)
+    medium_surface=pygame.Surface((medium_button.get_size()[0]+20, medium_button.get_size()[1]+20))
+    medium_surface.fill((255,0,230))
+    medium_surface.blit(medium_button,(10,10))
     medium_rect = medium_button.get_rect(center=(WIDTH // 2, HEIGHT * 3 // 4))
-    screen.blit(medium_button, medium_rect)
+    screen.blit(medium_surface, medium_rect)
 
     hard_button = button_font.render("Hard", True, BLACK)
+    hard_surface=pygame.Surface((hard_button.get_size()[0]+20, hard_button.get_size()[1]+20))
+    hard_surface.fill((220,0,255))
+    hard_surface.blit(hard_button,(10,10))
     hard_rect = hard_button.get_rect(center=(WIDTH * 3 // 4, HEIGHT * 3 // 4))
-    screen.blit(hard_button, hard_rect)
+    screen.blit(hard_surface, hard_rect)
 def fill_sudoku():
     z = generate_sudoku(9, 0)
     for j in range(9):
@@ -68,25 +78,26 @@ def main():
                 row = y // SQUARE_SIZE
                 col = (x // SQUARE_SIZE)
         # Clear the screen
-        #screen.fill((0, 0, 0))
-        #game_start_screen(screen)
+        screen.fill((0, 0, 0))
+        game_start_screen(screen)
+        pygame.display.update()
 
 
-        screen.fill(BG_COLOR)
+        #screen.fill(BG_COLOR)
 
-        b = Board(2, 2, screen, 1)
-        b.draw()
-        if o==1:
-            o=0
-            z = generate_sudoku(9, 0)
-            for j in range(9):
-                for i in range(9):
-                    value = z[i][j]
+        #b = Board(2, 2, screen, 1)
+        #b.draw()
+        #if o==1:
+            #o=0
+            #z = generate_sudoku(9, 30)
+            #for j in range(9):
+                #for i in range(9):
+                    #value = z[i][j]
 
-                    c = Cell(value, i, j, screen)
-                    c.draw()
+                    #c = Cell(value, i, j, screen)
+                    #c.draw()
 
-            pygame.display.update()
+            #pygame.display.update()
 
 
 
