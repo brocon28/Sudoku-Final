@@ -75,6 +75,10 @@ def game_start_screen():
             if event.type==pygame.MOUSEBUTTONDOWN and not game_over:
                 if easy_rect.collidepoint(event.pos):
                     easy_screen()
+                if medium_rect.collidepoint(event.pos):
+                    medium_screen()
+                if hard_rect.collidepoint(event.pos):
+                    hard_screen()
 
             if event.type == pygame.KEYDOWN:
                 x, y = event.pops
@@ -104,6 +108,40 @@ def easy_screen():
                     c.draw()
 
             pygame.display.update()
+def medium_screen():
+    o=1
+    while True:
+        screen.fill(BG_COLOR)
+
+        b = Board(2, 2,screen,2)
+        b.draw()
+        if o==1:
+            o=0
+            z = generate_sudoku(9,40)
+            for j in range(9):
+                for i in range(9):
+                    value = z[i][j]
+                    c = Cell(value,i,j,screen)
+                    c.draw()
+            pygame.display.update()
+def hard_screen():
+    o=1
+    while True:
+        screen.fill(BG_COLOR)
+
+        b = Board(2, 2,screen,2)
+        b.draw()
+        if o==1:
+            o=0
+            z = generate_sudoku(9,50)
+            for j in range(9):
+                for i in range(9):
+                    value = z[i][j]
+                    c = Cell(value,i,j,screen)
+                    c.draw()
+            pygame.display.update()
+
+
 
 
 
