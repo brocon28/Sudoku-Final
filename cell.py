@@ -42,6 +42,11 @@ class Cell:
         if self.touch==True:
             pygame.draw.line(self.screen, BLUE, (0, HEIGHT - 100), (WIDTH, HEIGHT - 100), LINE_WIDTH // 3)
             #pygame.draw.rect(self.screen, BLUE,pygame.Rect(self.column * SQUARE_SIZE, self.row * SQUARE_SIZE, SQUARE_SIZE),2)
+            border_color = BLUE if self.touch else LINE_COLOR
+            border_thickness = 2 if self.touch else 1
+            pygame.draw.rect(self.screen, border_color,
+                             pygame.Rect(self.column * SQUARE_SIZE//3, self.row * SQUARE_SIZE//3, SQUARE_SIZE//3, SQUARE_SIZE//3), border_thickness)
+            #column, row, width, height
 
 
         if self.value==1:

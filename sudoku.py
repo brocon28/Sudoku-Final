@@ -155,21 +155,36 @@ def easy_screen():
 
     pygame.display.update()
 
+    count=0
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pygame.draw.line(screen, BLUE, (0, HEIGHT - 100), (WIDTH, HEIGHT - 100), LINE_WIDTH // 3)
+                count+=1
+                c.touch = True
                 x, y = event.pos
                 row = y // SQUARE_SIZE
                 col = x // SQUARE_SIZE
+                print(event)
 
-
+                border_color = BLUE if c.touch else LINE_COLOR
+                border_thickness = 2 if c.touch else 1
+                pygame.draw.rect(c.screen, border_color,
+                                 pygame.Rect(col+100, row+100,
+                                             SQUARE_SIZE // 3, SQUARE_SIZE // 3), border_thickness)
+                if count>1:
+                    border_color
+                # pygame.draw.line(screen, (0,0,255), (0, HEIGHT - 100), (WIDTH, HEIGHT - 100), LINE_WIDTH // 3)
+                # column, row, width, height
                 if restart_rect.collidepoint(event.pos):
                     game_start_screen()
                 if exit_rect.collidepoint(event.pos):
                         sys.exit()
+                pygame.display.update()
+
+
+                c.touch=False
 
 
 def medium_screen():
