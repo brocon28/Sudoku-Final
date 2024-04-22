@@ -101,7 +101,34 @@ def easy_screen():
 
         b = Board(2, 2, screen, 1)
         b.draw()
+        #Buttons
+        reset_font = pygame.font.Font(None, 32)
+        reset_button = reset_font.render("Reset", True, BLACK)
+        reset_surface = pygame.Surface((reset_button.get_size()[0] + 20, reset_button.get_size()[1] + 20))
+        reset_surface.fill((255, 100, 180))
+        reset_surface.blit(reset_button, (10, 10))
+        reset_rect = reset_button.get_rect(center=(WIDTH // 4, HEIGHT * 2.55 // 2.8))
+        screen.blit(reset_surface, reset_rect)
+
+        restart_font=pygame.font.Font(None,32)
+        restart_button = restart_font.render("Restart", True, BLACK)
+        restart_surface = pygame.Surface((restart_button.get_size()[0] + 20, restart_button.get_size()[1] + 20))
+        restart_surface.fill((255, 100, 180))
+        restart_surface.blit(restart_button, (10, 10))
+        restart_rect = restart_button.get_rect(center=(WIDTH // 2, HEIGHT * 2.55 // 2.8))
+        screen.blit(restart_surface, restart_rect)
+
+
+        exit_button = reset_font.render("Exit", True, BLACK)
+        exit_surface = pygame.Surface((exit_button.get_size()[0] + 20, exit_button.get_size()[1] + 20))
+        exit_surface.fill((255, 100, 180))
+        exit_surface.blit(exit_button, (10, 10))
+        exit_rect = exit_button.get_rect(center=(WIDTH * 3 // 4, HEIGHT * 2.55 // 2.8))
+        screen.blit(exit_surface, exit_rect)
+
+
         if o==1:
+
             o=0
             z = generate_sudoku(9, 30)
             for j in range(9):
