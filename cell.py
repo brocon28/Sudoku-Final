@@ -33,8 +33,10 @@ class Cell:
         n8_num=num_font.render("8", True, BLACK)
         n9_num=num_font.render("9", True, BLACK)
 
-        #if self.touch==True:
-        #    pygame.draw.rect(self.screen, BLUE,pygame.Rect(self.column * SQUARE_SIZE, self.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE),2)
+        if self.touch==True:
+            pygame.draw.line(self.screen, BLUE, (0, HEIGHT - 100), (WIDTH, HEIGHT - 100), LINE_WIDTH // 3)
+            #pygame.draw.rect(self.screen, BLUE,pygame.Rect(self.column * SQUARE_SIZE, self.row * SQUARE_SIZE, SQUARE_SIZE),2)
+
 
         if self.value==1:
             num_rect=n1_num.get_rect(
