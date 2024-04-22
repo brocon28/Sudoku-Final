@@ -165,11 +165,19 @@ class Cell:
         self.value=value
 
     def draw(self):
-        if set_cell_value==0:
-            self.value=''
-        # if cell has non-zero value display it
-        #otherwise no value displayed
-        # outline cell red if currently selected
+        cell_size = 50
+        x = self.col*cell_size
+        y = self.col*cell_size
+
+        pygame.draw.rect(self.screen,(255,255,255),(x,y,cell_size,cell_size))
+        if set_cell_value!=0:
+            text = self.font.render(str(self.value),True,(0,0,0))
+            rect_text = text.get_rect(center = (x+cell_size//2,y+cell_size//2))
+            self.screen.blit(text,rect_text)
+        elif self.sketch_value is not None:
+            text = self.font.render(str(self.sketch_value),True,(128,128,128))
+            rect_text = text.get_rect(center=(x+cell_size//2,y+cell_size//2))
+            self.screen.blit(text,rect_text)
 
 class Board:
     def __init__(self,width,height,screen,difficulty):
@@ -179,51 +187,98 @@ class Board:
         self.difficulty=difficulty
 
     def draw(self):
-        #Draws an outline of the Sudoku grid, with bold lines to delineate the 3x3 boxes.
-        #Draws every cell on this board.
-        pass
+    # make grid lines
+    for i in range(10):
+        if i%3==0:
+            pygame.draw.line(self.screen,(0,0,0),(i*50,0),(i*50,450),3)
+            pygame.draw.line(self.screen,(0,0,0),(0,i*50),(450,i*50),3)
+        else:
+            pygame.draw.line(self.screen, (0, 0, 0), (i * 50, 0), (i * 50, 450))
+            pygame.draw.line(self.screen, (0, 0, 0), (0, i * 50), (450, i * 50))
+    #make cells
+    for row in range(9):
+        for col in range(9):
+            self.cell[row][col].draw()
 
     def select(self,row,col):
-        # Marks the cell at (row, col) in the board as the current selected cell.
-        # Once a cell has been selected, the user can edit its value or sketched value.
-        pass
+        self.cell_selected = (row,col)
 
     def click(self,x,y):
-        #If a tuple of (x, y) coordinates is within the displayed board, this function returns a tuple of the (row, col)
-        # of the cell which was clicked. Otherwise, this function returns None.
-        pass
+        if 0 <=x<=450 and 0<=y<=450:
+            row=y//50
+            col=x//50
+            return row,col
+        else:
+            return None
 
     def clear(self):
-        # clears the value cell. note the user can only remove the cell values
-        # and sketched values that are filled by themselves
-        pass
+        if self.cell_selected:
+            row,col=self.cell_selected
+            self.cell[row][col].set_cell_value(0)
+            self.cell[row][col].set_sketched_value(None)
 
     def sketch(self,value):
-        #Sets the sketched value of the current selected cell equal to user entered value.
-        #It will be displayed at the top left corner of the cell using the draw() function
-        pass
+        if self.cell_selected:
+            row,col=self.cell_selected
+            self.cell[row][col].set_sketched_value(value)
 
     def place_number(self,value):
-        #Sets the value of the current selected cell equal to user entered value.
-        #Called when the user presses the Enter key.
-        pass
+        if self.cell_selected:
+            row,col=self.cell_selected
+            self.cell[row][col].set_cell_value(value)
 
     def reset_to_original(self):
-        #Reset all cells in the board to their original values (0 if cleared, otherwise the corresponding digit).
-        pass
+        for row in range(9):
+            for col in range(9):
+                if self.cell[row][col].value==0:
+                    self.cell[row][col].set_sketched_value(None)
 
     def is_full(self):
-        #Returns a Boolean value indicating whether the board is full or not.
-        pass
+        for row in range(9):
+            for col in range(9):
+                if self.cell[row][col].value==0:
+                    return False
+                else:
+                    return True
 
     def update_board(self):
-        #Updates the underlying 2D board with the values in all cells.
-        pass
+        for row in range(9):
+            for col in range(9):
+                self.cell[row][col].draw()
 
     def find_empty(self):
-        #Finds an empty cell and returns its row and col as a tuple (x, y).
-        pass
+        for row in range(9):
+            for col in range(9):
+                if self.cell[row][col].value==0:
+                    return row,col
+                else:
+                    return None
 
     def check_board(self):
-        #Check whether the Sudoku board is solved correctly.
-        pass
+        for x in range(9):
+            if not self.valid_groups([self.cell[x][i].value for i in range(9)]) or \
+                not self.valid([self.cell[i][x].value for i in range(9)]):
+                return False
+        for z in range(0,9,3):
+            if not self.valid_groups([self.cell][z][p] for p in range(9)) or \
+                not self.valid_groups([self.cell[p][z]for p in range(9)]):
+                return False
+        return True
+
+    def valid_groups(self,kind):
+        kind = [y for y in group if y!=0]
+        return len(set(kind)==len(kind))
+
+    def valid(self,row,col,num):
+        if num in [self.cell[row][x].value for x in range(9)]:
+            return False
+
+        if num in [self.cell[y][col].value for y in range(9)]:
+            return False
+
+        row_start = (row//3)*3
+        col_start = (col//3)*3
+        if num in [self.cell[row_start+y][col_start+x].value for y in range(3) for x in range(3)]:
+            return False
+
+        return True
