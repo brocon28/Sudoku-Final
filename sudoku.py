@@ -155,26 +155,33 @@ def easy_screen():
 
     pygame.display.update()
 
-    count=0
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                count+=1
                 c.touch = True
                 x, y = event.pos
                 row = y // SQUARE_SIZE
                 col = x // SQUARE_SIZE
                 print(event)
+                screen.fill(BG_COLOR)
+                b = Board(2, 2, screen, 1)
+                b.draw()
+                screen.blit(reset_surface, reset_rect)
+                screen.blit(restart_surface, restart_rect)
+                screen.blit(exit_surface, exit_rect)
 
-                border_color = BLUE if c.touch else LINE_COLOR
-                border_thickness = 2 if c.touch else 1
-                pygame.draw.rect(c.screen, border_color,
-                                 pygame.Rect(col+100, row+100,
-                                             SQUARE_SIZE // 3, SQUARE_SIZE // 3), border_thickness)
-                if count>1:
-                    border_color
+                for j in range(9):
+                    for i in range(9):
+                        value = z[i][j]
+
+                        c = Cell(value, i, j, screen)
+                        c.draw()
+                pygame.draw.rect(c.screen, BLUE,
+                                 pygame.Rect(x+100, y+100,
+                                             SQUARE_SIZE // 3, SQUARE_SIZE // 3), 2)
+
                 # pygame.draw.line(screen, (0,0,255), (0, HEIGHT - 100), (WIDTH, HEIGHT - 100), LINE_WIDTH // 3)
                 # column, row, width, height
                 if restart_rect.collidepoint(event.pos):
