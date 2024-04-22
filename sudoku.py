@@ -6,12 +6,7 @@ from constants import *
 from sudoku_generator import *
 
 
-screen=pygame.display.set_mode((WIDTH,HEIGHT))
 def game_start_screen():
-    pygame.init()
-    #screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("SUDOKU")
-    game_over_font = pygame.font.Font(None, GAME_OVER_FONT)
     game_over = False
     # Sets the background to white
     screen.fill(WHITE)
@@ -53,7 +48,7 @@ def game_start_screen():
     screen.blit(hard_surface, hard_rect)
 
 
-
+#     game_over_font = pygame.font.Font(None, GAME_OVER_FONT)
 
 #def main_menu():#main menu screen
     #pygame.init()
@@ -95,6 +90,29 @@ def game_start_screen():
 
         pygame.display.update()
 
+# def game_in_progress():
+#     reset_font = pygame.font.Font(None, 32)
+#     reset_button = reset_font.render("Reset", True, BLACK)
+#     reset_rect = reset_button.get_rect(center=(WIDTH // 4, HEIGHT * 2.55 // 2.8))
+#     restart_font=pygame.font.Font(None,32)
+#     restart_button = restart_font.render("Restart", True, BLACK)
+#     restart_rect = restart_button.get_rect(center=(WIDTH // 2, HEIGHT * 2.55 // 2.8))
+#     exit_button = reset_font.render("Exit", True, BLACK)
+#     exit_rect = exit_button.get_rect(center=(WIDTH * 3 // 4, HEIGHT * 2.55 // 2.8))
+#
+#
+#     while True:
+#         for event in pygame.event.get():
+#             if event.type == pygame.QUIT:
+#                 sys.exit()
+#             if event.type == pygame.MOUSEBUTTONDOWN:
+#                 if restart_rect.collidepoint(event.pos):
+#                     game_start_screen()
+#                 if exit_rect.collidepoint(event.pos):
+#                     sys.exit()
+#     pass
+#
+
 def easy_screen():
     screen.fill(BG_COLOR)
 
@@ -126,6 +144,8 @@ def easy_screen():
     screen.blit(exit_surface, exit_rect)
 
     z = generate_sudoku(9, 30)
+
+
     for j in range(9):
         for i in range(9):
             value = z[i][j]
@@ -134,15 +154,23 @@ def easy_screen():
             c.draw()
 
     pygame.display.update()
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
+                pygame.draw.line(screen, BLUE, (0, HEIGHT - 100), (WIDTH, HEIGHT - 100), LINE_WIDTH // 3)
+                x, y = event.pos
+                row = y // SQUARE_SIZE
+                col = (x // SQUARE_SIZE)
+
                 if restart_rect.collidepoint(event.pos):
                     game_start_screen()
                 if exit_rect.collidepoint(event.pos):
                         sys.exit()
+
+
 def medium_screen():
     screen.fill(BG_COLOR)
 
@@ -243,4 +271,8 @@ def hard_screen():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+    # Initialize pygame, set the screen, and go to the start page
+    pygame.init()
+    pygame.display.set_caption("SUDOKU")
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
     game_start_screen()

@@ -2,6 +2,7 @@ import constants
 import pygame
 from constants import *
 class Cell:
+    touch = False
     def __init__(self, value, row, col, screen):
         self.value = value
         self.row = row
@@ -33,6 +34,11 @@ class Cell:
         n8_num=num_font.render("8", True, BLACK)
         n9_num=num_font.render("9", True, BLACK)
 
+        # border_color = BLUE if self.touch else LINE_COLOR
+        # border_thickness = 2 if self.touch else 1
+        # pygame.draw.rect(self.screen, border_color,
+        #                  pygame.Rect(self.column * SQUARE_SIZE//3, self.row * SQUARE_SIZE//3, SQUARE_SIZE//3, SQUARE_SIZE//3), border_thickness)
+                          # column, row, width, height
         if self.touch==True:
             pygame.draw.line(self.screen, BLUE, (0, HEIGHT - 100), (WIDTH, HEIGHT - 100), LINE_WIDTH // 3)
             #pygame.draw.rect(self.screen, BLUE,pygame.Rect(self.column * SQUARE_SIZE, self.row * SQUARE_SIZE, SQUARE_SIZE),2)
