@@ -69,6 +69,7 @@ def main():#main menu screen
     game_over_font = pygame.font.Font(None, GAME_OVER_FONT)
     game_over = False
 
+    #game_start_screen - rem = level of difficulty
     rem = game_start_screen(screen)
     z = generate_sudoku(9, rem)
 
