@@ -105,6 +105,7 @@ def main():#main menu screen
                         c = Cell(value, i, j, screen)
                         c.draw(screen)
 
+
                 if row<9 and col<9:
                     pygame.draw.rect(screen, BLUE, pygame.Rect(col*67,row*67,SQUARE_SIZE//3,SQUARE_SIZE//3),5)
 
@@ -127,10 +128,76 @@ def main():#main menu screen
                 if event.key == pygame.K_1 and e==1:
                     if row<9 and col<9:
                         if z[row][col]==0:
-                            #z[row].insert(col, 1)
+                            z[row].pop(col)
+                            z[row].insert(col, 1)
+
                             d = Cell(1, row, col, screen)
                             d.draw(screen)
-                            print("1")
+                if event.key == pygame.K_2 and e == 1:
+                    if row < 9 and col < 9:
+                        if z[row][col] == 0:
+                            z[row].pop(col)
+                            z[row].insert(col, 2)
+
+                            d = Cell(2, row, col, screen)
+                            d.draw(screen)
+                if event.key == pygame.K_3 and e == 1:
+                    if row < 9 and col < 9:
+                        if z[row][col] == 0:
+                            z[row].pop(col)
+                            z[row].insert(col, 3)
+
+                            d = Cell(3, row, col, screen)
+                            d.draw(screen)
+                if event.key == pygame.K_4 and e == 1:
+                    if row < 9 and col < 9:
+                        if z[row][col] == 0:
+                            z[row].pop(col)
+                            z[row].insert(col, 4)
+
+                            d = Cell(4, row, col, screen)
+                            d.draw(screen)
+                if event.key == pygame.K_5 and e == 1:
+                    if row < 9 and col < 9:
+                        if z[row][col] == 0:
+                            z[row].pop(col)
+                            z[row].insert(col, 5)
+
+                            d = Cell(5, row, col, screen)
+                            d.draw(screen)
+                if event.key == pygame.K_6 and e == 1:
+                    if row < 9 and col < 9:
+                        if z[row][col] == 0:
+                            z[row].pop(col)
+                            z[row].insert(col, 6)
+
+                            d = Cell(6, row, col, screen)
+                            d.draw(screen)
+                if event.key == pygame.K_7 and e == 1:
+                    if row < 9 and col < 9:
+                        if z[row][col] == 0:
+                            z[row].pop(col)
+                            z[row].insert(col, 7)
+
+                            d = Cell(7, row, col, screen)
+                            d.draw(screen)
+                if event.key == pygame.K_8 and e == 1:
+                    if row < 9 and col < 9:
+                        if z[row][col] == 0:
+                            z[row].pop(col)
+                            z[row].insert(col, 8)
+
+                            d = Cell(8, row, col, screen)
+                            d.draw(screen)
+                if event.key == pygame.K_9 and e == 1:
+                    if row < 9 and col < 9:
+                        if z[row][col] == 0:
+                            z[row].pop(col)
+                            z[row].insert(col, 9)
+
+                            d = Cell(9, row, col, screen)
+                            d.draw(screen)
+
 
             if event.type == pygame.QUIT:
                 sys.exit()
