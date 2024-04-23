@@ -237,7 +237,6 @@ class Board:
                              (i * SQUARE_SIZE * 3, HEIGHT - SQUARE_SIZE),
                              LINE_WIDTH * 3)
 
-        # Draw cells
         for i in range(9):
             for j in range(9):
                 self.cells[i][j].set_cell_value(self.board[i][j])
@@ -339,13 +338,11 @@ class Board:
 
         test_set = {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-        # Check row
         for row in range(9):
             set1 = set(self.board[row])
             if set1 != test_set:
                 return False
 
-        # Check column
         for col in range(9):
             col_list = []
             for row in range(9):
@@ -354,7 +351,6 @@ class Board:
             if set2 != test_set:
                 return False
 
-        # Check 3x3 box
         for row in range(0, 9, 3):
             for col in range(0, 9, 3):
                 box = [self.board[row][col], self.board[row][col + 1], self.board[row][col + 2],
