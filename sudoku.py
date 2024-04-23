@@ -94,12 +94,15 @@ def main():#main menu screen
                 if exit_rect.collidepoint(event.pos):
                     sys.exit()
 
+                if reset_rect.collidepoint(x, y):
+                    b.reset_to_original()
 
                 if 0 <= row <= 8 and 0 <= col <= 8:
                     if b.board[int(row)][int(col)] == 0:
                         current_cell = b.select(row, col)
                         current_cell.touch = True
                         b.draw(screen)
+
                         print(current_cell.touch)
                 # if 0<=row <=8 and 0<=col<=8:
 
@@ -116,6 +119,9 @@ def main():#main menu screen
                     game_start_screen()
                 if exit_rect.collidepoint(event.pos):
                     sys.exit()
+
+                if reset_rect.collidepoint(x, y):
+                    b.reset_to_original()
 
                 pygame.display.update()
 

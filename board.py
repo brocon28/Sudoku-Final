@@ -10,7 +10,7 @@ class Board:
         self.height=height
         self.screen=screen
         self.difficulty=difficulty
-        self.board = generate_sudoku(9,difficulty)
+        self.board, self.original = generate_sudoku(9,difficulty)
         self.cells=[
             [Cell(self.board[i][j], i, j, screen) for j in range(9)] for i in range(9)
         ]
@@ -93,8 +93,9 @@ class Board:
         for i in range(9):
             for j in range(9):
                 self.board[i][j]=self.original[i][j](self.cells[i][j]).value = self.board[i][j]
-                self.update.board()
-                self.draw()
+            self.update.board()
+            self.draw()
+
 
     def is_full(self):
         total = 0
