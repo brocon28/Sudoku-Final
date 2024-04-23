@@ -75,6 +75,11 @@ def main():#main menu screen
     #Creates instance of board class in order to call board methods.
     b = Board(2, 2, screen, rem)
     screen.fill(BG_COLOR)
+    for j in range(9):
+        for i in range(9):
+            value=z[i][j]
+            c=Cell(value,i,j,screen)
+            c.draw(screen)
     reset_rect, restart_rect, exit_rect = b.draw(screen)
 
 
@@ -87,6 +92,19 @@ def main():#main menu screen
                 x, y = event.pos
                 row = int(y//67.5)
                 col = int(x//67.5)
+                screen.fill(BG_COLOR)
+
+                b = Board(2, 2, screen, rem)
+                reset_rect, restart_rect, exit_rect = b.draw(screen)
+                for j in range(9):
+                    for i in range(9):
+                        value = z[i][j]
+                        c = Cell(value, i, j, screen)
+                        c.draw(screen)
+
+                if row<9 and col<9:
+                    pygame.draw.rect(screen, BLUE, pygame.Rect(col*67,row*67,SQUARE_SIZE//3,SQUARE_SIZE//3),5)
+
 
 
                 if restart_rect.collidepoint(event.pos):
@@ -95,12 +113,12 @@ def main():#main menu screen
                     sys.exit()
 
 
-                if 0 <= row <= 8 and 0 <= col <= 8:
-                    if b.board[int(row)][int(col)] == 0:
-                        current_cell = b.select(row, col)
-                        current_cell.touch = True
-                        b.draw(screen)
-                        print(current_cell.touch)
+                #if 0 <= row <= 8 and 0 <= col <= 8:
+                    #if b.board[int(row)][int(col)] == 0:
+                        #current_cell = b.select(row, col)
+                        #current_cell.touch = True
+                        #b.draw(screen)
+                        #print(current_cell.touch)
                 # if 0<=row <=8 and 0<=col<=8:
 
                     # if b.board[row][col] == 0:
