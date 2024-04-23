@@ -4,6 +4,7 @@ from board import Board
 from cell import *
 from constants import *
 from sudoku_generator import *
+import pygame
 
 
 def game_start_screen(screen):
