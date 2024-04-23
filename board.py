@@ -1,6 +1,8 @@
+from sudoku_generator import *
 from sudoku_generator import SudokuGenerator as SG
 from constants import *
 import pygame
+from cell import Cell
 import cell
 class Board:
     def __init__(self, width,height,screen,difficulty):
@@ -8,10 +10,13 @@ class Board:
         self.height=height
         self.screen=screen
         self.difficulty=difficulty
-        self.cells=[]
+        self.board = generate_sudoku(9,difficulty)
+        self.cells=[
+            [Cell(self.board[i][j], i, j, screen) for j in range(9)] for i in range(9)
+        ]
 
 
-    def draw(self):
+    def draw(self,screen):
 
 #This is the thicker lines dividing the 9x9 rows and columns for the 81x81 board
         for i in range (1,BOARD_ROWS):
@@ -29,19 +34,41 @@ class Board:
             pygame.draw.line(self.screen, LINE_COLOR, (i * SQUARE_SIZE//3, 0), (i * SQUARE_SIZE//3, HEIGHT - 100),
                          LINE_WIDTH // 6)
 
-        # for i in self.cells:
-        #     for j in range (1,BOARD_ROWS):
-        #         pygame.draw
-        #         pygame.draw.rect(self.screen)
+            reset_font = pygame.font.Font(None, 32)
+            reset_button = reset_font.render("Reset", True, BLACK)
+            reset_surface = pygame.Surface((reset_button.get_size()[0] + 20, reset_button.get_size()[1] + 20))
+            reset_surface.fill(EASY_COLOR)
+            reset_surface.blit(reset_button, (10, 10))
+            reset_rect = reset_button.get_rect(center=(WIDTH // 4, HEIGHT * 2.55 // 2.8))
+            screen.blit(reset_surface, reset_rect)
 
-        #return [["-" for i in range(3)] for j in range(3)]
+            restart_font = pygame.font.Font(None, 32)
+            restart_button = restart_font.render("Restart", True, BLACK)
+            restart_surface = pygame.Surface((restart_button.get_size()[0] + 20, restart_button.get_size()[1] + 20))
+            restart_surface.fill(EASY_COLOR)
+            restart_surface.blit(restart_button, (10, 10))
+            restart_rect = restart_button.get_rect(center=(WIDTH // 2, HEIGHT * 2.55 // 2.8))
+            screen.blit(restart_surface, restart_rect)
+
+            exit_button = reset_font.render("Exit", True, BLACK)
+            exit_surface = pygame.Surface((exit_button.get_size()[0] + 20, exit_button.get_size()[1] + 20))
+            exit_surface.fill(EASY_COLOR)
+            exit_surface.blit(exit_button, (10, 10))
+            exit_rect = exit_button.get_rect(center=(WIDTH * 3 // 4, HEIGHT * 2.55 // 2.8))
+            screen.blit(exit_surface, exit_rect)
+
+            for i in self.cells:
+               for j in i:
+                   j.draw(self.screen)
+
+        return reset_rect, restart_rect, exit_rect
 
 
 
     def select(self, row, col):
         for i in self.cells:
             for j in i:
-                if j.row==row and j.col==col:
+                if j.row==row and j.column==col:
                     j.touch==True
                     return j
 
