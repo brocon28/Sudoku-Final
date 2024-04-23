@@ -57,20 +57,20 @@ class Board:
             exit_rect = exit_button.get_rect(center=(WIDTH * 3 // 4, HEIGHT * 2.55 // 2.8))
             screen.blit(exit_surface, exit_rect)
 
-            for i in self.cells:
-               for j in i:
-                   j.draw(self.screen)
+        for i in self.cells:
+            for j in i:
+                j.draw(self.screen)
 
         return reset_rect, restart_rect, exit_rect
 
 
 
     def select(self, row, col):
-        for i in self.cells:
-            for j in i:
-                if j.row==row and j.column==col:
-                    j.touch==True
-                    return j
+            for i in self.cells:
+                for j in i:
+                    if j.row == row and j.column == col:
+                        j.selected = True
+                        return j
 
     def click(self, x, y):
         row = x//SQUARE_SIZE

@@ -93,19 +93,31 @@ def main():#main menu screen
                     main()
                 if exit_rect.collidepoint(event.pos):
                     sys.exit()
-                if 0<=row <=8 and 0<=col<=8:
-                        if b.board[row][col] == 0:
-                            cur_cel = b.select(row, col)
 
-                            cur_cel.touch = True
-                            #print(b.cells[0])
-                            b.draw(screen)
-                pygame.display.update()
+
+                if 0 <= row <= 8 and 0 <= col <= 8:
+                    if b.board[int(row)][int(col)] == 0:
+                        current_cell = b.select(row, col)
+                        current_cell.touch = True
+                        b.draw(screen)
+                        print(current_cell.touch)
+                # if 0<=row <=8 and 0<=col<=8:
+
+                    # if b.board[row][col] == 0:
+                    #     cur_cel = b.select(row, col)
+                    #
+                    #     cur_cel.touch = True
+                    #
+                    #     #print(b.cells[0])
+                    #     b.draw(screen)
+                    #     print(cur_cel.touch)
 
                 if restart_rect.collidepoint(event.pos):
                     game_start_screen()
                 if exit_rect.collidepoint(event.pos):
                     sys.exit()
+
+                pygame.display.update()
 
                 pygame.display.update()
             if event.type == pygame.QUIT:
@@ -115,40 +127,40 @@ def main():#main menu screen
 
         pygame.display.update()
 
-
-    while True:
-        for event in pygame.event.get():
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                c.touch = True
-                x, y = event.pos
-                row = y // SQUARE_SIZE
-                col = x // SQUARE_SIZE
-                print(event)
-                screen.fill(BG_COLOR)
-                b = Board(2, 2, screen, 1)
-                b.draw()
-                screen.blit(reset_surface, reset_rect)
-                screen.blit(restart_surface, restart_rect)
-                screen.blit(exit_surface, exit_rect)
-
-                for j in range(9):
-                    for i in range(9):
-                        value = z[i][j]
-
-                        c = Cell(value, i, j, screen)
-                        c.draw()
-                pygame.draw.rect(c.screen, BLUE,
-                                 pygame.Rect(x, y,
-                                             SQUARE_SIZE // 3, SQUARE_SIZE // 3), 2)
-
-                # pygame.draw.line(screen, (0,0,255), (0, HEIGHT - 100), (WIDTH, HEIGHT - 100), LINE_WIDTH // 3)
-                # column, row, width, height
-
-                pygame.display.update()
-
-
-                c.touch=False
+    #
+    # while True:
+    #     for event in pygame.event.get():
+    #
+    #         if event.type == pygame.MOUSEBUTTONDOWN:
+    #             c.touch = True
+    #             x, y = event.pos
+    #             row = y // SQUARE_SIZE
+    #             col = x // SQUARE_SIZE
+    #             print(event)
+    #             screen.fill(BG_COLOR)
+    #             b = Board(2, 2, screen, 1)
+    #             b.draw()
+    #             screen.blit(reset_surface, reset_rect)
+    #             screen.blit(restart_surface, restart_rect)
+    #             screen.blit(exit_surface, exit_rect)
+    #
+    #             for j in range(9):
+    #                 for i in range(9):
+    #                     value = z[i][j]
+    #
+    #                     c = Cell(value, i, j, screen)
+    #                     c.draw()
+    #             pygame.draw.rect(c.screen, BLUE,
+    #                              pygame.Rect(x, y,
+    #                                          SQUARE_SIZE // 3, SQUARE_SIZE // 3), 2)
+    #
+    #             # pygame.draw.line(screen, (0,0,255), (0, HEIGHT - 100), (WIDTH, HEIGHT - 100), LINE_WIDTH // 3)
+    #             # column, row, width, height
+    #
+    #             pygame.display.update()
+    #
+    #
+    #             c.touch=False
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

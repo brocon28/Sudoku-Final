@@ -43,7 +43,9 @@ class Cell:
             #                  pygame.Rect(self.column * SQUARE_SIZE, self.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE), 2)
             pygame.draw.rect(screen, BLUE,
                              pygame.Rect(self.column * 67, self.row * 67, SQUARE_SIZE // 3, SQUARE_SIZE // 3), 5)
-            self.touch= False
+
+            self.touch = False
+
 
 
 
