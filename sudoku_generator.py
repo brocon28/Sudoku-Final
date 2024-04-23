@@ -2,6 +2,9 @@ import math
 import random
 import pygame
 
+empty_locations = []
+puzzle_solution = []
+
 class SudokuGenerator:
     def __init__(self, row_length, removed_cells):
         self.row_length = row_length
@@ -36,13 +39,6 @@ class SudokuGenerator:
 
     def is_valid(self, row, col, num):
         return self.valid_in_row(row, num) and self.valid_in_col(col, num) and self.valid_in_box(row - row % 3, col - col % 3, num)
-
-    # def unused_in_box(self, row_start, col_start, num):
-    #     for row in range(row_start, row_start + 3):
-    #         for col in range(col_start, col_start + 3):
-    #             if self.board[row][col] == num:
-    #                 return False
-    #     return True
 
     def fill_box(self, row_start, col_start):
         nums = list(range(1, self.row_length + 1))
@@ -87,6 +83,7 @@ class SudokuGenerator:
         self.fill_remaining(0,3)
 
     def remove_cells(self):
+
         for i in range(self.removed_cells):
             row = random.randint(0, self.row_length - 1)
             col = random.randint(0, self.row_length - 1)
@@ -95,61 +92,96 @@ class SudokuGenerator:
                 col = random.randint(0, self.row_length - 1)
             self.board[row][col] = 0
 
-# class Cell:
-#     # Constructor for this class
-#     def __int__(self, value, row, col, screen):
-#         self.value = value
-#         self.row = row
-#         self.col = col
-#         self.screen = screen
-#
-#     # Setter for this cell's value
-#     def set_cell_value(self, value):
-#         pass
-#
-#     # Setter for this cell's sketched value
-#     def set_sketched_value(self, value):
-#         pass
-#
-#     # Draws this cell, along with the value inside it.
-#     # If this cell has a nonzero value, that value is displayed.
-#     # Otherwise, no value is displayed in the cell.
-#     # The cell is outlined red if it is currently selected
-#     def draw(self):
-#         pass
-
-class Board():
-
-    def __init__(self, width, height, screen, difficulty):
-        self.width = width
-        self.height = height
+class Cell:
+    # Constructor for this class
+    def __init__(self, value, row, col, screen, board, count):
+        self.value = value
+        self.row = row
+        self.col = col
         self.screen = screen
-        self.difficulty = difficulty
+        self.board = board
+        self.color = (0,0,0)
+        self.margin = 1
+        self.width = 50
+        self.height = 40
+        self.count = count
+        self.can_edit = False
+
+    def data(self):
+        return (self.row, self.col, self.width, self.height)
+
+    def draw(self):
+        global empty_locations
+
+        if self.count <= 1:
+            if self.value != "0":
+                z = pygame.draw.rect(self.screen, self.color, [(self.margin + self.width) * self.col + self.margin,
+                                                               (self.margin + self.height) * self.row + self.margin,
+                                                               self.width, self.height], 1)
+                font = pygame.font.Font(None, 25)
+
+                cell_text = font.render(str(self.board[self.row][self.col]), True, self.color)
+                z_rect = cell_text.get_rect(center=z.center)
+                self.screen.blit(cell_text, z_rect)
+
+                self.can_edit = False
+            else:
+                z = pygame.draw.rect(self.screen, self.color, [(self.margin + self.width) * self.col + self.margin,
+                                                               (self.margin + self.height) * self.row + self.margin,
+                                                               self.width, self.height], 1)
+                font = pygame.font.Font(None, 25)
+
+                cell_text = font.render("", True, self.color)
+                z_rect = cell_text.get_rect(center=z.center)
+                self.screen.blit(cell_text, z_rect)
+
+                self.can_edit = True
+
+            empty_locations.append((z.x, z.y, z.width, z.height))
+            empty_locations.append((self.row, self.col, self.can_edit))
+        else:
+            if self.value != "0":
+                z = pygame.draw.rect(self.screen, self.color, [(self.margin + self.width) * self.col + self.margin,
+                                                               (self.margin + self.height) * self.row + self.margin,
+                                                               self.width, self.height], 1)
+                font = pygame.font.Font(None, 25)
+
+                cell_text = font.render(str(self.board[self.row][self.col]), True, self.color)
+                z_rect = cell_text.get_rect(center=z.center)
+                self.screen.blit(cell_text, z_rect)
+
+                self.can_edit = False
+            else:
+                z = pygame.draw.rect(self.screen, self.color, [(self.margin + self.width) * self.col + self.margin,
+                                                               (self.margin + self.height) * self.row + self.margin,
+                                                               self.width, self.height], 1)
+                font = pygame.font.Font(None, 25)
+
+                cell_text = font.render("", True, self.color)
+                z_rect = cell_text.get_rect(center=z.center)
+                self.screen.blit(cell_text, z_rect)
+
+                self.can_edit = True
+
+class Board:
+    def __init__(self, screen, board):
+        self.screen = screen
+        self.difficulty = board
         self.row, self.col = 9,9
         self.color = (0,0,0)
-        self.board = generate_sudoku(9,difficulty)
+        self.board = board
         self.margin = 1
+        self.count = 0
 
-    # Draws an outline of the Sudoku grid, with bold lines to delineate the 3x3 boxes
-    # Draws every cell on this board.
     def draw(self):
+        self.count += 1
+
         for rows in range(self.row):
             for cols in range(self.col):
 
-                if str(self.board[rows][cols]) != "0":
-                    x = pygame.draw.rect(self.screen, self.color, [(self.margin + self.width) * cols + self.margin,(self.margin + self.height) * rows + self.margin,self.width, self.height], 1)
-                    font = pygame.font.Font(None, 25)
+                indiv_cell = Cell(str(self.board[rows][cols]), rows, cols, self.screen, self.board, self.count)
 
-                    cell_text = font.render(str(self.board[rows][cols]), True, self.color)
-                    x_rect = cell_text.get_rect(center=x.center)
-                    self.screen.blit(cell_text, x_rect)
-                else:
-                    x = pygame.draw.rect(self.screen, self.color, [(self.margin + self.width) * cols + self.margin, (self.margin + self.height) * rows + self.margin, self.width, self.height], 1)
-                    font = pygame.font.Font(None, 25)
-
-                    cell_text = font.render("", True, self.color)
-                    x_rect = cell_text.get_rect(center=x.center)
-                    self.screen.blit(cell_text, x_rect)
+                indiv_cell.draw()
 
         pygame.draw.line(self.screen, self.color, [0, 122], [457, 122], 2)
         pygame.draw.line(self.screen, self.color, [0, 246], [457, 246], 2)
@@ -157,10 +189,6 @@ class Board():
 
         pygame.draw.line(self.screen, self.color, [153, 0], [153, 368], 2)
         pygame.draw.line(self.screen, self.color, [305, 0], [305, 368], 2)
-
-
-    def board_solution(self):
-        return
 
     # Marks the cell at (row, col) in the board as the current selected cell.
     # Once a cell has been selected, the user can edit its value or sketched value.
@@ -213,5 +241,4 @@ def generate_sudoku(size, removed):
     board = sudoku.get_board()
     sudoku.remove_cells()
     board = sudoku.get_board()
-    sudoku.print_board()
     return board

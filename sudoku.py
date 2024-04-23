@@ -1,5 +1,6 @@
 import pygame
 import sudoku_generator
+from tkinter import *
 
 pygame.init()
 
@@ -12,11 +13,13 @@ SCREEN = pygame.display.set_mode([HEIGHT,WIDTH])
 WHITE = (255,255,255)
 BLACK = (0,0,0)
 GREY = (192,192,192)
+RED = (250,160,160)
 
 DIFFICULTY = None
 
 # Game initializer
 DB = False
+menu_showed = False
 clock = pygame.time.Clock()
 
 # Window caption
@@ -75,22 +78,72 @@ if __name__ == "__main__":
             if event.type == pygame.QUIT:
                 DB = True
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if easy_rect.collidepoint(mpos):
-                    DIFFICULTY = "Easy"
-                    SCREEN.fill(GREY)
-                    board = sudoku_generator.Board(50, 40, SCREEN, difficulty_chart["Easy"])
-                    board.draw()
-                elif med_rect.collidepoint(mpos):
-                    DIFFICULTY = "Medium"
-                    SCREEN.fill(GREY)
-                    board = sudoku_generator.Board(50, 40, SCREEN, difficulty_chart["Medium"])
-                    board.draw()
-                elif hard_rect.collidepoint(mpos):
-                    DIFFICULTY = "Hard"
-                    SCREEN.fill(GREY)
-                    board = sudoku_generator.Board(50, 40, SCREEN, difficulty_chart["Hard"])
-                    board.draw()
+                if menu_showed == False:
+                    if easy_rect.collidepoint(mpos):
+                        DIFFICULTY = "Easy"
+                        SCREEN.fill(GREY)
+
+                        board_list = sudoku_generator.generate_sudoku(9, difficulty_chart["Easy"])
+                        board = sudoku_generator.Board(SCREEN, board_list)
+                        board.draw()
+
+                        menu_showed = True
+                    elif med_rect.collidepoint(mpos):
+                        DIFFICULTY = "Medium"
+                        SCREEN.fill(GREY)
+
+                        board_list = sudoku_generator.generate_sudoku(9, difficulty_chart["Medium"])
+                        board = sudoku_generator.Board(SCREEN, board_list)
+                        board.draw()
+
+                        menu_showed = True
+                    elif hard_rect.collidepoint(mpos):
+                        DIFFICULTY = "Hard"
+                        SCREEN.fill(GREY)
+
+                        board_list = sudoku_generator.generate_sudoku(9, difficulty_chart["Hard"])
+                        board = sudoku_generator.Board(SCREEN, board_list)
+                        board.draw()
+
+                        menu_showed = True
                 else:
-                    DIFFICULTY = None
+
+                    for index in range(0, len(sudoku_generator.empty_locations), 2):
+                        x = pygame.Rect(sudoku_generator.empty_locations[index])
+
+                        if x.collidepoint(mpos):
+
+                            root = Tk()
+                            root.geometry("60x60")
+
+                            def save_input():
+                                INPUT = inputtxt.get("1.0", "end-1c")
+
+                                if sudoku_generator.empty_locations[index + 1][2] == True:
+                                    print(f"This cell can be edited. Changing the value to {INPUT}")
+
+                                    pygame.draw.rect(SCREEN, RED, x)
+
+                                    r,c = sudoku_generator.empty_locations[index + 1][0], sudoku_generator.empty_locations[index + 1][1]
+
+                                    board.board[r][c] = int(INPUT)
+                                else:
+                                    print("This cell cannot be edited!")
+
+                                root.destroy()
+
+                            l =  Label(root, text="Input #")
+
+                            inputtxt = Text(root, height=1, width=10, bg="Grey")
+
+                            submit_button = Button(root, height=3, width=5, text="Submit", command=lambda:save_input())
+
+                            l.pack()
+                            inputtxt.pack()
+                            submit_button.pack()
+
+                            root.mainloop()
+
+                            board.draw()
 
         pygame.display.flip()
