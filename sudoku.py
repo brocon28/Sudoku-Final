@@ -86,9 +86,12 @@ def main():#main menu screen
     #Creates instance of cell class in order to call cell methods
     # c = Cell(1, 8, 0, screen)
     #Start screen where the Easy, Medium and Hard buttons are placed
+    e=0
     while True:
         for event in pygame.event.get():
+
             if event.type == pygame.MOUSEBUTTONDOWN and not game_over:
+                e=1
                 x, y = event.pos
                 row = int(y//67.5)
                 col = int(x//67.5)
@@ -106,29 +109,10 @@ def main():#main menu screen
                     pygame.draw.rect(screen, BLUE, pygame.Rect(col*67,row*67,SQUARE_SIZE//3,SQUARE_SIZE//3),5)
 
 
-
                 if restart_rect.collidepoint(event.pos):
                     main()
                 if exit_rect.collidepoint(event.pos):
                     sys.exit()
-
-
-                #if 0 <= row <= 8 and 0 <= col <= 8:
-                    #if b.board[int(row)][int(col)] == 0:
-                        #current_cell = b.select(row, col)
-                        #current_cell.touch = True
-                        #b.draw(screen)
-                        #print(current_cell.touch)
-                # if 0<=row <=8 and 0<=col<=8:
-
-                    # if b.board[row][col] == 0:
-                    #     cur_cel = b.select(row, col)
-                    #
-                    #     cur_cel.touch = True
-                    #
-                    #     #print(b.cells[0])
-                    #     b.draw(screen)
-                    #     print(cur_cel.touch)
 
                 if restart_rect.collidepoint(event.pos):
                     game_start_screen()
@@ -138,8 +122,19 @@ def main():#main menu screen
                 pygame.display.update()
 
                 pygame.display.update()
+            if event.type == pygame.KEYDOWN:
+
+                if event.key == pygame.K_1 and e==1:
+                    if row<9 and col<9:
+                        if z[row][col]==0:
+                            #z[row].insert(col, 1)
+                            d = Cell(1, row, col, screen)
+                            d.draw(screen)
+                            print("1")
+
             if event.type == pygame.QUIT:
                 sys.exit()
+
 
 
 
