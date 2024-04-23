@@ -13,6 +13,7 @@ LINE_COLOR = (0, 0, 0)
 CHIP_COLOR = (171, 176, 172)
 FIXED_CHIP_COLOR = (0, 0, 0)
 
+i = 0
 
 class SudokuGenerator:
 
@@ -487,21 +488,25 @@ if __name__ == '__main__':
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     clicked_col = (clicked_col - 1) % 9
+                    i = 0
                 elif event.key == pygame.K_RIGHT:
                     clicked_col = (clicked_col + 1) % 9
+                    i = 0
                 elif event.key == pygame.K_UP:
                     clicked_row = (clicked_row - 1) % 9
+                    i = 0
                 elif event.key == pygame.K_DOWN:
                     clicked_row = (clicked_row + 1) % 9
+                    i = 0
+
                 if 0 <= clicked_row <= 8 and 0 <= clicked_col <= 8:
                     board.cells[clicked_row][clicked_col].selected = True
                     board.draw()
 
-
-
             elif event.type == pygame.MOUSEBUTTONDOWN and not game_over:
                 clicked_row = int(event.pos[1] / SQUARE_SIZE)
                 clicked_col = int(event.pos[0] / SQUARE_SIZE)
+                i = 0
                 if clicked_row == 9 and 1 <= clicked_col <= 2:
                     for i in range(9):
                         for j in range(9):
@@ -538,9 +543,6 @@ if __name__ == '__main__':
                                                                  clicked_row * SQUARE_SIZE + SQUARE_SIZE // 2 + 3 - 10))
                     screen.blit(chip_1_surf_1, chip_1_rect)
                     pygame.display.update()
-
-
-
 
                 elif event.key == pygame.K_2:
                     i = 2
@@ -619,13 +621,14 @@ if __name__ == '__main__':
                     board.draw()
                     board.update_display()
 
-
                 elif event.key == pygame.K_RETURN:
                     digit = i
                     if 0 <= clicked_row <= 8 and 0 <= clicked_col <= 8:
                         if not empty[clicked_row][str(clicked_col)]:
                             board.board[clicked_row][clicked_col] = digit
                             board.draw()
+                        i = 0
+
                 board.update_display()
 
                 if board.is_full():
