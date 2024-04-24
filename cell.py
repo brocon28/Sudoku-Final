@@ -35,7 +35,7 @@ class Cell:
         n9_num=num_font.render("9", True, BLACK)
 
 
-        # sketched_value1 = num_font.render("1", True, BLUE)
+        sketched_value1 = num_font.render("1", True, BLUE)
         # sketched_value2 = num_font.render("2", True, BLUE)
         # sketched_value3 = num_font.render("3", True, BLUE)
         # sketched_value4 = num_font.render("4", True, BLUE)
@@ -73,10 +73,10 @@ class Cell:
         #
             self.touch = False
         #
-        # if self.sketch_value == 1:
-        #     num_rect = sketched_value1.get_rect(
-        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
-        #     screen.blit(sketched_value1, num_rect)
+        if self.sketch_value == 1:
+            num_rect = sketched_value1.get_rect(
+                center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+            screen.blit(sketched_value1, num_rect)
         # if self.sketch_value == 2:
         #     num_rect = sketched_value2.get_rect(
         #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))

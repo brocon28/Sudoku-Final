@@ -105,7 +105,6 @@ def main():#main menu screen
     rem = game_start_screen(screen)
 
     #Creates instance of board class in order to call board methods.
-
     cb = Board(2, 2, screen, rem)
     screen.fill(BG_COLOR)
 
@@ -129,12 +128,13 @@ def main():#main menu screen
                     main()
 
 
-
                 if 0 <= row <= 8 and 0 <= col <= 8:
                     if cb.original[int(row)][int(col)] == 0:
                         current_cell = cb.select(row, col)
                         selected = True
                         cb.draw(screen)
+
+                pygame.display.update()
             # if event.type == pygame.MOUSEBUTTONDOWN and not game_over:
             #     e=1
             #     x, y = event.pos
@@ -145,16 +145,25 @@ def main():#main menu screen
                 # current_cell=b.select(x,y)
                 # reset_rect, restart_rect, exit_rect = b.draw(screen)
 
-                for j in range(9):
-                    for i in range(9):
-                        value = cb.original[i][j]
-                        c = Cell(value, i, j, screen)
-                        cb.draw(screen)
+                # TA said to remove this:
+                # for j in range(9):
+                #     for i in range(9):
+                #         value = cb.original[i][j]
+                #         c = Cell(value, i, j, screen)
+                #         cb.draw(screen)
 
 
                 if row<9 and col<9:
                     pygame.draw.rect(screen, BLUE, pygame.Rect(col*67,row*67,SQUARE_SIZE//3,SQUARE_SIZE//3),5)
             pygame.display.update()
+
+            if cb.is_full():
+                if cb.check_board():
+                    check_if_win(screen)
+                else:
+                    game_over_screen()
+                game_over = True
+                selected = False
 
 
                 #
@@ -169,22 +178,24 @@ def main():#main menu screen
                 #     sys.exit()
 
 
-            for event in pygame.event.get():
-
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_1 and e==1:
-                        print('m')
-                        if row < 9 and col < 9:
-                            if current_cell == 0:
-                                cb.select(row, col).set_value(1)
-
-                                d = Cell(1, row, col, screen)
-                                d.draw(screen)
-                                print(1)
+            # for event in pygame.event.get():
+            #
+            #     if event.type == pygame.KEYDOWN:
+            #         if event.key == pygame.K_1 and e==1:
+            #             print('m')
+            #             if row < 9 and col < 9:
+            #                 if current_cell == 0:
+            #                     cb.select(row, col).set_value(1)
+            #
+            #                     d = Cell(1, row, col, screen)
+            #                     d.draw(screen)
+            #                     print(1)
                     #current_cell.set_sketched_value(1)
 
-                # if event.key == pygame.K_2 and e == 1:
-                #     current_cell.set_sketched_value(2)
+                if event.key == pygame.K_1 and e == 1:
+                      current_cell.set_sketched_value(1)
+
+            pygame.display.update()
                 # if event.key == pygame.K_3 and e == 1:
                 #     current_cell.set_sketched_value(3)
                 # if event.key == pygame.K_4 and e == 1:
@@ -201,13 +212,7 @@ def main():#main menu screen
                 #     current_cell.set_sketched_value(9)
 
                         # This statement checks for the win condition if the board is full
-                if cb.is_full():
-                    if cb.check_board():
-                        check_if_win(screen)
-                    else:
-                        game_over_screen(screen)
-                    game_over = True
-                    selected = False
+
 
 
 
