@@ -65,6 +65,36 @@ def game_start_screen(screen):
 def game_over_screen():
     pass
 
+def check_if_win(screen):
+    win_title_font = pygame.font.Font(None, 100)
+    button_font = pygame.font.Font(None, 70)
+
+    screen.fill(BG_COLOR)
+
+    win_surface = win_title_font.render("Game Won!", True, LINE_COLOR)
+    win_rectangle = win_surface.get_rect(
+        center=(WIDTH // 2, HEIGHT // 2 - 200))
+    screen.blit(win_surface, win_rectangle)
+    # Creates exit button and creates its space on the screen
+    exit_text = button_font.render("Exit", True, BG_COLOR)
+
+    exit_surface = pygame.Surface((exit_text.get_size()[0] + 20, exit_text.get_size()[1] + 20))
+    exit_surface.fill(LINE_COLOR)
+    exit_surface.blit(exit_text, (10, 10))
+
+    exit_rectangle = exit_surface.get_rect(
+        center=(WIDTH // 2, HEIGHT // 2))
+
+    screen.blit(exit_surface, exit_rectangle)
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if exit_rectangle.collidepoint(event.pos):
+                    pygame.quit()
+        pygame.display.update()
+
 def main():#main menu screen
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -76,10 +106,10 @@ def main():#main menu screen
 
     #Creates instance of board class in order to call board methods.
 
-    b = Board(2, 2, screen, rem)
+    cb = Board(2, 2, screen, rem)
     screen.fill(BG_COLOR)
 
-    reset_rect, restart_rect, exit_rect = b.draw(screen)
+    reset_rect, restart_rect, exit_rect = cb.draw(screen)
 
     #Creates instance of cell class in order to call cell methods
     # c = Cell(1, 8, 0, screen)
@@ -87,127 +117,100 @@ def main():#main menu screen
     e=0
     while True:
         for event in pygame.event.get():
-
             if event.type == pygame.MOUSEBUTTONDOWN and not game_over:
-                e=1
                 x, y = event.pos
-                row = int(y//67.5)
-                col = int(x//67.5)
-                screen.fill(BG_COLOR)
+                col, row = cb.click(x, y)
+                # This if statement accounts for the reset, restart, and quit implementations
+                if reset_rect.collidepoint(x, y):
+                    cb.reset_to_original()
+                if exit_rect.collidepoint(x, y):
+                    pygame.quit()
+                if restart_rect.collidepoint(x, y):
+                    main()
 
-                b.select(x,y)
-                reset_rect, restart_rect, exit_rect = b.draw(screen)
 
-                # for j in range(9):
-                #     for i in range(9):
-                #         value = b[i][j]
-                #         c = Cell(value, i, j, screen)
-                #         c.draw(screen)
+
+                if 0 <= row <= 8 and 0 <= col <= 8:
+                    if cb.original[int(row)][int(col)] == 0:
+                        current_cell = cb.select(row, col)
+                        selected = True
+                        cb.draw(screen)
+            # if event.type == pygame.MOUSEBUTTONDOWN and not game_over:
+            #     e=1
+            #     x, y = event.pos
+            #     row = int(y//67.5)
+            #     col = int(x//67.5)
+            #     screen.fill(BG_COLOR)
+
+                # current_cell=b.select(x,y)
+                # reset_rect, restart_rect, exit_rect = b.draw(screen)
+
+                for j in range(9):
+                    for i in range(9):
+                        value = cb.original[i][j]
+                        c = Cell(value, i, j, screen)
+                        cb.draw(screen)
 
 
                 if row<9 and col<9:
                     pygame.draw.rect(screen, BLUE, pygame.Rect(col*67,row*67,SQUARE_SIZE//3,SQUARE_SIZE//3),5)
+            pygame.display.update()
 
 
-                if restart_rect.collidepoint(event.pos):
-                    main()
-                if exit_rect.collidepoint(event.pos):
-                    sys.exit()
-
-                if restart_rect.collidepoint(event.pos):
-                    game_start_screen()
-                if exit_rect.collidepoint(event.pos):
-                    sys.exit()
-
-                pygame.display.update()
-
-                pygame.display.update()
-            if event.type == pygame.KEYDOWN:
+                #
+                # if restart_rect.collidepoint(event.pos):
+                #     main()
+                # if exit_rect.collidepoint(event.pos):
+                #     sys.exit()
+                #
+                # if restart_rect.collidepoint(event.pos):
+                #     game_start_screen()
+                # if exit_rect.collidepoint(event.pos):
+                #     sys.exit()
 
 
-                if event.key == pygame.K_1 and e==1:
-                    if row<9 and col<9:
-                        if z[row][col]==0:
-                            z.select(row,col).set_sketched_value(1)
+            for event in pygame.event.get():
 
-                            d = Cell(1, row, col, screen)
-                            d.draw(screen)
-                if event.key == pygame.K_2 and e == 1:
-                    if row < 9 and col < 9:
-                        if z[row][col] == 0:
-                            z[row].pop(col)
-                            z[row].insert(col, 2)
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_1 and e==1:
+                        print('m')
+                        if row < 9 and col < 9:
+                            if current_cell == 0:
+                                cb.select(row, col).set_value(1)
 
-                            d = Cell(2, row, col, screen)
-                            d.draw(screen)
-                if event.key == pygame.K_3 and e == 1:
-                    if row < 9 and col < 9:
-                        if z[row][col] == 0:
-                            z[row].pop(col)
-                            z[row].insert(col, 3)
+                                d = Cell(1, row, col, screen)
+                                d.draw(screen)
+                                print(1)
+                    #current_cell.set_sketched_value(1)
 
-                            d = Cell(3, row, col, screen)
-                            d.draw(screen)
-                if event.key == pygame.K_4 and e == 1:
-                    if row < 9 and col < 9:
-                        if z[row][col] == 0:
-                            z[row].pop(col)
-                            z[row].insert(col, 4)
+                # if event.key == pygame.K_2 and e == 1:
+                #     current_cell.set_sketched_value(2)
+                # if event.key == pygame.K_3 and e == 1:
+                #     current_cell.set_sketched_value(3)
+                # if event.key == pygame.K_4 and e == 1:
+                #     current_cell.set_sketched_value(4)
+                # if event.key == pygame.K_5 and e == 1:
+                #     current_cell.set_sketched_value(5)
+                # if event.key == pygame.K_6 and e == 1:
+                #     current_cell.set_sketched_value(6)
+                # if event.key == pygame.K_7 and e == 1:
+                #     current_cell.set_sketched_value(7)
+                # if event.key == pygame.K_8 and e == 1:
+                #     current_cell.set_sketched_value(8)
+                # if event.key == pygame.K_9 and e == 1:
+                #     current_cell.set_sketched_value(9)
 
-                            d = Cell(4, row, col, screen)
-                            d.draw(screen)
-                if event.key == pygame.K_5 and e == 1:
-                    if row < 9 and col < 9:
-                        if z[row][col] == 0:
-                            z[row].pop(col)
-                            z[row].insert(col, 5)
-
-                            d = Cell(5, row, col, screen)
-                            d.draw(screen)
-                if event.key == pygame.K_6 and e == 1:
-                    if row < 9 and col < 9:
-                        if z[row][col] == 0:
-                            z[row].pop(col)
-                            z[row].insert(col, 6)
-
-                            d = Cell(6, row, col, screen)
-                            d.draw(screen)
-                if event.key == pygame.K_7 and e == 1:
-                    if row < 9 and col < 9:
-                        if z[row][col] == 0:
-                            z[row].pop(col)
-                            z[row].insert(col, 7)
-
-                            d = Cell(7, row, col, screen)
-                            d.draw(screen)
-                if event.key == pygame.K_8 and e == 1:
-                    if row < 9 and col < 9:
-                        if z[row][col] == 0:
-                            z[row].pop(col)
-                            z[row].insert(col, 8)
-
-                            d = Cell(8, row, col, screen)
-                            d.draw(screen)
-                if event.key == pygame.K_9 and e == 1:
-                    if row < 9 and col < 9:
-                        if z[row][col] == 0:
-                            z[row].pop(col)
-                            z[row].insert(col, 9)
-
-                            d = Cell(9, row, col, screen)
-                            d.draw(screen)
-
-                if event.key == pygame.K_BACKSPACE:
-                    if row < 9 and col < 9:
-                        if z[row][col] == 0:
-                            z[row].pop(col)
-                            z[row].insert(col,0)
+                        # This statement checks for the win condition if the board is full
+                if cb.is_full():
+                    if cb.check_board():
+                        check_if_win(screen)
+                    else:
+                        game_over_screen(screen)
+                    game_over = True
+                    selected = False
 
 
 
-
-            if event.type == pygame.QUIT:
-                sys.exit()
 
 
 

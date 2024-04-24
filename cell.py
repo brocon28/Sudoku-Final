@@ -34,6 +34,28 @@ class Cell:
         n8_num=num_font.render("8", True, BLACK)
         n9_num=num_font.render("9", True, BLACK)
 
+
+        # sketched_value1 = num_font.render("1", True, BLUE)
+        # sketched_value2 = num_font.render("2", True, BLUE)
+        # sketched_value3 = num_font.render("3", True, BLUE)
+        # sketched_value4 = num_font.render("4", True, BLUE)
+        # sketched_value5 = num_font.render("5", True, BLUE)
+        # sketched_value6 = num_font.render("6", True, BLUE)
+        # sketched_value7 = num_font.render("7", True, BLUE)
+        # sketched_value8 = num_font.render("8", True, BLUE)
+        # sketched_value9 = num_font.render("9", True, BLUE)
+        #
+        # saved_value1 = num_font.render("1", True, BLACK)
+        # saved_value2 = num_font.render("2", True, BLACK)
+        # saved_value3 = num_font.render("3", True, BLACK)
+        # saved_value4 = num_font.render("4", True, BLACK)
+        # saved_value5 = num_font.render("5", True, BLACK)
+        # saved_value6 = num_font.render("6", True, BLACK)
+        # saved_value7 = num_font.render("7", True, BLACK)
+        # saved_value8 = num_font.render("8", True, BLACK)
+        # saved_value9 = num_font.render("9", True, BLACK)
+
+
         # Font = pygame.font(Font(None, 25))
         #
         # Text = font.render(str(self.sketched_value)
@@ -48,9 +70,84 @@ class Cell:
             #                  pygame.Rect(self.column * SQUARE_SIZE, self.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE), 2)
             pygame.draw.rect(screen, BLUE,
                              pygame.Rect(self.column * 67, self.row * 67, SQUARE_SIZE // 3, SQUARE_SIZE // 3), 5)
-
+        #
             self.touch = False
-
+        #
+        # if self.sketch_value == 1:
+        #     num_rect = sketched_value1.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(sketched_value1, num_rect)
+        # if self.sketch_value == 2:
+        #     num_rect = sketched_value2.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(sketched_value2, num_rect)
+        # if self.sketch_value == 3:
+        #     num_rect = sketched_value3.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(sketched_value3, num_rect)
+        # if self.sketch_value == 4:
+        #     num_rect = sketched_value4.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(sketched_value4, num_rect)
+        # if self.sketch_value == 5:
+        #     num_rect = sketched_value5.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(sketched_value5, num_rect)
+        # if self.sketch_value == 6:
+        #     num_rect = sketched_value6.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(sketched_value6, num_rect)
+        # if self.sketch_value == 7:
+        #     num_rect = sketched_value7.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(sketched_value7, num_rect)
+        # if self.sketch_value == 8:
+        #     num_rect = sketched_value8.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(sketched_value8, num_rect)
+        # if self.sketch_value == 9:
+        #     num_rect = sketched_value9.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(sketched_value9, num_rect)
+        #
+        #
+        #
+        # if self.value == 1:
+        #     num_rect = saved_value1.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(saved_value1, num_rect)
+        # if self.value == 2:
+        #     num_rect = saved_value2.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(saved_value2, num_rect)
+        # if self.value == 3:
+        #     num_rect = saved_value3.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(saved_value3, num_rect)
+        # if self.value == 4:
+        #     num_rect = saved_value4.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(saved_value4, num_rect)
+        # if self.value == 5:
+        #     num_rect = saved_value5.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(saved_value5, num_rect)
+        # if self.value == 6:
+        #     num_rect = saved_value6.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(saved_value6, num_rect)
+        # if self.value == 7:
+        #     num_rect = saved_value7.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(saved_value7, num_rect)
+        # if self.value == 8:
+        #     num_rect = saved_value8.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(saved_value8, num_rect)
+        # if self.value == 9:
+        #     num_rect = saved_value9.get_rect(
+        #         center=((SQUARE_SIZE * self.column) / 3 + SQUARE_SIZE // 6, (SQUARE_SIZE * self.row) / 3 + SQUARE_SIZE // 6))
+        #     screen.blit(saved_value9, num_rect)
 
 
 

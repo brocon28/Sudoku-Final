@@ -10,13 +10,17 @@ class Board:
         self.height=height
         self.screen=screen
         self.difficulty=difficulty
-        self.board = generate_sudoku(9,difficulty)
+        self.board, self.filled, self.original = generate_sudoku(9,difficulty)
         self.cells=[
             [Cell(self.board[i][j], i, j, screen) for j in range(9)] for i in range(9)
         ]
 
 
     def draw(self,screen):
+
+
+        self.screen.fill(BG_COLOR)
+
 
 #This is the thicker lines dividing the 9x9 rows and columns for the 81x81 board
         for i in range (1,BOARD_ROWS):
@@ -61,21 +65,23 @@ class Board:
             for j in i:
                 j.draw(self.screen)
 
+
         return reset_rect, restart_rect, exit_rect
 
 
 
     def select(self, row, col):
-            for i in self.cells:
-                for j in i:
-                    if j.row == row and j.column == col:
-                        j.selected = True
-                        return j
+        for i in self.cells:
+            for j in i:
+                if j.row == row and j.column == col:
+                    j.selected = True
+                    return j
 
     def click(self, x, y):
-        row = x//SQUARE_SIZE
-        col = y//SQUARE_SIZE
+        row = x//67
+        col = y//67
         return row, col
+
 
     def clear(self):
         pass
@@ -97,16 +103,15 @@ class Board:
             self.draw()
 
 
+
+
+
     def is_full(self):
-        total = 0
-        for i in range (0, 9, 1):
-            for j in range (0, 9, 1):
-                if SG.print_board()[i][j] > 0:
-                    total += 1
-        if total == 81:
-            return True
-        else:
-            return False
+        for row in self.board:
+            for num in row:
+                if num == 0:
+                    return False
+        return True
 
     def update_board(self):
         for i in self.cells:
@@ -128,4 +133,11 @@ class Board:
             return True
         else:
             return False
+
+        #
+        # for i in range(9):
+        #     for j in range(9):
+        #         if self.board[i][j] != self.filled[i][j]:
+        #             return False
+        # return True
         #think this needs to pull the valid functions from sudoku_generator
