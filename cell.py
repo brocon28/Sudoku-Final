@@ -3,6 +3,7 @@ import pygame
 from constants import *
 class Cell:
     def __init__(self, value, row, col, screen):
+        self.sketch_value = 0
         self.value = value
         self.row = row
         self.column = col
@@ -13,7 +14,7 @@ class Cell:
         self.value = value
 
     def set_sketched_value(self,value):
-        self.value = value
+        self.sketch_value = value
 
     def draw(self, screen):
         BLACK=(0,0,0)
@@ -32,6 +33,10 @@ class Cell:
         n7_num=num_font.render("7", True, BLACK)
         n8_num=num_font.render("8", True, BLACK)
         n9_num=num_font.render("9", True, BLACK)
+
+        # Font = pygame.font(Font(None, 25))
+        #
+        # Text = font.render(str(self.sketched_value)
 
         # border_color = BLUE if self.touch else LINE_COLOR
         # border_thickness = 2 if self.touch else 1

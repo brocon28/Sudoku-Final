@@ -57,9 +57,9 @@ class Board:
             exit_rect = exit_button.get_rect(center=(WIDTH * 3 // 4, HEIGHT * 2.55 // 2.8))
             screen.blit(exit_surface, exit_rect)
 
-        #for i in self.cells:
-            #for j in i:
-                #j.draw(self.screen)
+        for i in self.cells:
+            for j in i:
+                j.draw(self.screen)
 
         return reset_rect, restart_rect, exit_rect
 

@@ -62,6 +62,9 @@ def game_start_screen(screen):
         pygame.display.update()
 #     game_over_font = pygame.font.Font(None, GAME_OVER_FONT)
 
+def game_over_screen():
+    pass
+
 def main():#main menu screen
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -70,18 +73,13 @@ def main():#main menu screen
     game_over = False
 
     rem = game_start_screen(screen)
-    z = generate_sudoku(9, rem)
 
     #Creates instance of board class in order to call board methods.
+
     b = Board(2, 2, screen, rem)
     screen.fill(BG_COLOR)
-    for j in range(9):
-        for i in range(9):
-            value=z[i][j]
-            c=Cell(value,i,j,screen)
-            c.draw(screen)
-    reset_rect, restart_rect, exit_rect = b.draw(screen)
 
+    reset_rect, restart_rect, exit_rect = b.draw(screen)
 
     #Creates instance of cell class in order to call cell methods
     # c = Cell(1, 8, 0, screen)
@@ -97,13 +95,14 @@ def main():#main menu screen
                 col = int(x//67.5)
                 screen.fill(BG_COLOR)
 
-                b = Board(2, 2, screen, rem)
+                b.select(x,y)
                 reset_rect, restart_rect, exit_rect = b.draw(screen)
-                for j in range(9):
-                    for i in range(9):
-                        value = z[i][j]
-                        c = Cell(value, i, j, screen)
-                        c.draw(screen)
+
+                # for j in range(9):
+                #     for i in range(9):
+                #         value = b[i][j]
+                #         c = Cell(value, i, j, screen)
+                #         c.draw(screen)
 
 
                 if row<9 and col<9:
@@ -125,11 +124,11 @@ def main():#main menu screen
                 pygame.display.update()
             if event.type == pygame.KEYDOWN:
 
+
                 if event.key == pygame.K_1 and e==1:
                     if row<9 and col<9:
                         if z[row][col]==0:
-                            z[row].pop(col)
-                            z[row].insert(col, 1)
+                            z.select(row,col).set_sketched_value(1)
 
                             d = Cell(1, row, col, screen)
                             d.draw(screen)
@@ -197,6 +196,14 @@ def main():#main menu screen
 
                             d = Cell(9, row, col, screen)
                             d.draw(screen)
+
+                if event.key == pygame.K_BACKSPACE:
+                    if row < 9 and col < 9:
+                        if z[row][col] == 0:
+                            z[row].pop(col)
+                            z[row].insert(col,0)
+
+
 
 
             if event.type == pygame.QUIT:
