@@ -16,17 +16,18 @@ class Cell:
     def draw(self):
         cell_size = 50
         x = self.col*cell_size
-        y = self.col*cell_size
+        y = self.row*cell_size
 
         pygame.draw.rect(self.screen, (255, 255, 255),
                          (x, y, cell_size, cell_size))
         if self.value != 0: #if set_cell_value != 0: --- is this self.value
-            text = self.font.render(str(self.value), True, (0, 0, 0))
+            font = pygame.font.Font(None,36)
+            text = font.render(str(self.value), True, (0, 0, 0))
             rect_text = text.get_rect(center=(x+cell_size//2, y+cell_size//2))
             self.screen.blit(text, rect_text)
-        elif self.sketch_value is not None:
-            text = self.font.render(
-                str(self.sketch_value), True, (128, 128, 128))
+        elif self.value is not None:
+            font = pygame.font.Font(None, 36)
+            text = font.render(str(self.value), True, (0, 0, 0))
             rect_text = text.get_rect(center=(x+cell_size//2, y+cell_size//2))
             self.screen.blit(text, rect_text)
 
@@ -37,7 +38,7 @@ class Board:
         self.height = height
         self.screen = screen
         self.difficulty = difficulty
-        self.cell=[[self.Cell(0,row,col,self.screen)for col in range(9)]for row in range(9)]
+        self.cell = [[Cell(0, row, col, self.screen) for col in range(9)] for row in range(9)]
         self.cell_selected = None
 
     def draw(self):
@@ -124,8 +125,8 @@ class Board:
         return True
 
     def valid_groups(self, kind):
-        kind = [y for y in group if y != 0]
-        return len(set(kind) == len(kind))
+        kind = [y for y in kind if y != 0]
+        return len(set(kind)) == len(kind)
 
     def valid(self, row, col, num):
         if num in [self.cell[row][x].value for x in range(9)]:
