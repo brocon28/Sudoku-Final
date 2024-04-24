@@ -1,4 +1,5 @@
-# this is hwere we should put the board and cell classes to organize the main file
+import pygame
+
 class Cell:
     def __init__(self, value, row, col, screen):
         self.value = value
@@ -19,7 +20,7 @@ class Cell:
 
         pygame.draw.rect(self.screen, (255, 255, 255),
                          (x, y, cell_size, cell_size))
-        if set_cell_value != 0:
+        if self.value != 0: #if set_cell_value != 0: --- is this self.value
             text = self.font.render(str(self.value), True, (0, 0, 0))
             rect_text = text.get_rect(center=(x+cell_size//2, y+cell_size//2))
             self.screen.blit(text, rect_text)
@@ -50,10 +51,10 @@ class Board:
                                  (i * 50, 0), (i * 50, 450))
                 pygame.draw.line(self.screen, (0, 0, 0),
                                  (0, i * 50), (450, i * 50))
-    # make cells
-    for row in range(9):
-        for col in range(9):
-            self.cell[row][col].draw()
+        # make cells
+        for row in range(9):
+            for col in range(9):
+                self.cell[row][col].draw()
 
     def select(self, row, col):
         self.cell_selected = (row, col)
