@@ -37,6 +37,8 @@ class Board:
         self.height = height
         self.screen = screen
         self.difficulty = difficulty
+        self.cell=[[self.Cell(0,row,col,self.screen)for col in range(9)]for row in range(9)]
+        self.cell_selected = None
 
     def draw(self):
         # make grid lines
