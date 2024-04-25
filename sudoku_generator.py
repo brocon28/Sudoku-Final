@@ -254,14 +254,22 @@ def generate_sudoku(size, removed):
     # sudoku.remove_cells()
     # board = sudoku.get_board()  # call the board with [variable name for generate_sudoku].board
     # return board
-
     sudoku = SudokuGenerator(size, removed)
     sudoku.fill_values()
+    # saves a copy of the filled board
     board = sudoku.get_board()
     filled = copy.deepcopy(board)
+    sudoku.filled_board = filled
+    # sets start board
     sudoku.remove_cells()
     original = copy.deepcopy(board)
-    sudoku.print_board()
+    board = sudoku.get_board()
+    sudoku.filled = filled
+    for i in filled:
+        print(i)
+    print("---------------------------")
+
+    print(board)
 
     return board, filled, original
 

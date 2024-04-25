@@ -28,6 +28,7 @@ class Board:
         self.cells=[
             [Cell(self.board[i][j], i, j, screen) for j in range(9)] for i in range(9)
         ]
+        # self.filled = []
 
     def draw(self, screen):
 
@@ -128,11 +129,21 @@ class Board:
 
 
     def check_board(self):
-        for i in range(9):
-            for j in range(9):
-                if self.board[i][j] != self.filled[i][j]:
-                    return False
+        for row in range(9):
+            for col in range(9):
+                cell = self.cells[row][col]
+                if cell.value == 0:
+                    if cell.sketch_value != self.filled[row][col]:
+                        return False
         return True
+
+        # for i in range(9):
+        #     for j in range(9):
+        #         if self.board[i][j] != self.filled[i][j]:
+        #             print(self.board[i][j])
+        #             print(self.filled[i][j])
+        #             return False
+        # return True
 
         #
         # for i in range(9):

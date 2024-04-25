@@ -120,11 +120,6 @@ def check_if_win(screen):
 
 def main(board):#main menu screen
 
-    # printing the current board in terminal (for decoding purposes, can be deleted later)
-    for i in board.board:
-        print(i)
-    print("---------------------------")
-
     # clears the screen
     screen.fill(BG_COLOR)
     # draws the board using the draw() function from Board.py
@@ -176,14 +171,14 @@ def main(board):#main menu screen
 
                 elif board_buttons[0].collidepoint(event.pos):
                     # sets all cell sketched_value to 0 (this will prevent them from being drawn again)
-                    board.reset_to_original()
+                    # board.reset_to_original()
                     board.draw(screen)
                     pygame.display.update()
 
 
-                    # for i in range(0, len(board.cells)):
-                    #     for j in range(0, len(board.cells[0])):
-                    #         board.cells[i][j].sketch_value = 0
+                    for i in range(0, len(board.cells)):
+                        for j in range(0, len(board.cells[0])):
+                            board.cells[i][j].sketch_value = 0
                     main(board)  # starts a new game with the current board
 
                 elif board_buttons[1].collidepoint(event.pos):
@@ -202,35 +197,54 @@ def main(board):#main menu screen
                                 pygame.K_6: 6, pygame.K_7: 7, pygame.K_8: 8, pygame.K_9: 9}
 
                     if event.key in selected:
-                        if selected_cell.value == 0:
+                        if selected_cell.value == 0:  # checks if the cell's value can be modified
                             selected_cell.sketch_value = selected[event.key]
+
+                            # deletes the sketched value if the user attempts to write something else -->
+                            # sets screen to white, redraws board, re-highlights selected cell, and redraws the sketched value
                             screen.fill(BG_COLOR)
                             board.draw(screen)
                             pygame.draw.rect(screen, BLUE,
                                              (
-                                             selected_cell.column * CELL_SIZE, selected_cell.row * CELL_SIZE, CELL_SIZE,
-                                             CELL_SIZE), width=4)
+                                                 selected_cell.column * CELL_SIZE, selected_cell.row * CELL_SIZE,
+                                                 CELL_SIZE,
+                                                 CELL_SIZE), width=4)
 
                             selected_cell.draw(screen)
-                    if event.key==pygame.K_RETURN and selected_cell.sketch_value!=0:
-                        selected_cell.value = selected_cell.sketch_value
-                        board.board[row].pop(col)
-                        board.board[row].insert(col,selected_cell.value)
-                        for i in board.board:
-                            print(i)
 
-                        i = 0
-                        for row in range(9):
-                            for col in range(9):
-                                cell = board.cells[row][col]
-                                if cell.sketch_value and not cell.value == 0 or not cell.sketch_value and cell.value == 0:
-                                    i = 1
+                            i = 0
+                            for row in range(9):
+                                for col in range(9):
+                                    cell = board.cells[row][col]
+                                    if cell.sketch_value and not cell.value == 0 or not cell.sketch_value and cell.value == 0:
+                                        i = 1
 
-                        if i == 0:
+                            if i == 0:
+                                if board.check_board():
+                                    check_if_win(screen)
+                                else:
+                                    game_over_screen(screen)
 
-                            screen.fill(BG_COLOR)  # replaced by win/lose screen
+                            pygame.display.update()
+                    # if event.key==pygame.K_RETURN and selected_cell.sketch_value!=0:
+                    #     selected_cell.value = selected_cell.sketch_value
+                    #     board.board[row].pop(col)
+                    #     board.board[row].insert(col,selected_cell.value)
+                    #     for i in board.board:
+                    #         print(i)
 
-                        pygame.display.update()
+                        # i = 0
+                        # for row in range(9):
+                        #     for col in range(9):
+                        #         cell = board.cells[row][col]
+                        #         if cell.sketch_value and not cell.value == 0 or not cell.sketch_value and cell.value == 0:
+                        #             i = 1
+                        #
+                        # if i == 0:
+                        #
+                        #     screen.fill(BG_COLOR)  # replaced by win/lose screen
+                        #
+                        # pygame.display.update()
 
             except UnboundLocalError:
                 pass
