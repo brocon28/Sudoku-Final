@@ -84,9 +84,11 @@ class Board:
         return row, col
 
 
-    def clear(self):
-        pass
-    #we might not need this (logically)
+    def clear(self,row,col):
+        self.cells[row][col]=0
+        self.cells[row][col].draw(screen)
+
+
 
     def sketch(self, value):
         pass

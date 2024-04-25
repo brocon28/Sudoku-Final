@@ -95,6 +95,8 @@ def main(board):#main menu screen
 
     while True:
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
 
@@ -120,10 +122,13 @@ def main(board):#main menu screen
 
                     # selects the cell
                     selected_cell = board.select(row, col)
-                    print("row", row, "col", col)
+                    selected_cell.touch=True
+
+
                     # draws the outline of the square in blue
-                    if selected_cell.touch:
-                        print(selected_cell.value)
+                    if selected_cell.touch==True:
+
+
                         pygame.draw.rect(screen, BLUE,
                                          (selected_cell.column * CELL_SIZE, selected_cell.row * CELL_SIZE, CELL_SIZE, CELL_SIZE), width=4)
                     # selected_cell.draw(screen)
@@ -148,6 +153,7 @@ def main(board):#main menu screen
 
             # if cell has been selected, the number can be drawn, else nothing happens
             try:
+                e=0
                 if event.type == pygame.KEYDOWN:
                     selected = {pygame.K_1: 1, pygame.K_2: 2, pygame.K_3: 3, pygame.K_4: 4, pygame.K_5: 5,
                                 pygame.K_6: 6, pygame.K_7: 7, pygame.K_8: 8, pygame.K_9: 9}
@@ -155,7 +161,19 @@ def main(board):#main menu screen
                     if event.key in selected:
                         if selected_cell.value == 0:
                             selected_cell.sketch_value = selected[event.key]
+                            screen.fill(BG_COLOR)
+                            board.draw(screen)
+                            pygame.draw.rect(screen, BLUE,
+                                             (
+                                             selected_cell.column * CELL_SIZE, selected_cell.row * CELL_SIZE, CELL_SIZE,
+                                             CELL_SIZE), width=4)
+
                             selected_cell.draw(screen)
+
+
+
+
+
 
                         i = 0
                         for row in range(9):
