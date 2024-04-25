@@ -4,72 +4,70 @@ from constants import *
 import pygame
 from cell import Cell
 import cell
+
+
+def create_button(text, color, position, screen):
+    button_font = pygame.font.Font(None, 32)
+    button = button_font.render(text, True, BLACK)
+    surface = pygame.Surface((button.get_width() + 20, button.get_height() + 20))
+    surface.fill(color)
+    surface.blit(button, (10, 10))
+    rect = button.get_rect(center=position)
+    screen.blit(surface, rect)
+    return rect  # Returns position of button created
+
+
 class Board:
     def __init__(self, width,height,screen,difficulty):
         self.width = width
         self.height=height
         self.screen=screen
         self.difficulty=difficulty
-        self.board, self.filled, self.original = generate_sudoku(9,difficulty)
+        self.board = generate_sudoku(9,difficulty)
+        # self.board, self.filled, self.original = generate_sudoku(9,difficulty)
         self.cells=[
             [Cell(self.board[i][j], i, j, screen) for j in range(9)] for i in range(9)
         ]
 
+    def draw(self, screen):
 
-    def draw(self,screen):
+        # Draws the thicker lines that divide the 3x3 board
+        for i in range(1, BOARD_ROWS):  # draws the horizontal lines
+            pygame.draw.line(self.screen, LINE_COLOR, (0, i * SQUARE_SIZE), (WIDTH, i * SQUARE_SIZE), LINE_WIDTH // 3)
+        for i in range(1, BOARD_COLS):  # draws the vertical lines
+            pygame.draw.line(self.screen, LINE_COLOR, (i * SQUARE_SIZE, 0), (i * SQUARE_SIZE, HEIGHT - 100),
+                             LINE_WIDTH // 3)
 
+        # Draws the lower line that separates the board to the buttons
+        pygame.draw.line(self.screen, LINE_COLOR, (0, HEIGHT - 100), (WIDTH, HEIGHT - 100), LINE_WIDTH // 3)
 
-        self.screen.fill(BG_COLOR)
-
-
-#This is the thicker lines dividing the 9x9 rows and columns for the 81x81 board
-        for i in range (1,BOARD_ROWS):
-            pygame.draw.line(self.screen,LINE_COLOR,(0,i*SQUARE_SIZE),(WIDTH,i*SQUARE_SIZE),LINE_WIDTH//3)
-        for i in range (1,BOARD_COLS):
-            pygame.draw.line(self.screen,LINE_COLOR,(i*SQUARE_SIZE,0),(i*SQUARE_SIZE,HEIGHT-100),LINE_WIDTH//3)
-
-        pygame.draw.line(self.screen,LINE_COLOR,(0,HEIGHT-100),(WIDTH,HEIGHT-100),LINE_WIDTH//3)
-
-#This is the thinner lines dividing the cells in the 9x9 bigger cells
-
-        for i in range(1,10):
-            pygame.draw.line(self.screen, LINE_COLOR, (0, i * SQUARE_SIZE//3), (WIDTH, i * SQUARE_SIZE//3), LINE_WIDTH // 6)
+        # Draws the thinner lines for each square, delimiting the cells
         for i in range(1, 10):
-            pygame.draw.line(self.screen, LINE_COLOR, (i * SQUARE_SIZE//3, 0), (i * SQUARE_SIZE//3, HEIGHT - 100),
-                         LINE_WIDTH // 6)
+            pygame.draw.line(self.screen, LINE_COLOR, (0, i * SQUARE_SIZE // 3),
+                             (WIDTH, i * SQUARE_SIZE // 3), LINE_WIDTH // 6)
+        for i in range(1, 10):
+            pygame.draw.line(self.screen, LINE_COLOR, (i * SQUARE_SIZE // 3, 0),
+                             (i * SQUARE_SIZE // 3, HEIGHT - 100), LINE_WIDTH // 6)
 
-            reset_font = pygame.font.Font(None, 32)
-            reset_button = reset_font.render("Reset", True, BLACK)
-            reset_surface = pygame.Surface((reset_button.get_size()[0] + 20, reset_button.get_size()[1] + 20))
-            reset_surface.fill(EASY_COLOR)
-            reset_surface.blit(reset_button, (10, 10))
-            reset_rect = reset_button.get_rect(center=(WIDTH // 4, HEIGHT * 2.55 // 2.8))
-            screen.blit(reset_surface, reset_rect)
+        # creates reset, restart, and exit buttons
+        position = [(WIDTH // 4, HEIGHT * 2.55 // 2.8), (WIDTH // 2, HEIGHT * 2.55 // 2.8),
+                    (WIDTH * 3 // 4, HEIGHT * 2.55 // 2.8), screen]
+        if self.difficulty == 30:
+            color = (255, 100, 180)
+        elif self.difficulty == 40:
+            color = (255, 0, 230)
+        else:
+            color = (220, 0, 255)
+        reset_button = create_button("Reset", color, position[0], screen)
+        restart_button = create_button("Restart", color, position[1], screen)
+        exit_button = create_button("Exit", color, position[2], screen)
 
-            restart_font = pygame.font.Font(None, 32)
-            restart_button = restart_font.render("Restart", True, BLACK)
-            restart_surface = pygame.Surface((restart_button.get_size()[0] + 20, restart_button.get_size()[1] + 20))
-            restart_surface.fill(EASY_COLOR)
-            restart_surface.blit(restart_button, (10, 10))
-            restart_rect = restart_button.get_rect(center=(WIDTH // 2, HEIGHT * 2.55 // 2.8))
-            screen.blit(restart_surface, restart_rect)
-
-            exit_button = reset_font.render("Exit", True, BLACK)
-            exit_surface = pygame.Surface((exit_button.get_size()[0] + 20, exit_button.get_size()[1] + 20))
-            exit_surface.fill(EASY_COLOR)
-            exit_surface.blit(exit_button, (10, 10))
-            exit_rect = exit_button.get_rect(center=(WIDTH * 3 // 4, HEIGHT * 2.55 // 2.8))
-            screen.blit(exit_surface, exit_rect)
-
+        # draws the numbers into the cells
         for i in self.cells:
             for j in i:
                 j.draw(self.screen)
 
-
-
-
-        return reset_rect, restart_rect, exit_rect
-
+        return [reset_button, restart_button, exit_button]
 
 
     def select(self, row, col):
@@ -78,6 +76,7 @@ class Board:
                 if j.row == row and j.column == col:
                     j.selected = True
                     return j
+
 
     def click(self, x, y):
         row = x//67
