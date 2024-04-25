@@ -65,10 +65,10 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_row(self, row, num):
-        if num in self.board[row]:
-            return False
-        else:
-            return True
+        for i in range(0, self.row_length):
+            if self.board[row][i] == num:
+                return False
+        return True
 
     '''
 	Determines if num is contained in the specified column (vertical) of the board
@@ -81,10 +81,9 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_col(self, col, num):
-        for i in range(0,9):
-            if self.board[i][col]==num:
+        for i in range(0, self.row_length):
+            if self.board[i][col] == num:
                 return False
-
         return True
 
     '''

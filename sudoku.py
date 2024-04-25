@@ -47,8 +47,42 @@ def game_start_screen():
         pygame.display.update()
 
 
-def game_over_screen():
-    pass
+def game_over_screen(screen):
+    loss_title_font = pygame.font.Font(None, 100)
+    button_font = pygame.font.Font(None, 70)
+
+    screen.fill(BG_COLOR)
+
+    loss_surface = loss_title_font.render("Game Over :(", True, LINE_COLOR)
+    loss_rectangle = loss_surface.get_rect(
+        center=(WIDTH // 2, HEIGHT // 2 - 200))
+    screen.blit(loss_surface, loss_rectangle)
+
+    restart_text = button_font.render("Restart", True, BG_COLOR)
+
+    restart_surface = pygame.Surface((restart_text.get_size()[0] + 20, restart_text.get_size()[1] + 20))
+    restart_surface.fill(LINE_COLOR)
+    restart_surface.blit(restart_text, (10, 10))
+
+    restart_rectangle = restart_surface.get_rect(
+        center=(WIDTH // 2, HEIGHT // 2))
+    # screen.blit places the restart button on the screen
+    screen.blit(restart_surface, restart_rectangle)
+    if restart_rectangle.collidepoint(event.pos):
+        main(board)
+
+
+    pygame.display.update()
+
+    while True:
+        # This for loop accounts for the options to quit and restart the game
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if restart_rectangle.collidepoint(event.pos):
+                    main(board)
+        pygame.display.update()
 
 def check_if_win(screen):
     win_title_font = pygame.font.Font(None, 100)
@@ -138,9 +172,12 @@ def main(board):#main menu screen
 
                 elif board_buttons[0].collidepoint(event.pos):
                     # sets all cell sketched_value to 0 (this will prevent them from being drawn again)
-                    for i in range(0, len(board.cells)):
-                        for j in range(0, len(board.cells[0])):
-                            board.cells[i][j].sketch_value = 0
+                    board.reset_to_original()
+                    board.reset_to_original()
+
+                    # for i in range(0, len(board.cells)):
+                    #     for j in range(0, len(board.cells[0])):
+                    #         board.cells[i][j].sketch_value = 0
                     main(board)  # starts a new game with the current board
 
                 elif board_buttons[1].collidepoint(event.pos):
@@ -188,10 +225,18 @@ def main(board):#main menu screen
                             screen.fill(BG_COLOR)  # replaced by win/lose screen
 
                         pygame.display.update()
+
             except UnboundLocalError:
                 pass
 
             pygame.display.update()
+
+            if board.is_full():
+                if board.check_board():
+                    check_if_win(screen)
+                else:
+                    game_over_screen(screen)
+                game_over = True
 
 
 

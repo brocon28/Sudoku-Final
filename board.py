@@ -100,9 +100,10 @@ class Board:
     def reset_to_original(self):
         for i in range(9):
             for j in range(9):
-                self.board[i][j]=self.original[i][j](self.cells[i][j]).value = self.board[i][j]
-            self.update.board()
-            self.draw()
+                self.board[i][j] = self.original[i][j]
+                (self.cells[i][j]).value = self.board[i][j]
+        self.update_board()
+        self.draw(self.screen)
 
 
 
@@ -118,7 +119,7 @@ class Board:
     def update_board(self):
         for i in self.cells:
             for j in i:
-                self.board[j.row][j.col] = j.value
+                self.board[j.row][j.column] = j.value
     def find_empty(self):
         for i in range(0, 9, 1):
             for j in range(0, 9, 1):
@@ -127,14 +128,11 @@ class Board:
 
 
     def check_board(self):
-        total=0
-        for i in range (0, 9, 1):
-            if SG.valid_in_row(i) is True and SG.valid_in_col(i) is True:
-                total += 1
-        if total == 9:
-            return True
-        else:
-            return False
+        for i in range(9):
+            for j in range(9):
+                if self.board[i][j] != self.filled[i][j]:
+                    return False
+        return True
 
         #
         # for i in range(9):
