@@ -32,7 +32,7 @@ def game_start_screen():
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if easy_button.collidepoint(event.pos):
-                    difficulty = 30
+                    difficulty = 1
                 elif medium_button.collidepoint(event.pos):
                     difficulty = 40
                 elif hard_button.collidepoint(event.pos):
@@ -68,8 +68,12 @@ def game_over_screen(screen):
         center=(WIDTH // 2, HEIGHT // 2))
     # screen.blit places the restart button on the screen
     screen.blit(restart_surface, restart_rectangle)
-    if restart_rectangle.collidepoint(event.pos):
-        main(board)
+    for event in pygame.event.get():
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+
+            if restart_rectangle.collidepoint(event.pos):
+                game_start_screen()
 
 
     pygame.display.update()
@@ -81,7 +85,7 @@ def game_over_screen(screen):
                 pygame.quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if restart_rectangle.collidepoint(event.pos):
-                    main(board)
+                    game_start_screen()
         pygame.display.update()
 
 def check_if_win(screen):
