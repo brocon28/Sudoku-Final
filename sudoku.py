@@ -176,11 +176,6 @@ def main(board):#main menu screen
                         for i in board.board:
                             print(i)
 
-
-
-
-
-
                         i = 0
                         for row in range(9):
                             for col in range(9):

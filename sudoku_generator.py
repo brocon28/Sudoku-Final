@@ -250,21 +250,21 @@ Return: list[list] (a 2D Python list to represent the board)
 
 
 def generate_sudoku(size, removed):
-    sudoku = SudokuGenerator(size, removed)
-    sudoku.fill_values()
-    sudoku.remove_cells()
-    board = sudoku.get_board()  # call the board with [variable name for generate_sudoku].board
-    return board
-
     # sudoku = SudokuGenerator(size, removed)
     # sudoku.fill_values()
-    # board = sudoku.get_board()
-    # filled = copy.deepcopy(board)
     # sudoku.remove_cells()
-    # original = copy.deepcopy(board)
-    # sudoku.print_board()
-    #
-    # return board, filled, original
+    # board = sudoku.get_board()  # call the board with [variable name for generate_sudoku].board
+    # return board
+
+    sudoku = SudokuGenerator(size, removed)
+    sudoku.fill_values()
+    board = sudoku.get_board()
+    filled = copy.deepcopy(board)
+    sudoku.remove_cells()
+    original = copy.deepcopy(board)
+    sudoku.print_board()
+
+    return board, filled, original
 
 
 
