@@ -122,14 +122,14 @@ def main(board):#main menu screen
 
                     # selects the cell
                     selected_cell = board.select(row, col)
-                    selected_cell.touch=True
+                    #selected_cell.touch=True
 
 
                     # draws the outline of the square in blue
-                    if selected_cell.touch==True:
+                    #if selected_cell.touch==True:
 
 
-                        pygame.draw.rect(screen, BLUE,
+                    pygame.draw.rect(screen, BLUE,
                                          (selected_cell.column * CELL_SIZE, selected_cell.row * CELL_SIZE, CELL_SIZE, CELL_SIZE), width=4)
                     # selected_cell.draw(screen)
                     pygame.display.update()
@@ -169,6 +169,12 @@ def main(board):#main menu screen
                                              CELL_SIZE), width=4)
 
                             selected_cell.draw(screen)
+                    if event.key==pygame.K_RETURN and selected_cell.sketch_value!=0:
+                        selected_cell.value = selected_cell.sketch_value
+                        board.board[row].pop(col)
+                        board.board[row].insert(col,selected_cell.value)
+                        for i in board.board:
+                            print(i)
 
 
 
@@ -183,6 +189,7 @@ def main(board):#main menu screen
                                     i = 1
 
                         if i == 0:
+
                             screen.fill(BG_COLOR)  # replaced by win/lose screen
 
                         pygame.display.update()

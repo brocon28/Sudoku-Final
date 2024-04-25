@@ -85,8 +85,7 @@ class Board:
 
 
     def clear(self,row,col):
-        self.cells[row][col]=0
-        self.cells[row][col].draw(screen)
+        pass
 
 
 
