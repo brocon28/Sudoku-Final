@@ -32,7 +32,7 @@ def game_start_screen():
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if easy_button.collidepoint(event.pos):
-                    difficulty = 1
+                    difficulty = 3
                 elif medium_button.collidepoint(event.pos):
                     difficulty = 40
                 elif hard_button.collidepoint(event.pos):
@@ -177,7 +177,9 @@ def main(board):#main menu screen
                 elif board_buttons[0].collidepoint(event.pos):
                     # sets all cell sketched_value to 0 (this will prevent them from being drawn again)
                     board.reset_to_original()
-                    board.reset_to_original()
+                    board.draw(screen)
+                    pygame.display.update()
+
 
                     # for i in range(0, len(board.cells)):
                     #     for j in range(0, len(board.cells[0])):
