@@ -32,7 +32,7 @@ def game_start_screen():
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if easy_button.collidepoint(event.pos):
-                    difficulty = 3
+                    difficulty = 2
                 elif medium_button.collidepoint(event.pos):
                     difficulty = 40
                 elif hard_button.collidepoint(event.pos):
@@ -47,7 +47,7 @@ def game_start_screen():
         pygame.display.update()
 
 
-def game_over_screen(screen):
+def game_over_screen():
     loss_title_font = pygame.font.Font(None, 100)
     button_font = pygame.font.Font(None, 70)
 
@@ -169,9 +169,9 @@ def main(board):#main menu screen
 
                 # board_buttons = [reset_button, restart_button, exit_button]
 
-                elif board_buttons[0].collidepoint(event.pos):
+                if board_buttons[0].collidepoint(event.pos):
                     # sets all cell sketched_value to 0 (this will prevent them from being drawn again)
-                    # board.reset_to_original()
+                    #board.reset_to_original()
                     board.draw(screen)
                     pygame.display.update()
 
@@ -181,10 +181,10 @@ def main(board):#main menu screen
                             board.cells[i][j].sketch_value = 0
                     main(board)  # starts a new game with the current board
 
-                elif board_buttons[1].collidepoint(event.pos):
+                if board_buttons[1].collidepoint(event.pos):
                     game_start_screen()  # goes back to the main menu
 
-                elif board_buttons[2].collidepoint(event.pos):
+                if board_buttons[2].collidepoint(event.pos):
                     sys.exit()  # exits the program
                 else:
                     break
@@ -212,26 +212,60 @@ def main(board):#main menu screen
 
                             selected_cell.draw(screen)
 
-                            i = 0
-                            for row in range(9):
-                                for col in range(9):
-                                    cell = board.cells[row][col]
-                                    if cell.sketch_value and not cell.value == 0 or not cell.sketch_value and cell.value == 0:
-                                        i = 1
-
-                            if i == 0:
-                                if board.check_board():
-                                    check_if_win(screen)
-                                else:
-                                    game_over_screen(screen)
+                            # i = 0
+                            # for row in range(9):
+                            #     for col in range(9):
+                            #         cell = board.cells[row][col]
+                            #         if cell.sketch_value and not cell.value == 0 or not cell.sketch_value and cell.value == 0:
+                            #             i = 1
+                            #
+                            # if i == 0:
+                            #     if board.check_board():
+                            #         check_if_win(screen)
+                            #     else:
+                            #         game_over_screen(screen)
 
                             pygame.display.update()
-                    # if event.key==pygame.K_RETURN and selected_cell.sketch_value!=0:
-                    #     selected_cell.value = selected_cell.sketch_value
-                    #     board.board[row].pop(col)
-                    #     board.board[row].insert(col,selected_cell.value)
-                    #     for i in board.board:
-                    #         print(i)
+                    if event.key==pygame.K_RETURN and selected_cell.sketch_value!=0:
+                        selected_cell.value = selected_cell.sketch_value
+                        board.board[row].pop(col)
+                        board.board[row].insert(col,selected_cell.value)
+                        for i in board.board:
+                            print(i)
+                        print("1", board.original)
+                        print("2", board.board)
+                        print("3", board.filled)
+                        for event in pygame.event.get():
+                            if board_buttons[0].collidepoint(event.pos):
+                            # sets all cell_values to 0 (this will prevent them from being drawn again)
+                                board.reset_to_original()
+                            #
+                            #     for i in range(0, len(board.cells)):
+                            #         for j in range(0, len(board.cells[0])):
+                            #             board.cells[i][j].set_cell_value = 0
+                            #     board.draw(screen)
+                            #
+                            # main(board)  # starts a new game with the current board
+
+                        pygame.display.update()
+
+                        i = 0
+                        for row in range(9):
+                            for col in range(9):
+                                cell = board.cells[row][col]
+                                if cell.sketch_value and not cell.value == 0 or not cell.sketch_value and cell.value == 0:
+                                    i = 1
+
+                        if i == 0:
+                            if board.check_board():
+                                check_if_win(screen)
+                            else:
+                                game_over_screen()
+
+                        pygame.display.update()
+
+
+
 
                         # i = 0
                         # for row in range(9):
@@ -243,8 +277,8 @@ def main(board):#main menu screen
                         # if i == 0:
                         #
                         #     screen.fill(BG_COLOR)  # replaced by win/lose screen
-                        #
-                        # pygame.display.update()
+
+                        pygame.display.update()
 
             except UnboundLocalError:
                 pass
@@ -255,7 +289,7 @@ def main(board):#main menu screen
                 if board.check_board():
                     check_if_win(screen)
                 else:
-                    game_over_screen(screen)
+                    game_over_screen()
                 game_over = True
 
 

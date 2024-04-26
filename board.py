@@ -103,6 +103,7 @@ class Board:
             for j in range(9):
                 self.board[i][j] = self.original[i][j]
                 (self.cells[i][j]).value = self.board[i][j]
+
         self.update_board()
         # self.draw(screen)
 
@@ -127,15 +128,25 @@ class Board:
                 if SG.print_board()[i][j] == 0:
                     print(str(i)+", "+str(j))
 
+        # original - removed
+        # filled - locked in
+        # board - everything
+
 
     def check_board(self):
-        for row in range(9):
-            for col in range(9):
-                cell = self.cells[row][col]
-                if cell.value == 0:
-                    if cell.sketch_value != self.filled[row][col]:
-                        return False
+
+        for i in range(9):
+            for j in range(9):
+                if self.board[i][j] != self.filled[i][j]:
+                    return False
         return True
+        # for row in range(9):
+        #     for col in range(9):
+        #         cell = self.cells[row][col]
+        #         if cell.value == 0:
+        #             if cell.sketch_value != self.filled[row][col]:
+        #                 return False
+        # return True
 
         # for i in range(9):
         #     for j in range(9):
