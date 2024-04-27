@@ -248,15 +248,21 @@ def main(board):#main menu screen
                             #     board.draw(screen)
                             #
                             # main(board)  # starts a new game with the current board
-
+                        screen.fill(BG_COLOR)
+                        board.draw(screen)
                         pygame.display.update()
 
                     if event.key == pygame.K_BACKSPACE and board.filled[row][col]==0 and selected_cell.value != 0:
                         selected_cell.value = 0
+                        screen.fill(BG_COLOR)
+                        board.draw(screen)
                         pygame.display.update()
+
 
                     if event.key == pygame.K_BACKSPACE and board.filled[row][col]==0 and selected_cell.sketch_value != 0:
                         selected_cell.sketch_value = 0
+                        screen.fill(BG_COLOR)
+                        board.draw(screen)
                         pygame.display.update()
 
 
