@@ -101,7 +101,7 @@ class Board:
     def reset_to_original(self):
         for i in range(9):
             for j in range(9):
-                self.board[i][j] = self.original[i][j]
+                self.board[i][j] = self.filled[i][j]
                 (self.cells[i][j]).value = self.board[i][j]
 
         self.update_board()
