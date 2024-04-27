@@ -231,7 +231,9 @@ def main(board):#main menu screen
                         board.board[row].pop(col)
                         board.board[row].insert(col,selected_cell.value)
                         for i in board.board:
-                            print(i)
+
+                            print("mama", i)
+
                         print("1", board.original)
                         print("2", board.board)
                         print("3", board.filled)
@@ -249,21 +251,13 @@ def main(board):#main menu screen
 
                         pygame.display.update()
 
-                        i = 0
-                        for row in range(9):
-                            for col in range(9):
-                                cell = board.cells[row][col]
-                                if cell.sketch_value and not cell.value == 0 or not cell.sketch_value and cell.value == 0:
-                                    i = 1
-
-                        if i == 0:
-                            if board.check_board():
-                                check_if_win(screen)
-                            else:
-                                game_over_screen()
-
+                    if event.key == pygame.K_BACKSPACE and board.filled[row][col]==0 and selected_cell.value != 0:
+                        selected_cell.value = 0
                         pygame.display.update()
 
+                    if event.key == pygame.K_BACKSPACE and board.filled[row][col]==0 and selected_cell.sketch_value != 0:
+                        selected_cell.sketch_value = 0
+                        pygame.display.update()
 
 
 
@@ -292,11 +286,20 @@ def main(board):#main menu screen
                     game_over_screen()
                 game_over = True
 
+    i = 0
+    for row in range(9):
+        for col in range(9):
+            cell = board.cells[row][col]
+            if cell.sketch_value and not cell.value == 0 or not cell.sketch_value and cell.value == 0:
+                i = 1
 
+    if i == 0:
+        if board.check_board():
+            check_if_win(screen)
+        else:
+            game_over_screen()
 
-
-
-
+    pygame.display.update()
 
     #
     # pygame.init()

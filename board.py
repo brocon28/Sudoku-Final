@@ -28,7 +28,9 @@ class Board:
         self.cells=[
             [Cell(self.board[i][j], i, j, screen) for j in range(9)] for i in range(9)
         ]
-        # self.filled = []
+        self.filled_cells = [
+            [Cell(self.filled[i][j], i, j, screen) for j in range(9)] for i in range(9)
+        ]
 
     def draw(self, screen):
 
@@ -137,7 +139,7 @@ class Board:
 
         for i in range(9):
             for j in range(9):
-                if self.board[i][j] != self.filled[i][j]:
+                if self.board[i][j] != self.original[i][j]:
                     return False
         return True
         # for row in range(9):

@@ -265,13 +265,13 @@ def generate_sudoku(size, removed):
     # sets start board
     board = sudoku.get_board()
     #sudoku.filled_board = filled
-    for i in filled:
-        print(i)
-    print("---------------------------")
-
-    print(board)
-    print(filled)
-    print(original)
+    # for i in filled:
+    #     print(i)
+    # print("---------------------------")
+    #
+    # print(board)
+    # print(filled)
+    # print(original)
 
     return board, filled, original
 
