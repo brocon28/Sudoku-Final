@@ -232,7 +232,7 @@ def main(board):#main menu screen
                         board.board[row].insert(col,selected_cell.value)
                         for i in board.board:
 
-                            print("mama", i)
+                            print(i)
 
                         print("1", board.original)
                         print("2", board.board)

@@ -28,8 +28,8 @@ class Cell:
         elif self.sketch_value != 0:
             num_font = pygame.font.SysFont('arial', 30)
             num_surface = num_font.render(str(self.sketch_value), True, BLUE)
-            num_rect = num_surface.get_rect(center=(self.column * CELL_SIZE + CELL_SIZE // 2,
-                                                    self.row * CELL_SIZE + CELL_SIZE // 2))
+            num_rect = num_surface.get_rect(center=(self.column * CELL_SIZE + CELL_SIZE // 3,
+                                                    self.row * CELL_SIZE + CELL_SIZE // 3))
             screen.blit(num_surface, num_rect)
 
 
