@@ -97,7 +97,18 @@ def loss_screen(screen):
     loss_text = loss_font.render("Game over :(", True, TEXT)
     loss_position = loss_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
     screen.blit(loss_text, loss_position)
+
+    menu_butt_font = pygame.font.Font(None, HEIGHT//20)
+    restart_button_text = menu_butt_font.render("PLAY AGAIN", True, TEXT) #render text
+    restart_surface = pygame.Surface((restart_button_text.get_size()[0] + BUTTON_PADDING, restart_button_text.get_size()[1] + BUTTON_PADDING)) #create background box around text
+    restart_surface.fill(BUTTON_COLOR) #fill with given color
+    restart_surface.blit(restart_button_text,(BUTTON_PADDING//2, BUTTON_PADDING//2)) #draw to screen, centered
+    restart_position = restart_button_text.get_rect(center=(WIDTH // 2, HEIGHT * 9 // 10)) #3 evenly spaced boxes centered, 1/10 from bottom
+    screen.blit(restart_surface, restart_position)
+
     pygame.display.update()
+
+    
 
 
 def main():
