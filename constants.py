@@ -1,4 +1,4 @@
-WIDTH = 600
+WIDTH = 450
 HEIGHT = 800
 BACKGROUND = (255, 255, 255) #white
 TEXT = (0, 0, 0) #black

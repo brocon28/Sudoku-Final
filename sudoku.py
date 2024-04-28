@@ -8,7 +8,11 @@ def start_menu(screen):
 
     #title text
     startscreen_title_font_big = pygame.font.Font(None, HEIGHT//10) #default font, large text that is 10% of window
-    startscreen_title_text = startscreen_title_font_big.render("Welcome to Sudoku", True, TEXT) #welcome text with provided text color. true makes the letters more smooth
+    startscreen_title_text = startscreen_title_font_big.render("Welcome", True, TEXT) #welcome text with provided text color. true makes the letters more smooth
+    startscreen_title_position = startscreen_title_text.get_rect(center=(WIDTH//2, HEIGHT//4)) #pick spot for title text, centered and top 
+    screen.blit(startscreen_title_text, startscreen_title_position) #copies the text object to the canvas
+    startscreen_title_font_big = pygame.font.Font(None, HEIGHT//10) #default font, large text that is 10% of window
+    startscreen_title_text = startscreen_title_font_big.render("to Sudoku", True, TEXT) #welcome text with provided text color. true makes the letters more smooth
     startscreen_title_position = startscreen_title_text.get_rect(center=(WIDTH//2, HEIGHT//3)) #pick spot for title text, centered and top 
     screen.blit(startscreen_title_text, startscreen_title_position) #copies the text object to the canvas
 
@@ -25,21 +29,21 @@ def start_menu(screen):
     e_surface = pygame.Surface((e_button_text.get_size()[0] + BUTTON_PADDING, e_button_text.get_size()[1] + BUTTON_PADDING)) #create background box around text
     e_surface.fill(BUTTON_COLOR) #fill with given color
     e_surface.blit(e_button_text,(BUTTON_PADDING//2, BUTTON_PADDING//2)) #draw to screen, centered
-    e_position = e_button_text.get_rect(center=(WIDTH // 4, HEIGHT * 2 // 3)) #1/3 from bottom and 3 evenly spaced boxes centered
+    e_position = e_button_text.get_rect(center=(WIDTH // 2, HEIGHT * 7 // 10)) #1/3 from bottom and 3 evenly spaced boxes centered
     screen.blit(e_surface, e_position)
 
     m_button_text = dif_butt_font.render("MEDIUM", True, TEXT) #render text
     m_surface = pygame.Surface((m_button_text.get_size()[0] + BUTTON_PADDING, m_button_text.get_size()[1] + BUTTON_PADDING)) #create background box around text
     m_surface.fill(BUTTON_COLOR) #fill with given color
     m_surface.blit(m_button_text,(BUTTON_PADDING//2, BUTTON_PADDING//2)) #draw to screen, centered
-    m_position = m_button_text.get_rect(center=(WIDTH // 2, HEIGHT * 2 // 3)) #1/3 from bottom and 3 evenly spaced boxes centered
+    m_position = m_button_text.get_rect(center=(WIDTH // 2, HEIGHT * 8 // 10)) #1/3 from bottom and 3 evenly spaced boxes centered
     screen.blit(m_surface, m_position)
 
     h_button_text = dif_butt_font.render("HARD", True, TEXT) #render text
     h_surface = pygame.Surface((h_button_text.get_size()[0] + BUTTON_PADDING, h_button_text.get_size()[1] + BUTTON_PADDING)) #create background box around text
     h_surface.fill(BUTTON_COLOR) #fill with given color
     h_surface.blit(h_button_text,(BUTTON_PADDING//2, BUTTON_PADDING//2)) #draw to screen, centered
-    h_position = h_button_text.get_rect(center=(3 * WIDTH // 4, HEIGHT * 2 // 3)) #1/3 from bottom and 3 evenly spaced boxes centered
+    h_position = h_button_text.get_rect(center=(WIDTH // 2, HEIGHT * 9 // 10)) #1/3 from bottom and 3 evenly spaced boxes centered
     screen.blit(h_surface, h_position)
 
     #gameplay loop
@@ -64,21 +68,21 @@ def draw_bottom_elements(screen):
     reset_surface = pygame.Surface((reset_button_text.get_size()[0] + BUTTON_PADDING, reset_button_text.get_size()[1] + BUTTON_PADDING)) #create background box around text
     reset_surface.fill(BUTTON_COLOR) #fill with given color
     reset_surface.blit(reset_button_text,(BUTTON_PADDING//2, BUTTON_PADDING//2)) #draw to screen, centered
-    reset_position = reset_button_text.get_rect(center=(WIDTH // 4, HEIGHT * 9 // 10)) #3 evenly spaced boxes centered, 1/10 from bottom
+    reset_position = reset_button_text.get_rect(center=(WIDTH // 2, HEIGHT * 7 // 10)) #3 evenly spaced boxes centered, 1/10 from bottom
     screen.blit(reset_surface, reset_position)
 
     restart_button_text = menu_butt_font.render("RESTART", True, TEXT) #render text
     restart_surface = pygame.Surface((restart_button_text.get_size()[0] + BUTTON_PADDING, restart_button_text.get_size()[1] + BUTTON_PADDING)) #create background box around text
     restart_surface.fill(BUTTON_COLOR) #fill with given color
     restart_surface.blit(restart_button_text,(BUTTON_PADDING//2, BUTTON_PADDING//2)) #draw to screen, centered
-    restart_position = restart_button_text.get_rect(center=(WIDTH // 2, HEIGHT * 9 // 10)) #3 evenly spaced boxes centered, 1/10 from bottom
+    restart_position = restart_button_text.get_rect(center=(WIDTH // 2, HEIGHT * 8 // 10)) #3 evenly spaced boxes centered, 1/10 from bottom
     screen.blit(restart_surface, restart_position)
 
     exit_button_text = menu_butt_font.render("EXIT", True, TEXT) #render text
     exit_surface = pygame.Surface((exit_button_text.get_size()[0] + BUTTON_PADDING, exit_button_text.get_size()[1] + BUTTON_PADDING)) #create background box around text
     exit_surface.fill(BUTTON_COLOR) #fill with given color
     exit_surface.blit(exit_button_text,(BUTTON_PADDING//2, BUTTON_PADDING//2)) #draw to screen, centered
-    exit_position = exit_button_text.get_rect(center=(3 * WIDTH // 4, HEIGHT * 9 // 10)) #3 evenly spaced boxes centered, 1/10 from bottom
+    exit_position = exit_button_text.get_rect(center=(WIDTH // 2, HEIGHT * 9 // 10)) #3 evenly spaced boxes centered, 1/10 from bottom
     screen.blit(exit_surface, exit_position)
 
     return exit_position, reset_position, restart_position
@@ -89,7 +93,25 @@ def win_screen(screen):
     win_text = win_font.render("Game won!", True, TEXT)
     win_position = win_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
     screen.blit(win_text, win_position)
+
+    menu_butt_font = pygame.font.Font(None, HEIGHT//20)
+    restart_button_text = menu_butt_font.render("EXIT", True, TEXT) #render text
+    restart_surface = pygame.Surface((restart_button_text.get_size()[0] + BUTTON_PADDING, restart_button_text.get_size()[1] + BUTTON_PADDING)) #create background box around text
+    restart_surface.fill(BUTTON_COLOR) #fill with given color
+    restart_surface.blit(restart_button_text,(BUTTON_PADDING//2, BUTTON_PADDING//2)) #draw to screen, centered
+    restart_position = restart_button_text.get_rect(center=(WIDTH // 2, HEIGHT * 9 // 10)) #3 evenly spaced boxes centered, 1/10 from bottom
+    screen.blit(restart_surface, restart_position)
+
     pygame.display.update()
+
+    while True:
+        for event in pygame.event.get(): #grab each pygame event
+            if event.type == pygame.QUIT: #kill the game if x pressed
+                quit()
+            elif event.type == pygame.MOUSEBUTTONDOWN: #check for clicks
+                if restart_position.collidepoint(event.pos): #check if it is on the easy button
+                    return
+        pygame.display.update()
 
 def loss_screen(screen):
     screen.fill(LOSS)
@@ -180,10 +202,10 @@ def main():
                         if board.is_full():
                             if board.check_board():
                                 win_screen(screen)
-                                #add exit button
+                                quit()
                             else:
                                 loss_screen(screen)
-                                #add restart button
+                                #main()
                             cell_selected = False
                     pygame.display.update()
                 pygame.display.update()
