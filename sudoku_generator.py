@@ -13,7 +13,7 @@ class SudokuGenerator:
 
     def print_board(self):
         self.fill_values()
-        winning_board = self.get_board()
+        #winning_board = self.get_board()
         self.remove_cells()
         board = self.get_board()
         for row in board:
@@ -28,16 +28,14 @@ class SudokuGenerator:
         for row in range(self.row_length):
             if self.board[row][col] == num:
                 return False
-            else:
-                return True
+        return True
 
     def valid_in_box(self, row_start, col_start, num):
         for i in range(self.box_length):
             for j in range(self.box_length):
                 if self.board[row_start+i][col_start+j] == num:
                     return False
-                else:
-                    return True
+        return True
 
     def is_valid(self, row, col, num):
         return (self.valid_in_row(row, num) and self.valid_in_col(col, num) and
