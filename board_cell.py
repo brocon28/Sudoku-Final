@@ -33,12 +33,12 @@ class Cell:
 
 
 class Board:
-    def __init__(self, width, height, screen, difficulty):
+    def __init__(self, width, height, screen, difficulty, game_board):
         self.width = width
         self.height = height
         self.screen = screen
         self.difficulty = difficulty
-        self.cell = [[Cell(0, row, col, self.screen) for col in range(9)] for row in range(9)]
+        self.cell = [[Cell(game_board[row][col], row, col, self.screen) for col in range(9)] for row in range(9)]
         self.cell_selected = None
 
     def draw(self):

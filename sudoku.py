@@ -107,14 +107,14 @@ def main():
     while True: #global game loop
         difficulty = start_menu(screen)
         gen = SudokuGenerator(9, difficulty)
-        #???Not sure how to call the following functions:
-        #fill_values()
-        #get_true_values()
-        #remove_cells()
+
+        board_list = gen.get_board()
+        gen.print_board()
 
         screen.fill(BACKGROUND) #wipe screen
         exit_position, reset_position, restart_position = draw_bottom_elements(screen) #draw menu options at bottom
-        board = Board(WIDTH, WIDTH, screen, difficulty)
+        board = Board(WIDTH, WIDTH, screen, difficulty, board_list)
+        
         board.draw()
 
         while True: #gameplay loop where cells are filled in
@@ -132,7 +132,8 @@ def main():
                     else:
                         x, y = pygame.mouse.get_pos() #grab cursor position
                         row, col = board.click(x, y) #grab cell xy index from click function
-                        #???pick the cell? not sure what function to use
+                        print(row, col)
+                        board.select(row, col)
 
                 #!!! add arrow key selection of cells
 
@@ -151,8 +152,7 @@ def main():
                     }
                     if event.key in key_to_num: #check game event key in dict
                         num = key_to_num[event.key]
-
-                    board.sketch(num) #redraw updated part of board with new number, i think it keeps track of the current cell?
+                        board.sketch(num) #redraw updated part of board with new number, i think it keeps track of the current cell?
 
                     if board.is_full():
                         if board.check_board():
