@@ -1,4 +1,5 @@
 import pygame
+pygame.display.init
 
 class Cell:
     def __init__(self, value, row, col, screen):
@@ -6,6 +7,7 @@ class Cell:
         self.row = row
         self.col = col
         self.screen = screen
+        self.select = False
 
     def set_cell_value(self, value):
         self.value = value
@@ -18,18 +20,23 @@ class Cell:
         x = self.col*cell_size
         y = self.row*cell_size
 
-        pygame.draw.rect(self.screen, (255, 255, 255),
+        color = (255, 255, 255)
+
+        if self.select:
+            color = (255, 0, 0)
+
+        pygame.draw.rect(self.screen, color,
                          (x, y, cell_size, cell_size))
         if self.value != 0: #if set_cell_value != 0: --- is this self.value
             font = pygame.font.Font(None,36)
             text = font.render(str(self.value), True, (0, 0, 0))
             rect_text = text.get_rect(center=(x+cell_size//2, y+cell_size//2))
             self.screen.blit(text, rect_text)
-        elif self.value is not None:
-            font = pygame.font.Font(None, 36)
-            text = font.render(str(self.value), True, (0, 0, 0))
-            rect_text = text.get_rect(center=(x+cell_size//2, y+cell_size//2))
-            self.screen.blit(text, rect_text)
+        # elif self.value is not None:
+        #     font = pygame.font.Font(None, 36)
+        #     text = font.render(str(self.value), True, (0, 0, 0))
+        #     rect_text = text.get_rect(center=(x+cell_size//2, y+cell_size//2))
+        #     self.screen.blit(text, rect_text)
 
 
 class Board:
@@ -61,6 +68,8 @@ class Board:
 
     def select(self, row, col):
         self.cell_selected = (row, col)
+        self.cell[row][col].select = True
+
 
     def click(self, x, y):
         if 0 <= x <= 450 and 0 <= y <= 450:
@@ -85,6 +94,7 @@ class Board:
         if self.cell_selected:
             row, col = self.cell_selected
             self.cell[row][col].set_cell_value(value)
+        self.cell[row][col].select = False
 
     def reset_to_original(self):
         for row in range(9):
