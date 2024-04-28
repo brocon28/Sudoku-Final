@@ -362,7 +362,7 @@ def main(board):#main menu screen
     #             #     for i in range(9):
     #             #         value = cb.original[i][j]
     #             #         c = Cell(value, i, j, screen)
-    #             #         cb.draw(screen)
+
     #
     #
     #             if row<9 and col<9:
