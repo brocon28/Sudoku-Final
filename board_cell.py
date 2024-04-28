@@ -117,13 +117,15 @@ class Board:
 
     def check_board(self):
         for x in range(9):
-            if not self.valid_groups([self.cell[x][i].value for i in range(9)]) or \
-                    not self.valid([self.cell[i][x].value for i in range(9)]):
+            if not self.valid_groups([self.cell[x][i].value for i in range(9)]):
                 return False
         for z in range(0, 9, 3):
-            if not self.valid_groups([self.cell][z][p] for p in range(9)) or \
-                    not self.valid_groups([self.cell[p][z]for p in range(9)]):
+            if not self.valid_groups([self.cell[z][p] for p in range(9)]) or not self.valid_groups([self.cell[p][z]for p in range(9)]):
                 return False
+        for x in range(9):
+            for ii in range(9):
+                if self.valid(ii, x, self.cell[ii][x].value):
+                    return False
         return True
 
     def valid_groups(self, kind):

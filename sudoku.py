@@ -47,7 +47,6 @@ def start_menu(screen):
     h_position = h_button_text.get_rect(center=(WIDTH // 2, HEIGHT * 9 // 10)) #1/3 from bottom and 3 evenly spaced boxes centered
     screen.blit(h_surface, h_position)
 
-    #gameplay loop
     while True:
         for event in pygame.event.get(): #grab each pygame event
             if event.type == pygame.QUIT: #kill the game if x pressed
@@ -96,12 +95,19 @@ def win_screen(screen):
     screen.blit(win_text, win_position)
 
     menu_butt_font = pygame.font.Font(None, HEIGHT//20)
-    restart_button_text = menu_butt_font.render("EXIT", True, TEXT) #render text
+    restart_button_text = menu_butt_font.render("PLAY AGAIN", True, TEXT) #render text
     restart_surface = pygame.Surface((restart_button_text.get_size()[0] + BUTTON_PADDING, restart_button_text.get_size()[1] + BUTTON_PADDING)) #create background box around text
     restart_surface.fill(BUTTON_COLOR) #fill with given color
-    restart_surface.blit(restart_button_text,(BUTTON_PADDING//2, BUTTON_PADDING//2)) #draw to screen, centered
-    restart_position = restart_button_text.get_rect(center=(WIDTH // 2, HEIGHT * 9 // 10)) #3 evenly spaced boxes centered, 1/10 from bottom
+    restart_surface.blit(restart_button_text,(BUTTON_PADDING//2, BUTTON_PADDING//2))
+    restart_position = restart_button_text.get_rect(center=(WIDTH //3, HEIGHT * 9 // 10))
     screen.blit(restart_surface, restart_position)
+
+    exit_button_text = menu_butt_font.render("EXIT", True, TEXT) #render text
+    exit_surface = pygame.Surface((exit_button_text.get_size()[0] + BUTTON_PADDING, exit_button_text.get_size()[1] + BUTTON_PADDING)) #create background box around text
+    exit_surface.fill(BUTTON_COLOR) #fill with given color
+    exit_surface.blit(exit_button_text,(BUTTON_PADDING//2, BUTTON_PADDING//2))
+    exit_position = exit_button_text.get_rect(center=(WIDTH*2 //3, HEIGHT * 9 // 10))
+    screen.blit(exit_surface, exit_position)
 
     pygame.display.update()
 
@@ -111,7 +117,9 @@ def win_screen(screen):
                 quit()
             elif event.type == pygame.MOUSEBUTTONDOWN: #check for clicks
                 if restart_position.collidepoint(event.pos): #check if it is on the easy button
-                    break
+                    return
+                elif exit_position.collidepoint(event.pos): #check if it is on the easy button
+                    quit()
         pygame.display.update()
 
 def loss_screen(screen):
@@ -125,22 +133,29 @@ def loss_screen(screen):
     restart_button_text = menu_butt_font.render("PLAY AGAIN", True, TEXT) #render text
     restart_surface = pygame.Surface((restart_button_text.get_size()[0] + BUTTON_PADDING, restart_button_text.get_size()[1] + BUTTON_PADDING)) #create background box around text
     restart_surface.fill(BUTTON_COLOR) #fill with given color
-    restart_surface.blit(restart_button_text,(BUTTON_PADDING//2, BUTTON_PADDING//2)) #draw to screen, centered
-    restart_position = restart_button_text.get_rect(center=(WIDTH // 2, HEIGHT * 9 // 10)) #3 evenly spaced boxes centered, 1/10 from bottom
+    restart_surface.blit(restart_button_text,(BUTTON_PADDING//2, BUTTON_PADDING//2))
+    restart_position = restart_button_text.get_rect(center=(WIDTH //3, HEIGHT * 9 // 10))
     screen.blit(restart_surface, restart_position)
+
+    exit_button_text = menu_butt_font.render("EXIT", True, TEXT) #render text
+    exit_surface = pygame.Surface((exit_button_text.get_size()[0] + BUTTON_PADDING, exit_button_text.get_size()[1] + BUTTON_PADDING)) #create background box around text
+    exit_surface.fill(BUTTON_COLOR) #fill with given color
+    exit_surface.blit(exit_button_text,(BUTTON_PADDING//2, BUTTON_PADDING//2))
+    exit_position = exit_button_text.get_rect(center=(WIDTH*2 //3, HEIGHT * 9 // 10))
+    screen.blit(exit_surface, exit_position)
 
     pygame.display.update()
 
     while True:
-        for event2 in pygame.event.get(): #grab each pygame event
-            if event2.type == pygame.QUIT: #kill the game if x pressed
+        for event in pygame.event.get(): #grab each pygame event
+            if event.type == pygame.QUIT: #kill the game if x pressed
                 quit()
-            elif event2.type == pygame.MOUSEBUTTONDOWN: #check for clicks
-                if restart_position.collidepoint(event2.pos): #check if it is on the easy button
+            elif event.type == pygame.MOUSEBUTTONDOWN: #check for clicks
+                if restart_position.collidepoint(event.pos): #check if it is on the easy button
                     return
+                elif exit_position.collidepoint(event.pos): #check if it is on the easy button
+                    quit()
         pygame.display.update()
-
-    
 
 
 def main():
@@ -213,7 +228,7 @@ def main():
                         if board.is_full():
                             if board.check_board():
                                 win_screen(screen)
-                                quit()
+                                main()
                             else:
                                 loss_screen(screen)
                                 main()
@@ -225,5 +240,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-#https://www.loom.com/share/dd921154dacb49dcbbc5c042850a8185?sid=302b0b3b-6460-4de9-8745-92093dd0f8a4
