@@ -104,6 +104,7 @@ def main():
     pygame.init() #create pygame instance
     pygame.display.set_caption("Sudoku Game - CS1 Final Project") #window title
     screen = pygame.display.set_mode((WIDTH, HEIGHT)) #set window dimensions
+    cell_selected = False
     while True: #global game loop
         difficulty = start_menu(screen)
         gen = SudokuGenerator(9, difficulty)
@@ -125,43 +126,56 @@ def main():
                     if exit_position.collidepoint(event.pos): #check if it is exit button
                         quit() #exit
                     elif reset_position.collidepoint(event.pos):
-                        #reset logic
+                        board.reset_to_original() #test this
                         pass
                     elif restart_position.collidepoint(event.pos):
-                        return
+                        main()
                     else:
-                        x, y = pygame.mouse.get_pos() #grab cursor position
+                        x, y = event.pos #grab cursor position
                         row, col = board.click(x, y) #grab cell xy index from click function
                         print(row, col)
-                        board.select(row, col)
-
+                        current_cell = board.select(row, col)
+                        cell_selected = True
+                        board.draw()
+                pygame.display.update()
                 #!!! add arrow key selection of cells
+            while cell_selected:
+                for event in pygame.event.get():
+                    if event.type == pygame.KEYDOWN:
+                        #dict to map keyboard presses to numeric values
+                        key_to_num = {
+                            pygame.K_1: 1,
+                            pygame.K_2: 2,
+                            pygame.K_3: 3,
+                            pygame.K_4: 4,
+                            pygame.K_5: 5,
+                            pygame.K_6: 6,
+                            pygame.K_7: 7,
+                            pygame.K_8: 8,
+                            pygame.K_9: 9
+                        }
+                        if event.key in key_to_num: #check game event key in dict
+                            num = key_to_num[event.key]
+                            current_cell.set_cell_value(num)
+                            current_cell.select = False
+                            cell_selected = False
+                            board.draw() #redraw updated part of board with new number, i think it keeps track of the current cell?
+                        if event.key == pygame.K_BACKSPACE:
+                            current_cell.set_cell_value(0)
+                            current_cell.select = True
+                            board.draw()
+                            pygame.display.update()
 
-                elif event.type == pygame.KEYDOWN:
-                    #dict to map keyboard presses to numeric values
-                    key_to_num = {
-                        pygame.K_1: 1,
-                        pygame.K_2: 2,
-                        pygame.K_3: 3,
-                        pygame.K_4: 4,
-                        pygame.K_5: 5,
-                        pygame.K_6: 6,
-                        pygame.K_7: 7,
-                        pygame.K_8: 8,
-                        pygame.K_9: 9
-                    }
-                    if event.key in key_to_num: #check game event key in dict
-                        num = key_to_num[event.key]
-                        board.sketch(num) #redraw updated part of board with new number, i think it keeps track of the current cell?
-
-                    if board.is_full():
-                        if board.check_board():
-                            win_screen(screen)
-                            #add exit button
-                        else:
-                            loss_screen(screen)
-                            #add restart button
-
+                        if board.is_full():
+                            if board.check_board():
+                                win_screen(screen)
+                                #add exit button
+                            else:
+                                loss_screen(screen)
+                                #add restart button
+                            cell_selected = False
+                    pygame.display.update()
+                pygame.display.update()
             pygame.display.update()
 
 

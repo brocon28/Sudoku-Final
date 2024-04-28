@@ -1,5 +1,4 @@
 import pygame
-pygame.display.init
 
 class Cell:
     def __init__(self, value, row, col, screen):
@@ -69,6 +68,7 @@ class Board:
     def select(self, row, col):
         self.cell_selected = (row, col)
         self.cell[row][col].select = True
+        return self.cell[row][col]
 
 
     def click(self, x, y):
@@ -94,7 +94,7 @@ class Board:
         if self.cell_selected:
             row, col = self.cell_selected
             self.cell[row][col].set_cell_value(value)
-        self.cell[row][col].select = False
+            self.cell[row][col].select = False #deslect cell when done
 
     def reset_to_original(self):
         for row in range(9):
@@ -107,8 +107,7 @@ class Board:
             for col in range(9):
                 if self.cell[row][col].value == 0:
                     return False
-                else:
-                    return True
+        return True #fix issue here, premature exiting
 
     def update_board(self):
         for row in range(9):
