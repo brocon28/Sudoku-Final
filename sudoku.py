@@ -53,11 +53,11 @@ def start_menu(screen):
                 quit()
             elif event.type == pygame.MOUSEBUTTONDOWN: #check for clicks
                 if e_position.collidepoint(event.pos): #check if it is on the easy button
-                    return 30 #start game with easy settings
+                    return EASY #start game with easy settings
                 elif m_position.collidepoint(event.pos):
-                    return 40
+                    return MEDIUM
                 elif h_position.collidepoint(event.pos):
-                    return 50
+                    return HARD
         pygame.display.update()
 
 def draw_bottom_elements(screen):
@@ -218,7 +218,7 @@ def main():
                             current_cell.set_cell_value(num)
                             current_cell.select = False
                             cell_selected = False
-                            board.draw() #redraw updated part of board with new number, i think it keeps track of the current cell?
+                            board.draw() #redraw updated part of board with new number
                         if event.key == pygame.K_BACKSPACE:
                             current_cell.set_cell_value(0)
                             current_cell.select = True
