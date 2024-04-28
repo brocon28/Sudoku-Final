@@ -24,7 +24,7 @@ class Board:
         self.screen=screen
         self.difficulty=difficulty
         #self.board = generate_sudoku(9,difficulty)
-        self.board, self.filled, self.original = generate_sudoku(9,difficulty)
+        self.filled, self.original, self.board = generate_sudoku(9,difficulty)
         self.cells=[
             [Cell(self.board[i][j], i, j, screen) for j in range(9)] for i in range(9)
         ]
