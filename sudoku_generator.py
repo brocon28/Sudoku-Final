@@ -1,4 +1,4 @@
-import math,random,sudoku
+import random
 
 class SudokuGenerator:
     def __init__(self, row_length, removed_cells):
