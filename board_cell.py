@@ -70,7 +70,7 @@ class Board:
             col = x//50
             return row, col
         else:
-            return None
+            return None, None#double so main does not break
 
     def clear(self):
         if self.cell_selected:

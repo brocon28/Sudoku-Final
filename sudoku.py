@@ -2,6 +2,7 @@ import pygame
 from constants import *
 from sudoku_generator import *
 from board_cell import * 
+import math
 
 def start_menu(screen):
     screen.fill(BACKGROUND) #window background based on constants file
@@ -131,11 +132,11 @@ def loss_screen(screen):
     pygame.display.update()
 
     while True:
-        for event in pygame.event.get(): #grab each pygame event
-            if event.type == pygame.QUIT: #kill the game if x pressed
+        for event2 in pygame.event.get(): #grab each pygame event
+            if event2.type == pygame.QUIT: #kill the game if x pressed
                 quit()
-            elif event.type == pygame.MOUSEBUTTONDOWN: #check for clicks
-                if restart_position.collidepoint(event.pos): #check if it is on the easy button
+            elif event2.type == pygame.MOUSEBUTTONDOWN: #check for clicks
+                if restart_position.collidepoint(event2.pos): #check if it is on the easy button
                     return
         pygame.display.update()
 
@@ -175,10 +176,11 @@ def main():
                     else:
                         x, y = event.pos #grab cursor position
                         row, col = board.click(x, y) #grab cell xy index from click function
-                        print(row, col)
-                        current_cell = board.select(row, col)
-                        cell_selected = True
-                        board.draw()
+                        if (row is not None) and (col is not None):
+                            print(row, col)
+                            current_cell = board.select(row, col)
+                            cell_selected = True
+                            board.draw()
                 pygame.display.update()
                 #!!! add arrow key selection of cells
             while cell_selected:
@@ -223,3 +225,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+#https://www.loom.com/share/dd921154dacb49dcbbc5c042850a8185?sid=302b0b3b-6460-4de9-8745-92093dd0f8a4
