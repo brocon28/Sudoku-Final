@@ -110,7 +110,7 @@ def win_screen(screen):
                 quit()
             elif event.type == pygame.MOUSEBUTTONDOWN: #check for clicks
                 if restart_position.collidepoint(event.pos): #check if it is on the easy button
-                    return
+                    break
         pygame.display.update()
 
 def loss_screen(screen):
@@ -129,6 +129,15 @@ def loss_screen(screen):
     screen.blit(restart_surface, restart_position)
 
     pygame.display.update()
+
+    while True:
+        for event in pygame.event.get(): #grab each pygame event
+            if event.type == pygame.QUIT: #kill the game if x pressed
+                quit()
+            elif event.type == pygame.MOUSEBUTTONDOWN: #check for clicks
+                if restart_position.collidepoint(event.pos): #check if it is on the easy button
+                    return
+        pygame.display.update()
 
     
 
@@ -205,7 +214,7 @@ def main():
                                 quit()
                             else:
                                 loss_screen(screen)
-                                #main()
+                                main()
                             cell_selected = False
                     pygame.display.update()
                 pygame.display.update()

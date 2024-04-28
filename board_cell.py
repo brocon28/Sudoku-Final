@@ -48,22 +48,15 @@ class Board:
         self.cell_selected = None
 
     def draw(self):
-        # make grid lines
-        for i in range(10):
-            if i % 3 == 0:
-                pygame.draw.line(self.screen, (0, 0, 0),
-                                 (i*50, 0), (i*50, 450), 3)
-                pygame.draw.line(self.screen, (0, 0, 0),
-                                 (0, i*50), (450, i*50), 3)
-            else:
-                pygame.draw.line(self.screen, (0, 0, 0),
-                                 (i * 50, 0), (i * 50, 450))
-                pygame.draw.line(self.screen, (0, 0, 0),
-                                 (0, i * 50), (450, i * 50))
         # make cells
         for row in range(9):
             for col in range(9):
                 self.cell[row][col].draw()
+        #dark lines
+        for i in range(10):
+            line_thickness = 3 if i % 3 == 0 else 1 #bold lines for 3x3 sections
+            pygame.draw.line(self.screen, (0, 0, 0), (0, i * 50), (450, i * 50), line_thickness)
+            pygame.draw.line(self.screen, (0, 0, 0), (i * 50, 0), (i * 50, 450), line_thickness)
 
     def select(self, row, col):
         self.cell_selected = (row, col)
