@@ -1,0 +1,12 @@
+WIDTH = 450
+HEIGHT = 800
+BACKGROUND = (255, 255, 255) #white
+TEXT = (0, 0, 0) #black
+BUTTON_COLOR = (30, 136, 229) #blue
+BUTTON_PADDING = 30
+WIN = 'green'
+LOSS = 'red'
+
+EASY = 30
+MEDIUM = 40
+HARD = 50
