@@ -7,6 +7,11 @@ https://www.geeksforgeeks.org/program-sudoku-generator/
 """
 
 class SudokuGenerator:
+    def __init__(self, removed_cells, board, box_length, row_length = 9):
+        self.row_lenght = row_length
+        self.removed_cells = removed_cells
+        self.board = board
+        self.box_length = box_length
     '''
 	create a sudoku board - initialize class variables and set up the 2D board
 	This should initialize:
