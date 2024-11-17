@@ -10,9 +10,9 @@ test_board = [
  [5, 9, 5, 7, 2, 7, 5, 7, 5]
 ]
 
-for i in range(len(test_board)):
+row_start = 5
+col_start = 1
+for i in range(row_start - 1 ,row_start + 2):
+    for j in range(col_start -1, col_start + 2):
+        print(test_board[i][j], end="")
     print()
-    for j in test_board[i]:
-        print(j, end=" ")
-
-print()
