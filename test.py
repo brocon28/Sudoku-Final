@@ -12,7 +12,19 @@ test_board = [
 
 row_start = 5
 col_start = 1
-for i in range(row_start - 1 ,row_start + 2):
-    for j in range(col_start -1, col_start + 2):
-        print(test_board[i][j], end="")
-    print()
+
+# Valid in box
+# for i in range(row_start - 1 ,row_start + 2):
+#     for j in range(col_start -1, col_start + 2):
+#         print(test_board[i][j], end="")
+#     print()
+
+# for i in test_board:
+#     print(i[0])
+
+# board = []
+# class Test:
+#     def __init__(self, board):
+#         self.board = board
+    
+# test = Test(test_board)
