@@ -16,9 +16,10 @@ class Board:
 	def draw(self):
 		for i in range(10):
 			pygame.draw.line(self.screen, "black", (0, i * 64), (576, i * 64))
-		for i in range(10):
-			pygame.draw.line(self.screen, "black", (i * 64, 0), (i * 64, 640))
-
+			pygame.draw.line(self.screen, "black", (i * 64, 0), (i * 64, 576))
+		for i in range(4):
+			pygame.draw.line(self.screen,"black",(0,i*192),(576,i*192),3)
+			pygame.draw.line(self.screen, "black", (i*192, 0), (i*192,576), 3)
 	# Draws an outline of the Sudoku grid, with bold lines to delineate the 3x3 boxes.
 	# Draws every cell on this board.
 	def select(self, row, col):
@@ -80,15 +81,28 @@ class Board:
 
 def main():
 	try:
+		pygame.init()
+		screen = pygame.display.set_mode((576, 640))
+		board = Board(576, 640, screen, 1)
+		clock = pygame.time.Clock()
+		running = True
+		screen.fill("white")
 		board.draw()
+
+		while running:
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					running = False
+
+
+			pygame.display.flip()
+			clock.tick(60)
 
 	finally:
 		pygame.quit()
 
 #variables
-screen = pygame.display.set_mode((576,640))
-board = Board(576,640,screen,1)
-clock = pygame.time.Clock()
+
 
 if __name__ == "__main__":
 	main()
