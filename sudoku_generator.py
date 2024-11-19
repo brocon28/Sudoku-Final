@@ -1,5 +1,6 @@
 import math, random
 import pygame
+import random
 
 """
 This was adapted from a GeeksforGeeks article "Program for Sudoku Generator" by Aarti_Rathi and Ankur Trisal
@@ -25,19 +26,28 @@ class SudokuGenerator:
 	None
     '''
 
-    def __init__(self, row_length, removed_cells):
+    def __init__(self, removed_cells):
         '''
         Returns a 2D python list of numbers which represents the board
 
         Parameters: None
         Return: list[list]
         '''
-        self.row_length = row_length
+        self.row_length = 9
         self.removed_cells = removed_cells
         self.board = self.get_board()
 
     def get_board(self):
-        pass
+        board = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        return board
 
     '''
 	Displays the board to the console
@@ -98,11 +108,11 @@ class SudokuGenerator:
 	Return: boolean
     '''
 
-    def valid_in_box(self, row_start, col_start, num):
+    def valid_in_box(self, row_start, col_start, num, board):
 
         for row in range(row_start, row_start + 3):
             for col in range(col_start, col_start + 3):
-                if self.board[row][col] == num:
+                if board[row][col] == num:
                     return False
                 return True
 
@@ -148,7 +158,12 @@ class SudokuGenerator:
     '''
 
     def fill_box(self, row_start, col_start):
-        pass
+        for r in range(row_start, row_start + 3):
+            for c in range(col_start, col_start + 3):
+                num = random.randint(1,9)
+                if self.valid_in_box(row_start, col_start, num, self.board):
+                    self.board[r][c] = num
+        return self.board
 
     '''
     Fills the three boxes along the main diagonal of the board
@@ -271,3 +286,7 @@ def display_start(screen):
     select_surf = select_font.render("Select Game Mode:", 0, "black")
     select_rect = select_surf.get_rect(center=(width // 2, height // 2))
     screen.blit(select_surf, select_rect)
+
+generate = SudokuGenerator(30)
+print(generate.get_board())
+print(generate.fill_box(0, 0))
