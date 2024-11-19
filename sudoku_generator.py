@@ -58,7 +58,7 @@ class SudokuGenerator:
     '''
 
     def print_board(self):
-        pass
+        print(self.board)
 
     '''
 	Determines if num is contained in the specified row (horizontal) of the board
@@ -114,7 +114,7 @@ class SudokuGenerator:
             for col in range(col_start, col_start + 3):
                 if board[row][col] == num:
                     return False
-                return True
+        return True
 
     '''
     Determines if it is valid to enter num at (row, col) in the board
@@ -163,6 +163,12 @@ class SudokuGenerator:
                 num = random.randint(1,9)
                 if self.valid_in_box(row_start, col_start, num, self.board):
                     self.board[r][c] = num
+                else:
+                    while True:
+                        num = random.randint(1,9)
+                        if self.valid_in_box(row_start, col_start, num, self.board):
+                            self.board[r][c] = num
+                            break
         return self.board
 
     '''
@@ -174,7 +180,9 @@ class SudokuGenerator:
     '''
 
     def fill_diagonal(self):
-        pass
+        generate.fill_box(0, 0)
+        generate.fill_box(3, 3)
+        generate.fill_box(6, 6)
 
     '''
     DO NOT CHANGE
@@ -288,5 +296,5 @@ def display_start(screen):
     screen.blit(select_surf, select_rect)
 
 generate = SudokuGenerator(30)
-print(generate.get_board())
-print(generate.fill_box(0, 0))
+generate.fill_diagonal()
+generate.print_board()
