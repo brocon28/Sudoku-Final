@@ -1,5 +1,6 @@
 #main file
 import pygame
+from sudoku_generator import *
 
 #Class
 class Board:
@@ -80,6 +81,7 @@ class Board:
 # Check whether the Sudoku board is solved correctly.
 
 def main():
+
 	try:
 		pygame.init()
 		screen = pygame.display.set_mode((576, 640))
@@ -88,6 +90,8 @@ def main():
 		running = True
 		screen.fill("white")
 		board.draw()
+		realboard = SudokuGenerator(9,9)
+		realboard.print_board()
 
 		while running:
 			for event in pygame.event.get():

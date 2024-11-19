@@ -36,7 +36,8 @@ class SudokuGenerator:
         self.board = self.get_board()
 
     def get_board(self):
-        pass
+        # 1st approach
+        return [["-" for i in range(9)] for j in range(9)]
 
     '''
 	Displays the board to the console
@@ -46,12 +47,10 @@ class SudokuGenerator:
 	Return: None
     '''
     def print_board(self):
-        for i in range(10):
-            pygame.draw.line(self.screen, "black", (0, i * 64), (576, i * 64))
-            pygame.draw.line(self.screen, "black", (i * 64, 0), (i * 64, 576))
-        for i in range(4):
-            pygame.draw.line(self.screen, "black", (0, i * 192), (576, i * 192), 3)
-            pygame.draw.line(self.screen, "black", (i * 192, 0), (i * 192, 576), 3)
+        for row in self.board:  # row: ["-", "-", "-"]
+            for col in row:
+                print(col, end=" ")
+            print()
 
     '''
 	Determines if num is contained in the specified row (horizontal) of the board
