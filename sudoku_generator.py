@@ -284,14 +284,14 @@ def display_start(screen):
     width = 64 * 9
     height = 64 * 10
     screen.fill((255, 255, 245))
-    start_font = pygame.font.Font(None, 60)
-    select_font = pygame.font.Font(None, 50)
+    big_font = pygame.font.Font(None, 60)
+    small_font = pygame.font.Font(None, 50)
 
-    start_surf = start_font.render("Welcome to Sodoku", 0, "black")
+    start_surf = big_font.render("Welcome to Sodoku", 0, "black")
     start_rect = start_surf.get_rect(center=(width // 2, height // 2 - 150))
     screen.blit(start_surf, start_rect)
 
-    select_surf = select_font.render("Select Game Mode:", 0, "black")
+    select_surf = small_font.render("Select Game Mode:", 0, "black")
     select_rect = select_surf.get_rect(center=(width // 2, height // 2))
     screen.blit(select_surf, select_rect)
 
