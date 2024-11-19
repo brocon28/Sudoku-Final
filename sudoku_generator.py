@@ -1,4 +1,5 @@
 import math,random
+import pygame
 
 """
 This was adapted from a GeeksforGeeks article "Program for Sudoku Generator" by Aarti_Rathi and Ankur Trisal
@@ -218,29 +219,43 @@ def generate_sudoku(size, removed):
 class Cell:
 
     def __init__(self, value, row, col, screen):
-        pass
+        self.value = value
+        self.row = row
+        self.col = col
+        self.screen = screen
        #constructor for cell class
+
     def set_cell_value(self, value):
-        pass
+        self.value = value
         #setter for this cell's value
+
     def set_sketched_value(self, value):
-        pass
+        self.value = value
         #setter for this cells sketched value
+
     def draw(self):
         pass
-        #draws this cell, along with value inswide it. If this cell has a nonzero value
+
+        #draws this cell, along with value inside it. If this cell has a nonzero value
         #that value is displayed. Otherwise, no value is displayed in the cell.
         #the cell is outlined red if it is currently selected
 
 class Board:
     def __init__(self, width, height, screen, difficulty):
-        pass
+        self.width = 64*9
+        self.height = 64*10
+        self.screen = screen
+        self.difficulty = difficulty
         # Constructor for the Board class.
         # screen is a window from PyGame.
         # difficulty is a variable to indicate if the user chose easy medium, or hard.
 
     def draw(self):
-        pass
+        for i in range(10):
+            pygame.draw.line(self.screen,"black",0,i*64,576,i*64)
+        for i in range(10):
+            pygame.draw.line(self.screen,"black",i*64,0,i*64,640)
+
         # Draws an outline of the Sudoku grid, with bold lines to delineate the 3x3 boxes.
         # Draws every cell on this board.
     def select(self, row, col):
