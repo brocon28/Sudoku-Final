@@ -7,6 +7,7 @@ https://www.geeksforgeeks.org/program-sudoku-generator/
 """
 
 class SudokuGenerator:
+
     '''
 	create a sudoku board - initialize class variables and set up the 2D board
 	This should initialize:
@@ -23,14 +24,16 @@ class SudokuGenerator:
 	None
     '''
     def __init__(self, row_length, removed_cells):
-        pass
+        '''
+        Returns a 2D python list of numbers which represents the board
 
-    '''
-	Returns a 2D python list of numbers which represents the board
+        Parameters: None
+        Return: list[list]
+        '''
+        self.row_length = row_length
+        self.removed_cells = removed_cells
+        self.board = self.get_board()
 
-	Parameters: None
-	Return: list[list]
-    '''
     def get_board(self):
         pass
 
