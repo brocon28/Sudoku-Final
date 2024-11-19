@@ -88,10 +88,12 @@ def main():
 		board = Board(576, 640, screen, 1)
 		clock = pygame.time.Clock()
 		running = True
-		screen.fill("white")
-		board.draw()
-		realboard = SudokuGenerator(9,9)
-		realboard.print_board()
+		display_start(screen)
+		# board.draw()
+		# screen.fill("white")
+
+		# realboard = SudokuGenerator(9,9)
+
 
 		while running:
 			for event in pygame.event.get():
