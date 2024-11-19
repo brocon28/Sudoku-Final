@@ -35,6 +35,7 @@ class SudokuGenerator:
         '''
         self.row_length = 9
         self.removed_cells = removed_cells
+        self.box_length = self.row_length // 3
         self.board = self.get_board()
 
     def get_board(self):
@@ -180,9 +181,8 @@ class SudokuGenerator:
     '''
 
     def fill_diagonal(self):
-        generate.fill_box(0, 0)
-        generate.fill_box(3, 3)
-        generate.fill_box(6, 6)
+        for i in range(0, self.row_length, 3):
+            self.fill_box(i, i)
 
     '''
     DO NOT CHANGE
@@ -251,8 +251,18 @@ class SudokuGenerator:
     '''
 
     def remove_cells(self):
-        pass
+        difficulty_levels = {
+            "easy": 30,
+            "medium": 40,
+            "hard": 50
+        }
+        amtRemoved = difficulty_levels.get(self.removed_cells, 30)
+        
+        cells = [(row, col) for row in range(9) for col in range(9)]
+        cells_to_remove = random.sample(cells, amtRemoved)
 
+        for row, col in cells_to_remove:
+            self.board[row][col] = 0
 
 '''
 DO NOT CHANGE
@@ -296,5 +306,7 @@ def display_start(screen):
     screen.blit(select_surf, select_rect)
 
 generate = SudokuGenerator(30)
-generate.fill_diagonal()
+generate.fill_values()
+generate.print_board()
+generate.remove_cells()
 generate.print_board()
