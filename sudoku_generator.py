@@ -1,5 +1,4 @@
 import math,random
-import pygame
 
 """
 This was adapted from a GeeksforGeeks article "Program for Sudoku Generator" by Aarti_Rathi and Ankur Trisal
@@ -36,8 +35,7 @@ class SudokuGenerator:
         self.board = self.get_board()
 
     def get_board(self):
-        # 1st approach
-        return [["-" for i in range(9)] for j in range(9)]
+        pass
 
     '''
 	Displays the board to the console
@@ -47,10 +45,7 @@ class SudokuGenerator:
 	Return: None
     '''
     def print_board(self):
-        for row in self.board:  # row: ["-", "-", "-"]
-            for col in row:
-                print(col, end=" ")
-            print()
+        pass
 
     '''
 	Determines if num is contained in the specified row (horizontal) of the board
@@ -63,7 +58,12 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_row(self, row, num):
-        pass
+        self.row = row
+        self.num = num
+        if num in row:
+            return False
+        else:
+            return True
 
     '''
 	Determines if num is contained in the specified column (vertical) of the board
@@ -76,7 +76,9 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_col(self, col, num):
-        pass
+
+        column_values = [self.board[row][col] for row in range(len(self.board))]
+        return num not in column_values
 
     '''
 	Determines if num is contained in the 3x3 box specified on the board
@@ -91,8 +93,12 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_box(self, row_start, col_start, num):
-        pass
-    
+
+        for row in range(row_start, row_start + 3):
+            for col in range(col_start, col_start + 3):
+                if self.board[row][col] == num:
+                    return False
+                return True
     '''
     Determines if it is valid to enter num at (row, col) in the board
     This is done by checking that num is unused in the appropriate, row, column, and box
@@ -220,4 +226,19 @@ def generate_sudoku(size, removed):
     board = sudoku.get_board()
     return board
 
+class Cell:
 
+    def __init__(self, value, row, col, screen):
+        pass
+       #constructor for cell class
+    def set_cell_value(self, value):
+        pass
+        #setter for this cell's value
+    def set_sketched_value(self, value):
+        pass
+        #setter for this cells sketched value
+    def draw(self):
+        pass
+        #draws this cell, along with value inside it. If this cell has a nonzero value
+        #that value is displayed. Otherwise, no value is displayed in the cell.
+        #the cell is outlined red if it is currently selected
