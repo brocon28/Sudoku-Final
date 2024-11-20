@@ -265,22 +265,6 @@ class SudokuGenerator:
         for row, col in cells_to_remove:
             self.board[row][col] = 0
 
-    # def print_board(self):
-    #     for i in range(10):
-    #         pygame.draw.line(self.screen, "black", (0, i * 64), (576, i * 64))
-    #         pygame.draw.line(self.screen, "black", (i * 64, 0), (i * 64, 576))
-    #     for i in range(4):
-    #         pygame.draw.line(self.screen, "black", (0, i * 192), (576, i * 192), 3)
-    #         pygame.draw.line(self.screen, "black", (i * 192, 0), (i * 192, 576), 3)
-    #     for row in self.board:  # row: ["-", "-", "-"]
-    #         for col in row:
-    #             print(col, end=" ")
-    #         print()
-    # def draw(self):
-    #     for i in range(10):
-    #         pygame.draw.line(self.screen,"black",0,i*64,576,i*64)
-    #     for i in range(10):
-    #         pygame.draw.line(self.screem,"black", i*64, 0, i*64, 640)
 '''
 DO NOT CHANGE
 Provided for students
@@ -401,8 +385,20 @@ def game_over(screen):
     return button_rect
 
 
-generate = SudokuGenerator()
-generate.fill_values()
+# generatehard = SudokuGenerator()
+# generatehard.fill_values()
+# # generate.print_board()
+# generatehard.remove_cells("Hard")
+# #generatehard.print_board()
+# generatemed = SudokuGenerator()
+# generatemed.fill_values()
+# # generate.print_board()
+# generatemed.remove_cells("Medium")
+# generatemed.print_board()
+# print()
+generateeasy = SudokuGenerator()
+generateeasy.fill_values()
 # generate.print_board()
-generate.remove_cells("Hard")
-generate.print_board()
+generateeasy.remove_cells("Easy")
+generateeasy.print_board()
+print()
