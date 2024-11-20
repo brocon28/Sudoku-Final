@@ -82,7 +82,75 @@ class Board:
 						center=(col * 64 + 64 / 2, row * 64 + 64 / 2))
 					self.screen.blit(nine_surf, nine_rect)
 
+	def draw_sketch(self,sketchboard):
+		big_font = pygame.font.Font(None, 80)
+		small_font = pygame.font.Font(None, 50)
 
+		one_surf = small_font.render("1", 0, "gray")
+		two_surf = small_font.render("2", 0, "gray")
+		three_surf = small_font.render("3", 0, "gray")
+		four_surf = small_font.render("4", 0, "gray")
+		five_surf = small_font.render("5", 0, "gray")
+		six_surf = small_font.render("6", 0, "gray")
+		seven_surf = small_font.render("7", 0, "gray")
+		eight_surf = small_font.render("8", 0, "gray")
+		nine_surf = small_font.render("9", 0, "gray")
+
+
+		for i in range(10):
+			pygame.draw.line(self.screen, "black", (0, i * 64), (576, i * 64))
+			pygame.draw.line(self.screen, "black", (i * 64, 0), (i * 64, 576))
+		for i in range(4):
+			pygame.draw.line(self.screen,"black",(0,i*192),(576,i*192),3)
+			pygame.draw.line(self.screen, "black", (i*192, 0), (i*192,576), 3)
+
+		for row in range(9):
+			for col in range(9):
+
+				if sketchboard[row][col] == 1:
+					one_rect = one_surf.get_rect(
+						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+					self.screen.blit(one_surf, one_rect)
+
+				if sketchboard[row][col] == 2:
+					two_rect = two_surf.get_rect(
+						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+					self.screen.blit(two_surf, two_rect)
+
+				if sketchboard[row][col] == 3:
+					three_rect = three_surf.get_rect(
+						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+					self.screen.blit(three_surf, three_rect)
+
+				if sketchboard[row][col] == 4:
+					four_rect = four_surf.get_rect(
+						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+					self.screen.blit(four_surf, four_rect)
+
+				if sketchboard[row][col] == 5:
+					five_rect = five_surf.get_rect(
+						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+					self.screen.blit(five_surf, five_rect)
+
+				if sketchboard[row][col] == 6:
+					six_rect = six_surf.get_rect(
+						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+					self.screen.blit(six_surf, six_rect)
+
+				if sketchboard[row][col] == 7:
+					seven_rect = seven_surf.get_rect(
+						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+					self.screen.blit(seven_surf, seven_rect)
+
+				if sketchboard[row][col] == 8:
+					eight_rect = eight_surf.get_rect(
+						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+					self.screen.blit(eight_surf, eight_rect)
+
+				if sketchboard[row][col] == 9:
+					nine_rect = nine_surf.get_rect(
+						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+					self.screen.blit(nine_surf, nine_rect)
 	# Draws an outline of the Sudoku grid, with bold lines to delineate the 3x3 boxes.
 	# Draws every cell on this board.
 
@@ -102,6 +170,16 @@ def main():
 		smaller_font = pygame.font.Font(None,30)
 		board = Board((64 * 9), (64 * 10), screen)
 		buttons = display_start(screen)
+		#cursor = pygame.Rect(0, 0, 64, 64)
+		sketchboard =[[0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0]]
 		pygame.display.flip()
 
 		while running:
@@ -145,57 +223,79 @@ def main():
 							screen.fill("white")
 							board.draw_board(sudoku)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx*64, usery*64, 64, 64), 2)
+							board.draw_sketch(sketchboard)
+							#cursor.move(userx*64,usery*64)
 
 					elif event.type == pygame.KEYDOWN:
 						if event.key == pygame.K_1:
 							sketched_value = 1
-							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							screen.blit(num_surf, num_rect)
+							sketchboard[usery][userx] = sketched_value
+							board.draw_sketch(sketchboard)
+							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							# screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_2:
 							sketched_value = 2
-							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							screen.blit(num_surf, num_rect)
+							sketchboard[usery][userx] = sketched_value
+							board.draw_sketch(sketchboard)
+							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							# screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_3:
 							sketched_value = 3
-							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							screen.blit(num_surf, num_rect)
+							sketchboard[usery][userx] = sketched_value
+							board.draw_sketch(sketchboard)
+							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							# screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_4:
 							sketched_value = 4
-							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							screen.blit(num_surf, num_rect)
+							sketchboard[usery][userx] = sketched_value
+							board.draw_sketch(sketchboard)
+							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							# screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_5:
 							sketched_value = 5
-							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							screen.blit(num_surf, num_rect)
+							sketchboard[usery][userx] = sketched_value
+							board.draw_sketch(sketchboard)
+							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							# screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_6:
 							sketched_value = 6
-							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							screen.blit(num_surf, num_rect)
+							sketchboard[usery][userx] = sketched_value
+							board.draw_sketch(sketchboard)
+							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							# screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_7:
 							sketched_value = 7
-							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							screen.blit(num_surf, num_rect)
+							sketchboard[usery][userx] = sketched_value
+							board.draw_sketch(sketchboard)
+							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							# screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_8:
 							sketched_value = 8
-							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							screen.blit(num_surf, num_rect)
+							sketchboard[usery][userx] = sketched_value
+							board.draw_sketch(sketchboard)
+							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							# screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_9:
 							sketched_value = 9
-							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							screen.blit(num_surf, num_rect)
+							sketchboard[usery][userx] = sketched_value
+							board.draw_sketch(sketchboard)
+							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							# screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_RETURN:
-								playerboard[usery][userx] = sketched_value
+								playerboard[usery][userx] = sketchboard[usery][userx]
 								screen.fill("white")
 								board.draw_board(sudoku)
+								sketchboard[usery][userx] = 0
+								board.draw_sketch(sketchboard)
 
 
 					#fix full board for win conditions
