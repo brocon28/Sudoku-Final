@@ -225,77 +225,89 @@ def main():
 							pygame.draw.rect(screen, "red", pygame.Rect(userx*64, usery*64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 							#cursor.move(userx*64,usery*64)
+						else:
+							continue
 
 					elif event.type == pygame.KEYDOWN:
-						if event.key == pygame.K_1:
+						if event.key == pygame.K_1 and sudoku.board[usery][userx] == 0:
 							sketched_value = 1
 							sketchboard[usery][userx] = sketched_value
+							screen.fill("white")
+							board.draw_board(sudoku)
+							pygame.draw.rect(screen, "red", pygame.Rect(userx*64, usery*64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
-							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							# screen.blit(num_surf, num_rect)
-						elif event.key == pygame.K_2:
+
+						elif event.key == pygame.K_2 and sudoku.board[usery][userx] == 0:
 							sketched_value = 2
 							sketchboard[usery][userx] = sketched_value
+							screen.fill("white")
+							board.draw_board(sudoku)
+							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
-							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							# screen.blit(num_surf, num_rect)
-						elif event.key == pygame.K_3:
+
+						elif event.key == pygame.K_3 and sudoku.board[usery][userx] == 0:
 							sketched_value = 3
 							sketchboard[usery][userx] = sketched_value
+							screen.fill("white")
+							board.draw_board(sudoku)
+							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
-							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							# screen.blit(num_surf, num_rect)
-						elif event.key == pygame.K_4:
+
+						elif event.key == pygame.K_4 and sudoku.board[usery][userx] == 0:
 							sketched_value = 4
 							sketchboard[usery][userx] = sketched_value
+							screen.fill("white")
+							board.draw_board(sudoku)
+							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
-							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							# screen.blit(num_surf, num_rect)
-						elif event.key == pygame.K_5:
+
+						elif event.key == pygame.K_5 and sudoku.board[usery][userx] == 0:
 							sketched_value = 5
 							sketchboard[usery][userx] = sketched_value
+							screen.fill("white")
+							board.draw_board(sudoku)
+							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
-							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							# screen.blit(num_surf, num_rect)
-						elif event.key == pygame.K_6:
+
+						elif event.key == pygame.K_6 and sudoku.board[usery][userx] == 0:
 							sketched_value = 6
 							sketchboard[usery][userx] = sketched_value
+							screen.fill("white")
+							board.draw_board(sudoku)
+							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
-							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							# screen.blit(num_surf, num_rect)
-						elif event.key == pygame.K_7:
+
+						elif event.key == pygame.K_7 and sudoku.board[usery][userx] == 0:
 							sketched_value = 7
 							sketchboard[usery][userx] = sketched_value
+							screen.fill("white")
+							board.draw_board(sudoku)
+							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
-							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							# screen.blit(num_surf, num_rect)
-						elif event.key == pygame.K_8:
+
+						elif event.key == pygame.K_8 and sudoku.board[usery][userx] == 0:
 							sketched_value = 8
 							sketchboard[usery][userx] = sketched_value
+							screen.fill("white")
+							board.draw_board(sudoku)
+							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
-							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							# screen.blit(num_surf, num_rect)
-						elif event.key == pygame.K_9:
+
+						elif event.key == pygame.K_9 and sudoku.board[usery][userx] == 0:
 							sketched_value = 9
 							sketchboard[usery][userx] = sketched_value
+							screen.fill("white")
+							board.draw_board(sudoku)
+							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
-							# num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							# num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
-							# screen.blit(num_surf, num_rect)
+
 						elif event.key == pygame.K_RETURN:
+							if sketchboard[usery][userx] != 0:
 								playerboard[usery][userx] = sketchboard[usery][userx]
-								screen.fill("white")
-								board.draw_board(sudoku)
-								sketchboard[usery][userx] = 0
-								board.draw_sketch(sketchboard)
+							screen.fill("white")
+							board.draw_board(sudoku)
+							sketchboard[usery][userx] = 0
+							board.draw_sketch(sketchboard)
 
 
 					#fix full board for win conditions
