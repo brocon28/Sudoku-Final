@@ -12,7 +12,7 @@ class Board:
 # screen is a window from PyGame.
 # difficulty is a variable to indicate if the user chose easy medium, or hard.
 
-	def draw(self,gameboard):
+	def draw_board(self,gameboard):
 		big_font = pygame.font.Font(None, 80)
 		small_font = pygame.font.Font(None, 50)
 
@@ -82,6 +82,7 @@ class Board:
 						center=(col * 64 + 64 / 2, row * 64 + 64 / 2))
 					self.screen.blit(nine_surf, nine_rect)
 
+
 	# Draws an outline of the Sudoku grid, with bold lines to delineate the 3x3 boxes.
 	# Draws every cell on this board.
 
@@ -96,6 +97,9 @@ def main():
 		screen1 = True
 		screen2 = True
 		difficulty = None
+		big_font = pygame.font.Font(None, 80)
+		small_font = pygame.font.Font(None, 50)
+		smaller_font = pygame.font.Font(None,30)
 		board = Board((64 * 9), (64 * 10), screen)
 		buttons = display_start(screen)
 		pygame.display.flip()
@@ -123,18 +127,12 @@ def main():
 								fullboard = sudoku.board
 								#print(fullboard)
 								sudoku.remove_cells(difficulty)
-								#print(sudoku.board)
-								board.draw(sudoku)
+								playerboard = sudoku.board
+								print(sudoku.board)
+								board.draw_board(sudoku)
 								screen1 = False
 
 			while screen2:
-				# screen.fill("white")
-				# board = Board((64 * 9), (64 * 10), screen)
-				# sudoku = SudokuGenerator()
-				# sudoku.fill_values()
-				# sudoku.remove_cells(difficulty)
-				#board.draw(sudoku)
-				#pygame.draw.rect(screen,"red",pygame.Rect(0,0,64,64),2)
 				for event in pygame.event.get():
 					if event.type == pygame.QUIT:
 						running = False
@@ -145,8 +143,60 @@ def main():
 						userx = x//64
 						usery = y//64
 						if sudoku.board[usery][userx] == 0:
+							screen.fill("white")
+							board.draw_board(sudoku)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx*64, usery*64, 64, 64), 2)
 
+					elif event.type == pygame.KEYDOWN:
+						if event.key == pygame.K_1:
+							sketched_value = 1
+							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							num_rect = num_surf.get_rect(topleft=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							screen.blit(num_surf, num_rect)
+						elif event.key == pygame.K_2:
+							sketched_value = 2
+							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							screen.blit(num_surf, num_rect)
+						elif event.key == pygame.K_3:
+							sketched_value = 3
+							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							screen.blit(num_surf, num_rect)
+						elif event.key == pygame.K_4:
+							sketched_value = 4
+							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							screen.blit(num_surf, num_rect)
+						elif event.key == pygame.K_5:
+							sketched_value = 5
+							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							screen.blit(num_surf, num_rect)
+						elif event.key == pygame.K_6:
+							sketched_value = 6
+							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							screen.blit(num_surf, num_rect)
+						elif event.key == pygame.K_7:
+							sketched_value = 7
+							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							screen.blit(num_surf, num_rect)
+						elif event.key == pygame.K_8:
+							sketched_value = 8
+							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							screen.blit(num_surf, num_rect)
+						elif event.key == pygame.K_9:
+							sketched_value = 9
+							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
+							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							screen.blit(num_surf, num_rect)
+						elif event.key == pygame.K_RETURN:
+								playerboard[usery][userx] = sketched_value
+								screen.fill("white")
+								board.draw_board(sudoku)
 
 				pygame.display.flip()
 				clock.tick(60)
