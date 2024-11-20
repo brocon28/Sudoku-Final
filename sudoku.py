@@ -184,6 +184,7 @@ def main():
 
 		while running:
 			while screen1:
+				screen2 = True
 				for event in pygame.event.get():
 					if event.type == pygame.QUIT:
 						running = False
