@@ -116,8 +116,6 @@ def main():
 						for button_rect, mode in buttons:
 							if button_rect.collidepoint(x,y):
 
-								
-								
 								difficulty = mode
 								print(f"Difficulty selected: {mode}")
 								screen.fill("white")
@@ -125,10 +123,11 @@ def main():
 								sudoku = SudokuGenerator()
 								sudoku.fill_values()
 								fullboard = sudoku.board
-								#print(fullboard)
+								print(fullboard)
 								sudoku.remove_cells(difficulty)
 								playerboard = sudoku.board
-								print(sudoku.board)
+								print(playerboard)
+								print(fullboard)
 								board.draw_board(sudoku)
 								screen1 = False
 
@@ -151,52 +150,58 @@ def main():
 						if event.key == pygame.K_1:
 							sketched_value = 1
 							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(topleft=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
 							screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_2:
 							sketched_value = 2
 							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
 							screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_3:
 							sketched_value = 3
 							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
 							screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_4:
 							sketched_value = 4
 							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
 							screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_5:
 							sketched_value = 5
 							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
 							screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_6:
 							sketched_value = 6
 							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
 							screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_7:
 							sketched_value = 7
 							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
 							screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_8:
 							sketched_value = 8
 							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
 							screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_9:
 							sketched_value = 9
 							num_surf = smaller_font.render(f"{sketched_value}", 0, "gray")
-							num_rect = num_surf.get_rect(center=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
+							num_rect = num_surf.get_rect(bottomright=(userx * 64 + 64 / 2, usery * 64 + 64 / 2))
 							screen.blit(num_surf, num_rect)
 						elif event.key == pygame.K_RETURN:
 								playerboard[usery][userx] = sketched_value
 								screen.fill("white")
 								board.draw_board(sudoku)
+
+
+					#fix full board for win conditions
+					#full board is the same as playerboard rn; need a way to get the board before removing cells
+
+
 
 				pygame.display.flip()
 				clock.tick(60)

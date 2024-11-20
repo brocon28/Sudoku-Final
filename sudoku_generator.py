@@ -38,6 +38,7 @@ class SudokuGenerator:
         self.row_length = 9
         self.box_length = self.row_length // 3
         self.board = self.get_board()
+        self.fullboard = self.get_board()
 
     def get_board(self):
         board = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -396,9 +397,9 @@ def game_over(screen):
 # generatemed.remove_cells("Medium")
 # generatemed.print_board()
 # print()
-generateeasy = SudokuGenerator()
-generateeasy.fill_values()
-generateeasy.print_board()
-generateeasy.remove_cells("Easy")
-generateeasy.print_board()
-print()
+# generateeasy = SudokuGenerator()
+# generateeasy.fill_values()
+# generateeasy.print_board()
+# generateeasy.remove_cells("Easy")
+# generateeasy.print_board()
+# print()
