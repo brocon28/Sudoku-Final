@@ -265,22 +265,22 @@ class SudokuGenerator:
         for row, col in cells_to_remove:
             self.board[row][col] = 0
 
-    def print_board(self):
-        for i in range(10):
-            pygame.draw.line(self.screen, "black", (0, i * 64), (576, i * 64))
-            pygame.draw.line(self.screen, "black", (i * 64, 0), (i * 64, 576))
-        for i in range(4):
-            pygame.draw.line(self.screen, "black", (0, i * 192), (576, i * 192), 3)
-            pygame.draw.line(self.screen, "black", (i * 192, 0), (i * 192, 576), 3)
-        for row in self.board:  # row: ["-", "-", "-"]
-            for col in row:
-                print(col, end=" ")
-            print()
-    def draw(self):
-        for i in range(10):
-            pygame.draw.line(self.screen,"black",0,i*64,576,i*64)
-        for i in range(10):
-            pygame.draw.line(self.screem,"black", i*64, 0, i*64, 640)
+    # def print_board(self):
+    #     for i in range(10):
+    #         pygame.draw.line(self.screen, "black", (0, i * 64), (576, i * 64))
+    #         pygame.draw.line(self.screen, "black", (i * 64, 0), (i * 64, 576))
+    #     for i in range(4):
+    #         pygame.draw.line(self.screen, "black", (0, i * 192), (576, i * 192), 3)
+    #         pygame.draw.line(self.screen, "black", (i * 192, 0), (i * 192, 576), 3)
+    #     for row in self.board:  # row: ["-", "-", "-"]
+    #         for col in row:
+    #             print(col, end=" ")
+    #         print()
+    # def draw(self):
+    #     for i in range(10):
+    #         pygame.draw.line(self.screen,"black",0,i*64,576,i*64)
+    #     for i in range(10):
+    #         pygame.draw.line(self.screem,"black", i*64, 0, i*64, 640)
 '''
 DO NOT CHANGE
 Provided for students
@@ -351,8 +351,58 @@ def display_start(screen):
         button_rect_text = button_surf.get_rect(center=button_rect.center)
         screen.blit(button_surf, button_rect_text)
     return buttons
-        
+
+
+
+def game_over(screen):
+    width = 64 * 9
+    height = 64 * 10
+
+    button_width = 120
+    button_height = 50
+    gap = 20
+    button_x_start = (width - (3* button_width + 2 * gap)) // 2
+    button_y = height // 2 + 50
+
+    current_dir = os.path.dirname(__file__)
+    image_path = os.path.join(current_dir, "assets","Sodoku_Start_Screen.png")
+    
+    if not os.path.exists(image_path):
+        raise FileNotFoundError(f"Image file not found at {image_path}")
+    # screen.fill((255, 255, 245))
+    background_image = pygame.image.load(image_path)
+    background_image = pygame.transform.scale(background_image, (width, height))
+    screen.blit(background_image, (0, 0))
+
+    big_font = pygame.font.Font(None, 80)
+    small_font = pygame.font.Font(None, 50)
+
+    start_surf = big_font.render("Game Over :(", 0, (128,0,0))
+    start_rect = start_surf.get_rect(center=(width // 2, height // 2 - 175))
+    screen.blit(start_surf, start_rect)
+
+    button_color = (153,101,21)
+    button_text = "Restart"
+    
+
+   
+    x = (width - button_width) // 2
+    y = (height - button_height) // 2
+
+    button_rect = pygame.Rect(x, y, button_width, button_height)
+
+    pygame.draw.rect(screen, button_color, button_rect)
+
+    pygame.draw.rect(screen, button_color, button_rect)
+    button_surf = small_font.render(button_text, True, "White")
+    button_rect_text = button_surf.get_rect(center=button_rect.center)
+    screen.blit(button_surf, button_rect_text)
+
+    return button_rect
+
 
 generate = SudokuGenerator()
 generate.fill_values()
+# generate.print_board()
+generate.remove_cells("Hard")
 generate.print_board()

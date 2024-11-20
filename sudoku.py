@@ -12,7 +12,7 @@ def main():
 		running = True
 		screen1 = True
 		difficulty = None
-		buttons = display_start(screen)
+		buttons = game_over(screen)
 		pygame.display.flip()
 		board = SudokuGenerator()
 
