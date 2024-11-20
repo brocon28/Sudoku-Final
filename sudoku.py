@@ -124,6 +124,7 @@ def main():
 								#print(fullboard)
 								sudoku.remove_cells(difficulty)
 								#print(sudoku.board)
+								board.draw(sudoku)
 								screen1 = False
 
 			while screen2:
@@ -132,7 +133,8 @@ def main():
 				# sudoku = SudokuGenerator()
 				# sudoku.fill_values()
 				# sudoku.remove_cells(difficulty)
-				board.draw(sudoku)
+				#board.draw(sudoku)
+				#pygame.draw.rect(screen,"red",pygame.Rect(0,0,64,64),2)
 				for event in pygame.event.get():
 					if event.type == pygame.QUIT:
 						running = False
@@ -140,6 +142,10 @@ def main():
 						sys.exit()
 					elif event.type == pygame.MOUSEBUTTONDOWN:
 						x, y = event.pos
+						userx = x//64
+						usery = y//64
+						if sudoku.board[usery][userx] == 0:
+							pygame.draw.rect(screen, "red", pygame.Rect(userx*64, usery*64, 64, 64), 2)
 
 
 				pygame.display.flip()
