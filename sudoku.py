@@ -120,7 +120,10 @@ def main():
 								board = Board((64 * 9), (64 * 10), screen)
 								sudoku = SudokuGenerator()
 								sudoku.fill_values()
+								fullboard = sudoku.board
+								#print(fullboard)
 								sudoku.remove_cells(difficulty)
+								#print(sudoku.board)
 								screen1 = False
 
 			while screen2:

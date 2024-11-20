@@ -398,7 +398,7 @@ def game_over(screen):
 # print()
 generateeasy = SudokuGenerator()
 generateeasy.fill_values()
-# generate.print_board()
+generateeasy.print_board()
 generateeasy.remove_cells("Easy")
 generateeasy.print_board()
 print()
