@@ -213,11 +213,11 @@ def main():
 								sudoku = SudokuGenerator()
 								sudoku.fill_values()
 								sudoku.remove_cells(difficulty)
-								baseboard = copy.deepcopy(sudoku)
+								baseboard = sudoku.board.copy()
 								playerboard = sudoku.board
 								print(sudoku.board)
 								print(playerboard)
-								print(baseboard.board)
+								print(baseboard)
 								board.draw_board(sudoku.board)
 								screen1 = False
 
@@ -261,14 +261,16 @@ def main():
 									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
 									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
 									               [0, 0, 0, 0, 0, 0, 0, 0, 0]]
-									sudoku.board = baseboard.board
-									playerboard = baseboard.board
+									sudoku.board = baseboard
+									playerboard = baseboard
 									screen.fill("white")
 									board.draw_board(playerboard)
 									board.draw_sketch(sketchboard)
 									print()
+									print(sudoku.board)
 									print(playerboard)
-									print(baseboard.board)
+									print(baseboard)
+
 
 								elif choice == "Restart":
 									screen1 = True
@@ -379,8 +381,9 @@ def main():
 							sketchboard[usery][userx] = 0
 							board.draw_sketch(sketchboard)
 							print()
+							print(sudoku.board)
 							print(playerboard)
-							print(baseboard.board)
+							print(baseboard)
 
 						elif event.key == pygame.K_UP:
 							usery -= 1
