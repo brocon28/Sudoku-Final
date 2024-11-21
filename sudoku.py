@@ -219,13 +219,11 @@ def main():
 						x, y = event.pos
 						userx = x//64
 						usery = y//64
-						if sudoku.board[usery][userx] == 0:
-							screen.fill("white")
-							board.draw_board(sudoku)
-							pygame.draw.rect(screen, "red", pygame.Rect(userx*64, usery*64, 64, 64), 2)
-							board.draw_sketch(sketchboard)
-						else:
-							continue
+						screen.fill("white")
+						board.draw_board(sudoku)
+						pygame.draw.rect(screen, "red", pygame.Rect(userx*64, usery*64, 64, 64), 2)
+						board.draw_sketch(sketchboard)
+
 
 					elif event.type == pygame.KEYDOWN:
 						if event.key == pygame.K_1 and sudoku.board[usery][userx] == 0:
