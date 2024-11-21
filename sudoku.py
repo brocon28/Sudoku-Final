@@ -38,47 +38,47 @@ class Board:
 		for row in range(9):
 			for col in range(9):
 
-				if gameboard.board[row][col] == 1:
+				if gameboard[row][col] == 1:
 					one_rect = one_surf.get_rect(
 						center=(col * 64 + 64 / 2, row * 64 + 64 / 2))
 					self.screen.blit(one_surf, one_rect)
 
-				if gameboard.board[row][col] == 2:
+				if gameboard[row][col] == 2:
 					two_rect = two_surf.get_rect(
 						center=(col * 64 + 64 / 2, row * 64 + 64 / 2))
 					self.screen.blit(two_surf, two_rect)
 
-				if gameboard.board[row][col] == 3:
+				if gameboard[row][col] == 3:
 					three_rect = three_surf.get_rect(
 						center=(col * 64 + 64 / 2, row * 64 + 64 / 2))
 					self.screen.blit(three_surf, three_rect)
 
-				if gameboard.board[row][col] == 4:
+				if gameboard[row][col] == 4:
 					four_rect = four_surf.get_rect(
 						center=(col * 64 + 64 / 2, row * 64 + 64 / 2))
 					self.screen.blit(four_surf, four_rect)
 
-				if gameboard.board[row][col] == 5:
+				if gameboard[row][col] == 5:
 					five_rect = five_surf.get_rect(
 						center=(col * 64 + 64 / 2, row * 64 + 64 / 2))
 					self.screen.blit(five_surf, five_rect)
 
-				if gameboard.board[row][col] == 6:
+				if gameboard[row][col] == 6:
 					six_rect = six_surf.get_rect(
 						center=(col * 64 + 64 / 2, row * 64 + 64 / 2))
 					self.screen.blit(six_surf, six_rect)
 
-				if gameboard.board[row][col] == 7:
+				if gameboard[row][col] == 7:
 					seven_rect = seven_surf.get_rect(
 						center=(col * 64 + 64 / 2, row * 64 + 64 / 2))
 					self.screen.blit(seven_surf, seven_rect)
 
-				if gameboard.board[row][col] == 8:
+				if gameboard[row][col] == 8:
 					eight_rect = eight_surf.get_rect(
 						center=(col * 64 + 64 / 2, row * 64 + 64 / 2))
 					self.screen.blit(eight_surf, eight_rect)
 
-				if gameboard.board[row][col] == 9:
+				if gameboard[row][col] == 9:
 					nine_rect = nine_surf.get_rect(
 						center=(col * 64 + 64 / 2, row * 64 + 64 / 2))
 					self.screen.blit(nine_surf, nine_rect)
@@ -212,12 +212,13 @@ def main():
 								board = Board((64 * 9), (64 * 10), screen)
 								sudoku = SudokuGenerator()
 								sudoku.fill_values()
-								fullboard = copy.deepcopy(sudoku.board)
 								sudoku.remove_cells(difficulty)
+								baseboard = copy.deepcopy(sudoku)
 								playerboard = sudoku.board
+								print(sudoku.board)
 								print(playerboard)
-								print(fullboard)
-								board.draw_board(sudoku)
+								print(baseboard.board)
+								board.draw_board(sudoku.board)
 								screen1 = False
 
 			while screen2:
@@ -239,11 +240,11 @@ def main():
 						usery = y//64
 						if usery > 8:
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							board.draw_sketch(sketchboard)
 						else:
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
@@ -260,10 +261,14 @@ def main():
 									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
 									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
 									               [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+									sudoku.board = baseboard.board
+									playerboard = baseboard.board
 									screen.fill("white")
-									board.draw_board(sudoku)
-									pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
+									board.draw_board(playerboard)
 									board.draw_sketch(sketchboard)
+									print()
+									print(playerboard)
+									print(baseboard.board)
 
 								elif choice == "Restart":
 									screen1 = True
@@ -298,7 +303,7 @@ def main():
 							sketched_value = 1
 							sketchboard[usery][userx] = sketched_value
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx*64, usery*64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
@@ -306,7 +311,7 @@ def main():
 							sketched_value = 2
 							sketchboard[usery][userx] = sketched_value
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
@@ -314,7 +319,7 @@ def main():
 							sketched_value = 3
 							sketchboard[usery][userx] = sketched_value
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
@@ -322,7 +327,7 @@ def main():
 							sketched_value = 4
 							sketchboard[usery][userx] = sketched_value
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
@@ -330,7 +335,7 @@ def main():
 							sketched_value = 5
 							sketchboard[usery][userx] = sketched_value
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
@@ -338,7 +343,7 @@ def main():
 							sketched_value = 6
 							sketchboard[usery][userx] = sketched_value
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
@@ -346,7 +351,7 @@ def main():
 							sketched_value = 7
 							sketchboard[usery][userx] = sketched_value
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
@@ -354,7 +359,7 @@ def main():
 							sketched_value = 8
 							sketchboard[usery][userx] = sketched_value
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
@@ -362,7 +367,7 @@ def main():
 							sketched_value = 9
 							sketchboard[usery][userx] = sketched_value
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
@@ -370,16 +375,19 @@ def main():
 							if sketchboard[usery][userx] != 0:
 								playerboard[usery][userx] = sketchboard[usery][userx]
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							sketchboard[usery][userx] = 0
 							board.draw_sketch(sketchboard)
+							print()
+							print(playerboard)
+							print(baseboard.board)
 
 						elif event.key == pygame.K_UP:
 							usery -= 1
 							if usery < 0:
 								usery = 0
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
@@ -388,7 +396,7 @@ def main():
 							if usery > 8:
 								usery = 8
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
@@ -397,7 +405,7 @@ def main():
 							if userx < 0:
 								userx=0
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
@@ -406,7 +414,7 @@ def main():
 							if userx > 8:
 								userx=8
 							screen.fill("white")
-							board.draw_board(sudoku)
+							board.draw_board(sudoku.board)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
