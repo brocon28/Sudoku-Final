@@ -274,17 +274,28 @@ class SudokuGenerator:
                     nums.remove(self.board[i][j])
             if len(nums) != 0:
                 return False
-        x = 0
-        for b in range(3):
-            for r in range(b, x + 3):
+
+        for j in range(self.row_length):
+            nums = {1, 2, 3, 4, 5, 6, 7, 8, 9}
+            for i in range(self.row_length):
+                if self.board[i][j] in nums:
+                    nums.remove(self.board[i][j])
+            if len(nums) != 0:
+                return False
+
+        for i in range(0, self.row_length, 3):
+            for j in range(0, self.row_length, 3):
                 nums = {1, 2, 3, 4, 5, 6, 7, 8, 9}
-                for c in range(b, x + 3):
-                    if self.board[r][c] in nums:
-                        nums.remove(self.board[r][c])
-                x += 3
+                for r in range(i, i + 3):
+                    for c in range(j, j + 3):
+                        if self.board[r][c] in nums:
+                            nums.remove(self.board[r][c])
                 if len(nums) != 0:
                     return False
+
         return True
+
+
 '''
 DO NOT CHANGE
 Provided for students
