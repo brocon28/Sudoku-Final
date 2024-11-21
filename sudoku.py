@@ -211,10 +211,12 @@ def main():
 
 			while screen2:
 				for event in pygame.event.get():
+
 					if event.type == pygame.QUIT:
 						running = False
 						pygame.quit()
 						sys.exit()
+
 					elif event.type == pygame.MOUSEBUTTONDOWN:
 						x, y = event.pos
 						userx = x//64
@@ -304,6 +306,42 @@ def main():
 							screen.fill("white")
 							board.draw_board(sudoku)
 							sketchboard[usery][userx] = 0
+							board.draw_sketch(sketchboard)
+
+						elif event.key == pygame.K_UP:
+							usery -= 1
+							if usery < 0:
+								usery = 0
+							screen.fill("white")
+							board.draw_board(sudoku)
+							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
+							board.draw_sketch(sketchboard)
+
+						elif event.key == pygame.K_DOWN:
+							usery += 1
+							if usery > 8:
+								usery = 8
+							screen.fill("white")
+							board.draw_board(sudoku)
+							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
+							board.draw_sketch(sketchboard)
+
+						elif event.key == pygame.K_LEFT:
+							userx -= 1
+							if userx < 0:
+								userx=0
+							screen.fill("white")
+							board.draw_board(sudoku)
+							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
+							board.draw_sketch(sketchboard)
+
+						elif event.key == pygame.K_RIGHT:
+							userx += 1
+							if userx > 8:
+								userx=8
+							screen.fill("white")
+							board.draw_board(sudoku)
+							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
 
