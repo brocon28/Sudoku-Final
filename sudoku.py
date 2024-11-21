@@ -2,6 +2,7 @@
 import pygame
 from sudoku_generator import *
 import sys
+import copy
 
 class Board:
 	def __init__(self, width, height, screen):
@@ -153,7 +154,11 @@ class Board:
 					self.screen.blit(nine_surf, nine_rect)
 	# Draws an outline of the Sudoku grid, with bold lines to delineate the 3x3 boxes.
 	# Draws every cell on this board.
-
+def check_full(board):
+	for i in range(9):
+		if 0 in board[i]:
+			return False
+	return True
 
 def main():
 
@@ -164,6 +169,7 @@ def main():
 		running = True
 		screen1 = True
 		screen2 = True
+		screen3 = True
 		difficulty = None
 		big_font = pygame.font.Font(None, 80)
 		small_font = pygame.font.Font(None, 50)
@@ -185,10 +191,12 @@ def main():
 			while screen1:
 				screen2 = True
 				for event in pygame.event.get():
+
 					if event.type == pygame.QUIT:
 						running = False
 						pygame.quit()
 						sys.exit()
+
 					elif event.type == pygame.MOUSEBUTTONDOWN:
 						x,y = event.pos
 						for button_rect, mode in buttons:
@@ -200,8 +208,7 @@ def main():
 								board = Board((64 * 9), (64 * 10), screen)
 								sudoku = SudokuGenerator()
 								sudoku.fill_values()
-								fullboard = sudoku.board
-								print(fullboard)
+								fullboard = copy.deepcopy(sudoku.board)
 								sudoku.remove_cells(difficulty)
 								playerboard = sudoku.board
 								print(playerboard)
@@ -210,6 +217,10 @@ def main():
 								screen1 = False
 
 			while screen2:
+				status = check_full(playerboard)
+				if status == True :
+					screen2 = False
+
 				for event in pygame.event.get():
 
 					if event.type == pygame.QUIT:
@@ -344,11 +355,23 @@ def main():
 							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
 
+				pygame.display.flip()
+				clock.tick(60)
 
-					#fix full board for win conditions
-					#full board is the same as playerboard rn; need a way to get the board before removing cells
+			while screen3:
+				winner = sudoku.check_win()
+				if winner == True:
+					game_win(screen)
 
+				else:
+					game_over(screen)
 
+				for event in pygame.event.get():
+
+					if event.type == pygame.QUIT:
+						running = False
+						pygame.quit()
+						sys.exit()
 
 				pygame.display.flip()
 				clock.tick(60)

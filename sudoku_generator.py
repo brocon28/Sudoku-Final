@@ -254,7 +254,7 @@ class SudokuGenerator:
 
     def remove_cells(self, difficulty):
         difficulty_levels = {
-            "Easy": 30,
+            "Easy": 1,
             "Medium": 40,
             "Hard": 50
         }
@@ -266,6 +266,25 @@ class SudokuGenerator:
         for row, col in cells_to_remove:
             self.board[row][col] = 0
 
+    def check_win(self):
+        for i in range(self.row_length):
+            nums = {1, 2, 3, 4, 5, 6, 7, 8, 9}
+            for j in range(self.row_length):
+                if self.board[i][j] in nums:
+                    nums.remove(self.board[i][j])
+            if len(nums) != 0:
+                return False
+        x = 0
+        for b in range(3):
+            for r in range(b, x + 3):
+                nums = {1, 2, 3, 4, 5, 6, 7, 8, 9}
+                for c in range(b, x + 3):
+                    if self.board[r][c] in nums:
+                        nums.remove(self.board[r][c])
+                x += 3
+                if len(nums) != 0:
+                    return False
+        return True
 '''
 DO NOT CHANGE
 Provided for students
@@ -371,6 +390,51 @@ def game_over(screen):
     
 
    
+    x = (width - button_width) // 2
+    y = (height - button_height) // 2
+
+    button_rect = pygame.Rect(x, y, button_width, button_height)
+
+    pygame.draw.rect(screen, button_color, button_rect)
+
+    pygame.draw.rect(screen, button_color, button_rect)
+    button_surf = small_font.render(button_text, True, "White")
+    button_rect_text = button_surf.get_rect(center=button_rect.center)
+    screen.blit(button_surf, button_rect_text)
+
+    return button_rect
+
+
+def game_win(screen):
+    width = 64 * 9
+    height = 64 * 10
+
+    button_width = 120
+    button_height = 50
+    gap = 20
+    button_x_start = (width - (3 * button_width + 2 * gap)) // 2
+    button_y = height // 2 + 50
+
+    current_dir = os.path.dirname(__file__)
+    image_path = os.path.join(current_dir, "assets", "Sodoku_Start_Screen.png")
+
+    if not os.path.exists(image_path):
+        raise FileNotFoundError(f"Image file not found at {image_path}")
+    # screen.fill((255, 255, 245))
+    background_image = pygame.image.load(image_path)
+    background_image = pygame.transform.scale(background_image, (width, height))
+    screen.blit(background_image, (0, 0))
+
+    big_font = pygame.font.Font(None, 80)
+    small_font = pygame.font.Font(None, 50)
+
+    start_surf = big_font.render("Game Won!", 0, (128, 0, 0))
+    start_rect = start_surf.get_rect(center=(width // 2, height // 2 - 175))
+    screen.blit(start_surf, start_rect)
+
+    button_color = (153, 101, 21)
+    button_text = "Exit"
+
     x = (width - button_width) // 2
     y = (height - button_height) // 2
 
