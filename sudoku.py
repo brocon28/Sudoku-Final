@@ -86,15 +86,15 @@ class Board:
 		big_font = pygame.font.Font(None, 80)
 		small_font = pygame.font.Font(None, 50)
 
-		one_surf = small_font.render("1", 0, "gray")
-		two_surf = small_font.render("2", 0, "gray")
-		three_surf = small_font.render("3", 0, "gray")
-		four_surf = small_font.render("4", 0, "gray")
-		five_surf = small_font.render("5", 0, "gray")
-		six_surf = small_font.render("6", 0, "gray")
-		seven_surf = small_font.render("7", 0, "gray")
-		eight_surf = small_font.render("8", 0, "gray")
-		nine_surf = small_font.render("9", 0, "gray")
+		one_surf = small_font.render("1", 0, "slategray")
+		two_surf = small_font.render("2", 0, "slategray")
+		three_surf = small_font.render("3", 0, "slategray")
+		four_surf = small_font.render("4", 0, "slategray")
+		five_surf = small_font.render("5", 0, "slategray")
+		six_surf = small_font.render("6", 0, "slategray")
+		seven_surf = small_font.render("7", 0, "slategray")
+		eight_surf = small_font.render("8", 0, "slategray")
+		nine_surf = small_font.render("9", 0, "slategray")
 
 
 		for i in range(10):
@@ -109,47 +109,47 @@ class Board:
 
 				if sketchboard[row][col] == 1:
 					one_rect = one_surf.get_rect(
-						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+						topleft=(col * 64 + 5 , row * 64 + 5))
 					self.screen.blit(one_surf, one_rect)
 
 				if sketchboard[row][col] == 2:
 					two_rect = two_surf.get_rect(
-						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+						topleft=(col * 64 + 5 , row * 64 + 5))
 					self.screen.blit(two_surf, two_rect)
 
 				if sketchboard[row][col] == 3:
 					three_rect = three_surf.get_rect(
-						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+						topleft=(col * 64 + 5 , row * 64 + 5))
 					self.screen.blit(three_surf, three_rect)
 
 				if sketchboard[row][col] == 4:
 					four_rect = four_surf.get_rect(
-						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+						topleft=(col * 64 + 5 , row * 64 + 5))
 					self.screen.blit(four_surf, four_rect)
 
 				if sketchboard[row][col] == 5:
 					five_rect = five_surf.get_rect(
-						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+						topleft=(col * 64 + 5 , row * 64 + 5))
 					self.screen.blit(five_surf, five_rect)
 
 				if sketchboard[row][col] == 6:
 					six_rect = six_surf.get_rect(
-						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+						topleft=(col * 64 + 5 , row * 64 + 5))
 					self.screen.blit(six_surf, six_rect)
 
 				if sketchboard[row][col] == 7:
 					seven_rect = seven_surf.get_rect(
-						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+						topleft=(col * 64 + 5 , row * 64 + 5))
 					self.screen.blit(seven_surf, seven_rect)
 
 				if sketchboard[row][col] == 8:
 					eight_rect = eight_surf.get_rect(
-						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+						topleft=(col * 64 + 5 , row * 64 + 5))
 					self.screen.blit(eight_surf, eight_rect)
 
 				if sketchboard[row][col] == 9:
 					nine_rect = nine_surf.get_rect(
-						topright=(col * 64 + 64 / 2, row * 64 + 64 / 2))
+						topleft=(col * 64 + 5 , row * 64 + 5))
 					self.screen.blit(nine_surf, nine_rect)
 	# Draws an outline of the Sudoku grid, with bold lines to delineate the 3x3 boxes.
 	# Draws every cell on this board.
@@ -170,7 +170,6 @@ def main():
 		smaller_font = pygame.font.Font(None,30)
 		board = Board((64 * 9), (64 * 10), screen)
 		buttons = display_start(screen)
-		#cursor = pygame.Rect(0, 0, 64, 64)
 		sketchboard =[[0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -225,7 +224,6 @@ def main():
 							board.draw_board(sudoku)
 							pygame.draw.rect(screen, "red", pygame.Rect(userx*64, usery*64, 64, 64), 2)
 							board.draw_sketch(sketchboard)
-							#cursor.move(userx*64,usery*64)
 						else:
 							continue
 
