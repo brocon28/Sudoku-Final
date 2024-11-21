@@ -171,6 +171,8 @@ def main():
 		screen2 = True
 		screen3 = True
 		difficulty = None
+		usery=0
+		userx=0
 		big_font = pygame.font.Font(None, 80)
 		small_font = pygame.font.Font(None, 50)
 		smaller_font = pygame.font.Font(None,30)
@@ -220,6 +222,7 @@ def main():
 
 			while screen2:
 				status = check_full(playerboard)
+				gamebuttons = game_in_progress(screen)
 				if status == True :
 					screen2 = False
 
@@ -234,10 +237,60 @@ def main():
 						x, y = event.pos
 						userx = x//64
 						usery = y//64
-						screen.fill("white")
-						board.draw_board(sudoku)
-						pygame.draw.rect(screen, "red", pygame.Rect(userx*64, usery*64, 64, 64), 2)
-						board.draw_sketch(sketchboard)
+						if usery > 8:
+							screen.fill("white")
+							board.draw_board(sudoku)
+							board.draw_sketch(sketchboard)
+						else:
+							screen.fill("white")
+							board.draw_board(sudoku)
+							pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
+							board.draw_sketch(sketchboard)
+
+						for button_rect, mode in gamebuttons:
+							if button_rect.collidepoint(x,y):
+								choice = mode
+								if choice == "Reset":
+									sketchboard = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+									screen.fill("white")
+									board.draw_board(sudoku)
+									pygame.draw.rect(screen, "red", pygame.Rect(userx * 64, usery * 64, 64, 64), 2)
+									board.draw_sketch(sketchboard)
+
+								elif choice == "Restart":
+									screen1 = True
+									screen2 = False
+									screen3 = False
+									difficulty = None
+									big_font = pygame.font.Font(None, 80)
+									small_font = pygame.font.Font(None, 50)
+									smaller_font = pygame.font.Font(None, 30)
+									board = Board((64 * 9), (64 * 10), screen)
+									startbuttons = display_start(screen)
+
+									sketchboard = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+									               [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+								elif choice == "Exit":
+									running = False
+									pygame.quit()
+									sys.exit()
+
 
 
 					elif event.type == pygame.KEYDOWN:

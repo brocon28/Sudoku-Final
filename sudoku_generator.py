@@ -460,21 +460,28 @@ def game_win(screen):
 
     return button_rect
 
+def game_in_progress(screen):
+    width = 64 * 9
+    height = 64 * 10
 
-# generatehard = SudokuGenerator()
-# generatehard.fill_values()
-# # generate.print_board()
-# generatehard.remove_cells("Hard")
-# #generatehard.print_board()
-# generatemed = SudokuGenerator()
-# generatemed.fill_values()
-# # generate.print_board()
-# generatemed.remove_cells("Medium")
-# generatemed.print_board()
-# print()
-# generateeasy = SudokuGenerator()
-# generateeasy.fill_values()
-# generateeasy.print_board()
-# generateeasy.remove_cells("Easy")
-# generateeasy.print_board()
-# print()
+    small_font = pygame.font.Font(None, 50)
+
+    button_width = 120
+    button_height = 50
+    gap = 20
+    button_x_start = (width - (3 * button_width + 2 * gap)) // 2
+    button_y =  584
+
+    button_color = (153, 101, 21)
+    button_texts = ["Reset", "Restart", "Exit"]
+    buttons = []
+
+    for i, text in enumerate(button_texts):
+        x = button_x_start + i * (button_width + gap)
+        button_rect = pygame.Rect(x, button_y, button_width, button_height)
+        buttons.append((button_rect, text))
+        pygame.draw.rect(screen, button_color, button_rect)
+        button_surf = small_font.render(text, True, "white")
+        button_rect_text = button_surf.get_rect(center=button_rect.center)
+        screen.blit(button_surf, button_rect_text)
+    return buttons
