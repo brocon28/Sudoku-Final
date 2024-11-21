@@ -175,7 +175,8 @@ def main():
 		small_font = pygame.font.Font(None, 50)
 		smaller_font = pygame.font.Font(None,30)
 		board = Board((64 * 9), (64 * 10), screen)
-		buttons = display_start(screen)
+		startbuttons = display_start(screen)
+
 		sketchboard =[[0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -190,6 +191,7 @@ def main():
 		while running:
 			while screen1:
 				screen2 = True
+				screen3 = True
 				for event in pygame.event.get():
 
 					if event.type == pygame.QUIT:
@@ -199,7 +201,7 @@ def main():
 
 					elif event.type == pygame.MOUSEBUTTONDOWN:
 						x,y = event.pos
-						for button_rect, mode in buttons:
+						for button_rect, mode in startbuttons:
 							if button_rect.collidepoint(x,y):
 
 								difficulty = mode
@@ -361,17 +363,54 @@ def main():
 			while screen3:
 				winner = sudoku.check_win()
 				if winner == True:
-					game_win(screen)
+					winbutton = game_win(screen)
+
+					for event in pygame.event.get():
+
+						if event.type == pygame.QUIT:
+							running = False
+							pygame.quit()
+							sys.exit()
+
+						if event.type == pygame.MOUSEBUTTONDOWN:
+							x, y = event.pos
+							if winbutton.collidepoint(x, y):
+								running = False
+								pygame.quit()
+								sys.exit()
 
 				else:
-					game_over(screen)
+					lossbutton = game_over(screen)
+					for event in pygame.event.get():
 
-				for event in pygame.event.get():
+						if event.type == pygame.QUIT:
+							running = False
+							pygame.quit()
+							sys.exit()
 
-					if event.type == pygame.QUIT:
-						running = False
-						pygame.quit()
-						sys.exit()
+						if event.type == pygame.MOUSEBUTTONDOWN:
+							x, y = event.pos
+							if lossbutton.collidepoint(x, y):
+								screen1 = True
+								screen2 = True
+								screen3 = False
+								difficulty = None
+								big_font = pygame.font.Font(None, 80)
+								small_font = pygame.font.Font(None, 50)
+								smaller_font = pygame.font.Font(None, 30)
+								board = Board((64 * 9), (64 * 10), screen)
+								startbuttons = display_start(screen)
+
+								sketchboard = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+								               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+								               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+								               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+								               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+								               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+								               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+								               [0, 0, 0, 0, 0, 0, 0, 0, 0],
+								               [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
 
 				pygame.display.flip()
 				clock.tick(60)

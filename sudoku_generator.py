@@ -254,7 +254,7 @@ class SudokuGenerator:
 
     def remove_cells(self, difficulty):
         difficulty_levels = {
-            "Easy": 1,
+            "Easy": 30,
             "Medium": 40,
             "Hard": 50
         }
