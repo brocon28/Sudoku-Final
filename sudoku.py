@@ -97,14 +97,6 @@ class Board:
 		eight_surf = small_font.render("8", 0, "slategray")
 		nine_surf = small_font.render("9", 0, "slategray")
 
-
-		for i in range(10):
-			pygame.draw.line(self.screen, "black", (0, i * 64), (576, i * 64))
-			pygame.draw.line(self.screen, "black", (i * 64, 0), (i * 64, 576))
-		for i in range(4):
-			pygame.draw.line(self.screen,"black",(0,i*192),(576,i*192),3)
-			pygame.draw.line(self.screen, "black", (i*192, 0), (i*192,576), 3)
-
 		for row in range(9):
 			for col in range(9):
 
