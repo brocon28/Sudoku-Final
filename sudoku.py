@@ -213,16 +213,14 @@ def main():
 								sudoku = SudokuGenerator()
 								sudoku.fill_values()
 								sudoku.remove_cells(difficulty)
-								baseboard = sudoku.board.copy()
+								baseboard = sudoku.baseboard
 								playerboard = sudoku.board
-								print(sudoku.board)
-								print(playerboard)
-								print(baseboard)
+								moves = []
 								board.draw_board(sudoku.board)
 								screen1 = False
 
 			while screen2:
-				status = check_full(playerboard)
+				status = check_full(sudoku.board)
 				gamebuttons = game_in_progress(screen)
 				if status == True :
 					screen2 = False
@@ -261,15 +259,12 @@ def main():
 									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
 									               [0, 0, 0, 0, 0, 0, 0, 0, 0],
 									               [0, 0, 0, 0, 0, 0, 0, 0, 0]]
-									sudoku.board = baseboard
-									playerboard = baseboard
+									for i,j in moves:
+										sudoku.board[j][i] = 0
+									moves = []
 									screen.fill("white")
-									board.draw_board(playerboard)
+									board.draw_board(sudoku.board)
 									board.draw_sketch(sketchboard)
-									print()
-									print(sudoku.board)
-									print(playerboard)
-									print(baseboard)
 
 
 								elif choice == "Restart":
@@ -375,15 +370,12 @@ def main():
 
 						elif event.key == pygame.K_RETURN:
 							if sketchboard[usery][userx] != 0:
-								playerboard[usery][userx] = sketchboard[usery][userx]
+								sudoku.board[usery][userx] = sketchboard[usery][userx]
+							moves.append([userx,usery])
 							screen.fill("white")
 							board.draw_board(sudoku.board)
 							sketchboard[usery][userx] = 0
 							board.draw_sketch(sketchboard)
-							print()
-							print(sudoku.board)
-							print(playerboard)
-							print(baseboard)
 
 						elif event.key == pygame.K_UP:
 							usery -= 1

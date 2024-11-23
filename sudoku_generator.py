@@ -39,6 +39,7 @@ class SudokuGenerator:
         self.box_length = self.row_length // 3
         self.board = self.get_board()
         self.fullboard = self.get_board()
+        self.baseboard = self.board
 
     def get_board(self):
         board = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
